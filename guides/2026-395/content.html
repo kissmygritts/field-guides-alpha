@@ -1,0 +1,1007 @@
+<!-- Eastern Sierra 395 — Photographer's Shooting Script -->
+<div id="trip-root">
+<style>
+  #trip-root {
+    --ink: #e8e4da;
+    --ink-dim: #a49f92;
+    --ink-faint: #6f6a5e;
+    --ground: #14140f;
+    --ground-2: #1c1c16;
+    --panel: #201f18;
+    --line: #35342a;
+    --sun: #e8a13c;
+    --sun-deep: #c76b2a;
+    --sky: #6f86a3;
+    --sage: #8a9a72;
+    --alarm: #d8663f;
+    --day1: #c76b2a;
+    --day2: #7f9b6d;
+    --day3: #6f86a3;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: "Avenir Next", "Segoe UI", -apple-system, system-ui, sans-serif;
+    --mono: "SFMono-Regular", "Roboto Mono", Menlo, Consolas, monospace;
+    color: var(--ink);
+    font-family: var(--sans);
+    background: var(--ground);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  #trip-root * { box-sizing: border-box; }
+
+  /* ---------- Masthead ---------- */
+  #trip-root .mast {
+    position: relative;
+    padding: 46px 30px 38px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(232,161,60,0.14), transparent 55%),
+      linear-gradient(180deg, #191811, #14140f);
+    overflow: hidden;
+  }
+  #trip-root .mast-ridge { position:absolute; left:0; right:0; bottom:-1px; height:120px; display:block; opacity:.5; }
+  #trip-root .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--sun);
+    margin: 0 0 16px;
+  }
+  #trip-root h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 15ch;
+  }
+  #trip-root h1 em { font-style: italic; color: var(--sun); }
+  #trip-root .dek {
+    font-size: 15px;
+    color: var(--ink-dim);
+    max-width: 56ch;
+    margin: 0 0 22px;
+  }
+  #trip-root .mast-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 26px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+    color: var(--ink-dim); position: relative; z-index: 2;
+  }
+  #trip-root .mast-meta b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Section wrap ---------- */
+  #trip-root .body { padding: 8px 22px 60px; }
+
+  /* ---------- Day header ---------- */
+  #trip-root .day {
+    margin: 40px 0 6px;
+    padding: 20px 20px 18px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--ground-2), #17170f);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  #trip-root .day::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--accent);
+  }
+  #trip-root .day-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
+  }
+  #trip-root .day-title {
+    font-family: var(--serif); font-size: 25px; font-weight: 500; margin: 0 0 4px;
+  }
+  #trip-root .day-sub { font-size: 13.5px; color: var(--ink-dim); margin: 0; }
+  #trip-root .day-legs {
+    margin-top: 12px; display:flex; flex-wrap:wrap; gap: 8px;
+  }
+  #trip-root .chip {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.04em;
+    padding: 4px 9px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-dim);
+    background: rgba(0,0,0,.2);
+  }
+  #trip-root .chip b { color: var(--ink); }
+
+  /* ---------- Stop card ---------- */
+  #trip-root .stop {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  #trip-root .stop-visual { position: relative; background: #0d0d09; min-height: 210px; }
+  #trip-root .stop-visual svg { display:block; width:100%; height:100%; }
+  #trip-root .visual-label {
+    position:absolute; left:10px; bottom:9px;
+    font-family: var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: rgba(255,255,255,.72);
+    background: rgba(0,0,0,.42); backdrop-filter: blur(2px);
+    padding: 3px 7px; border-radius: 5px;
+  }
+  #trip-root .stop-body { padding: 18px 20px 20px; }
+  #trip-root .stop-kicker {
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom: 3px;
+  }
+  #trip-root .stop-num {
+    font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing:.1em;
+  }
+  #trip-root .stop-when {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.08em;
+    color: var(--ink-faint); text-transform: uppercase;
+    margin-left:auto;
+  }
+  #trip-root .stop h3 {
+    font-family: var(--serif); font-size: 21px; font-weight: 500; margin: 0 0 8px;
+  }
+  #trip-root .stop h3 .opt {
+    font-family: var(--mono); font-size: 10px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sage); border:1px solid var(--line); padding:2px 6px; border-radius:5px;
+    vertical-align: middle; margin-left: 8px;
+  }
+  #trip-root .stop p { font-size: 13.5px; color: var(--ink-dim); margin: 0 0 12px; }
+  #trip-root .stop p b { color: var(--ink); font-weight: 600; }
+
+  /* direction row */
+  #trip-root .direct {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: 9px; overflow:hidden;
+    margin-top: 4px;
+  }
+  #trip-root .direct div { background: var(--ground-2); padding: 8px 11px; }
+  #trip-root .direct dt {
+    font-family: var(--mono); font-size: 9px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-faint); margin-bottom: 3px;
+  }
+  #trip-root .direct dd { margin:0; font-size: 12.5px; color: var(--ink); }
+  #trip-root .direct dd.warn { color: var(--alarm); }
+
+  /* the "shot" callout */
+  #trip-root .theshot {
+    margin-top: 12px; padding: 10px 13px;
+    border-left: 2px solid var(--accent);
+    background: linear-gradient(90deg, rgba(199,107,42,0.08), transparent);
+    font-size: 12.5px;
+  }
+  #trip-root .theshot span {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--accent); display:block; margin-bottom: 3px;
+  }
+
+  /* ---------- Camp banner ---------- */
+  #trip-root .camp {
+    margin: 16px 0 4px;
+    padding: 13px 16px;
+    border: 1px dashed var(--line);
+    border-radius: 11px;
+    background: rgba(127,155,109,0.06);
+    display:flex; gap:12px; align-items:flex-start;
+    font-size: 13px; color: var(--ink-dim);
+  }
+  #trip-root .camp b { color: var(--ink); }
+  #trip-root .camp .ci { flex-shrink:0; margin-top:1px; }
+
+  /* ---------- Field notes footer ---------- */
+  #trip-root .notes {
+    margin-top: 46px; padding: 26px 22px 30px;
+    border-top: 1px solid var(--line);
+  }
+  #trip-root .notes h2 {
+    font-family: var(--serif); font-size: 22px; font-weight:500; margin: 0 0 16px;
+  }
+  #trip-root .notegrid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px;
+  }
+  #trip-root .note {
+    border: 1px solid var(--line); border-radius: 11px; padding: 14px 15px;
+    background: var(--panel);
+  }
+  #trip-root .note h4 {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sun); margin: 0 0 7px;
+  }
+  #trip-root .note p { font-size: 12.8px; color: var(--ink-dim); margin: 0; }
+  #trip-root .note b { color: var(--ink); }
+
+  #trip-root .colophon {
+    margin-top: 26px; padding-top: 16px; border-top:1px solid var(--line);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.06em;
+    color: var(--ink-faint); line-height:1.7;
+  }
+  #trip-root .colophon b { color: var(--ink-dim); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    #trip-root .stop { grid-template-columns: 1fr; }
+    #trip-root .stop-visual { min-height: 170px; }
+    #trip-root .body { padding: 4px 14px 50px; }
+    #trip-root .mast { padding: 34px 20px 30px; }
+    #trip-root .stop-when { margin-left:0; width:100%; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #trip-root .stop { transition: border-color .25s ease; }
+    #trip-root .stop:hover { border-color: var(--accent); }
+  }
+</style>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="mast">
+  <svg class="mast-ridge" viewBox="0 0 940 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,120 L0,74 L80,52 L150,66 L220,30 L300,58 L370,22 L450,50 L520,14 L600,44 L680,26 L760,54 L840,34 L940,60 L940,120 Z" fill="#0f0f0a"/>
+  </svg>
+  <p class="eyebrow">Shooting Script · Solo · Late Aug – Early Sep</p>
+  <h1>San Diego to Reno, the <em>long way</em> up 395</h1>
+  <p class="dek">Three days east of the Sierra crest — desert tufa, living ghost towns, granite arches and dawn-lit alkali flats. Built to shoot the ends of the day and drive through the heat. No portraits, no LA, no Death Valley in September.</p>
+  <div class="mast-meta">
+    <span><b>~530 mi</b> total</span>
+    <span><b>3 nights</b> camping</span>
+    <span>Depart <b>Fri 4:00 AM</b></span>
+    <span>Route <b>I-15 → CA-395</b></span>
+    <span>Golden hours are the whole point</span>
+  </div>
+</header>
+
+<div class="body">
+
+<!-- ============ DAY 1 ============ -->
+<section class="day" style="--accent: var(--day1);">
+  <p class="day-tag">Day 1 · Friday · The Desert Day</p>
+  <h2 class="day-title">San Diego → Lone Pine</h2>
+  <p class="day-sub">Chase the desert while it's cool. Shoot two big subjects before noon, drive the heat, land at the Alabama Hills for golden hour. ~330 mi.</p>
+  <div class="day-legs">
+    <span class="chip"><b>4:00a</b> depart · I-15 N</span>
+    <span class="chip"><b>~8:30a</b> Trona</span>
+    <span class="chip"><b>~11a</b> Randsburg</span>
+    <span class="chip"><b>lunch</b> Ridgecrest</span>
+    <span class="chip"><b>pm</b> Fossil Falls</span>
+    <span class="chip"><b>golden</b> Alabama Hills</span>
+  </div>
+  <div class="day-brief">
+    <span><b>⛽ Fuel</b> Ridgecrest — last real gas before Lone Pine. Top off.</span>
+    <span><b>📵 Signal</b> Dead from Trona through Owens Valley. Download everything first.</span>
+    <span><b>💧 Water</b> Carry 4+ L — none at Trona, Fossil Falls or Owens.</span>
+    <span><b>🚗 Drive</b> ~330 mi · 6–7 hr moving</span>
+  </div>
+</section>
+
+<!-- Stop: Trona -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="tr-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3a4a63"/><stop offset="0.55" stop-color="#b9814a"/><stop offset="1" stop-color="#e8a94e"/>
+        </linearGradient>
+        <linearGradient id="tr-gr" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c98f52"/><stop offset="1" stop-color="#5a4227"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="150" fill="url(#tr-sky)"/>
+      <circle cx="228" cy="118" r="20" fill="#ffe6ad" opacity="0.9"/>
+      <rect y="150" width="300" height="70" fill="url(#tr-gr)"/>
+      <!-- spires, side-lit from right, long shadows left -->
+      <g>
+        <polygon points="40,150 52,86 64,150" fill="#2e2416"/>
+        <polygon points="52,86 64,150 40,150" fill="#4a3a22"/>
+        <polygon points="52,86 58,95 64,150 52,150" fill="#6e5330"/>
+        <polygon points="95,150 104,64 116,150" fill="#2e2416"/>
+        <polygon points="104,64 116,150 95,150" fill="#4a3a22"/>
+        <polygon points="104,64 110,78 116,150 104,150" fill="#7a5c34"/>
+        <polygon points="150,150 157,104 168,150" fill="#3a2d1b"/>
+        <polygon points="157,104 168,150 150,150" fill="#574227"/>
+        <polygon points="200,150 214,58 232,150" fill="#241c10"/>
+        <polygon points="214,58 232,150 200,150" fill="#453521"/>
+        <polygon points="214,58 221,74 232,150 214,150" fill="#8a6636"/>
+        <polygon points="258,150 266,96 278,150" fill="#3a2d1b"/>
+      </g>
+      <!-- long shadows to the left across the flat -->
+      <g opacity="0.32" fill="#241a0e">
+        <polygon points="52,150 44,168 8,166 40,150"/>
+        <polygon points="104,150 96,176 40,172 95,150"/>
+        <polygon points="214,150 206,180 120,176 200,150"/>
+      </g>
+    </svg>
+    <span class="visual-label">Side-light · long shadows · warm</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.1</span>
+      <span class="stop-when">First light · ~8:30–9:30 AM</span>
+    </div>
+    <h3>Trona Pinnacles</h3>
+    <p>Your marquee desert subject — <b>500+ tufa spires on a dry lakebed</b>, straight out of a Shainblum frame. Access is ~5 mi of graded, washboarded dirt off CA-178; fine for a normal car if you crawl it. Beat the heat and the crowds: you want the low raking sun that separates each spire from its shadow. By 10:30 it flattens and bakes.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Low side-light, E/SE</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + a longer lens to stack spires</dd></div>
+      <div><dt>Access</dt><dd class="warn">5 mi washboard dirt — crawl it</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Get low. Use a foreground spire as anchor, compress a cluster behind it with the longer lens so they overlap into a ridge of teeth. Shadows pointing at camera-left.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Randsburg -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="rb-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8fa7c0"/><stop offset="1" stop-color="#d8cdb4"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="220" fill="url(#rb-sky)"/>
+      <!-- desert hill behind -->
+      <path d="M0,120 L70,96 L150,110 L220,88 L300,108 L300,220 L0,220 Z" fill="#b39a70"/>
+      <!-- dirt street -->
+      <rect y="176" width="300" height="44" fill="#9c8256"/>
+      <!-- old western storefronts, weathered wood -->
+      <g>
+        <rect x="24" y="120" width="60" height="60" fill="#7c5636"/>
+        <polygon points="24,120 54,104 84,120" fill="#5e3f26"/>
+        <rect x="34" y="140" width="14" height="22" fill="#3a2716"/>
+        <rect x="58" y="140" width="16" height="14" fill="#c7b58e"/>
+        <rect x="98" y="128" width="52" height="52" fill="#9a6f45"/>
+        <rect x="98" y="122" width="52" height="8" fill="#6f4c2c"/>
+        <rect x="110" y="146" width="12" height="34" fill="#402c19"/>
+        <rect x="128" y="146" width="14" height="16" fill="#cbbb92"/>
+        <rect x="166" y="112" width="46" height="68" fill="#a83e30"/>
+        <rect x="166" y="106" width="46" height="10" fill="#7d2a20"/>
+        <rect x="176" y="150" width="12" height="30" fill="#3a1c15"/>
+        <rect x="192" y="128" width="12" height="14" fill="#e3d3ac"/>
+        <rect x="228" y="132" width="50" height="48" fill="#836a48"/>
+        <polygon points="228,132 253,118 278,132" fill="#5c4831"/>
+        <rect x="246" y="150" width="14" height="30" fill="#3a2a19"/>
+      </g>
+      <!-- boardwalk shadow line -->
+      <rect y="176" width="300" height="4" fill="#6e5636" opacity="0.6"/>
+    </svg>
+    <span class="visual-label">Weathered facades · flat light OK</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.2</span>
+      <span class="stop-when">Late morning · ~11 AM</span>
+    </div>
+    <h3>Randsburg</h3>
+    <p>A <b>living ghost town</b> — wooden sidewalks, gold-rush facades, mining bones in the hills, ~100 residents still hanging on. This is your Nick Carver Americana chapter: hand-painted signage, sun-bleached siding, rust and patina. Detail and texture work, so midday flat light is fine here — you're not shooting sky.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Flat is fine · shade for detail</dd></div>
+      <div><dt>Glass</dt><dd>35 / 50 · get tight on texture</dd></div>
+      <div><dt>Also</dt><dd>Red Mtn &amp; Jo'burg on the way</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      One clean facade dead-on, symmetrical, filling the frame — then break it with a tight detail: a cracked sign, a padlock, boots of peeling paint. Shoot for a diptych.
+    </div>
+  </div>
+</article>
+
+<div class="camp" style="border-color: var(--line);">
+  <span class="ci">◆</span>
+  <div><b>Midday = drive time, not shoot time.</b> Fuel + lunch in <b>Ridgecrest</b> (last real town before Lone Pine — top off water and gas). Push north on 395; the Sierra crest opens on your left as you enter Owens Valley.</div>
+</div>
+
+<!-- Stop: Fossil Falls -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Polished basalt · voids · hard shadow</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.3</span>
+      <span class="stop-when">Late morning · quick stop</span>
+    </div>
+    <h3>Fossil Falls</h3>
+    <p>A dry waterfall of <b>water-polished black basalt</b> — the ancient Owens River carved obsidian-smooth flutes, potholes and voids into a volcanic flow, with <b>Red Hill cinder cone</b> rising behind. A five-minute walk from the lot off US-395; almost nobody stops. Low raking light sculpts the rock best, but even midday hard shadow reads the strange scooped texture.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Low &amp; hard — rakes the flutes</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + something close for texture</dd></div>
+      <div><dt>Access</dt><dd>Short graded dirt off US-395 — any car</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Get down into the rock: frame a smooth black void or pothole against the pale desert beyond, Red Hill cone as a distant anchor. Watch your footing — the drops are real.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Owens Lake -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="ow-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9fb6cc"/><stop offset="1" stop-color="#e7ddc9"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="130" fill="url(#ow-sky)"/>
+      <!-- Sierra crest -->
+      <path d="M0,96 L46,60 L92,84 L140,44 L188,78 L236,52 L300,82 L300,130 L0,130 Z" fill="#7d8598"/>
+      <path d="M0,96 L46,60 L92,84 L140,44 L188,78 L236,52 L300,82 L300,130 L0,130 Z" fill="none"/>
+      <!-- snow flecks -->
+      <path d="M132,52 L140,44 L150,56 L143,58 Z" fill="#e8e8ea" opacity="0.8"/>
+      <path d="M228,60 L236,52 L245,64 L237,64 Z" fill="#e8e8ea" opacity="0.7"/>
+      <!-- alkali flat -->
+      <rect y="130" width="300" height="90" fill="#d9cfbb"/>
+      <!-- pink/white mineral streaks + faint reflection -->
+      <rect y="130" width="300" height="30" fill="#cbb6ad" opacity="0.6"/>
+      <g stroke="#b8a894" stroke-width="1" opacity="0.5">
+        <line x1="0" y1="150" x2="300" y2="150"/>
+        <line x1="0" y1="168" x2="300" y2="168"/>
+        <line x1="0" y1="188" x2="300" y2="188"/>
+      </g>
+      <rect y="130" width="300" height="20" fill="#8f9aad" opacity="0.18"/>
+    </svg>
+    <span class="visual-label">Minimal · negative space · crest</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.4 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Afternoon pass-through</span>
+    </div>
+    <h3>Owens (dry) Lake<span class="opt">roadside</span></h3>
+    <p>A stark alkali plain with the Sierra rising straight off it — Heaton-style minimalism, all negative space and horizon. A quick roadside frame if the light's doing anything. If you're ahead of schedule and hungry for a real ghost town, <b>Cerro Gordo</b> sits 7.7 mi up a rough road off CA-136 (gated, few visitors) — only if you've got the time and stomach for the climb before sunset.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Any · shoot the flatness</dd></div>
+      <div><dt>Glass</dt><dd>Wide, or long to compress crest</dd></div>
+      <div><dt>Skip if</dt><dd>You want the Hills before dark</dd></div>
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Alabama Hills -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="ah-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e08b52"/><stop offset="0.6" stop-color="#e7c88d"/><stop offset="1" stop-color="#f0ddb4"/>
+        </linearGradient>
+        <linearGradient id="ah-peak" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e3a06a"/><stop offset="1" stop-color="#9a7f7c"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="220" fill="url(#ah-sky)"/>
+      <!-- alpenglow Sierra crest -->
+      <path d="M0,110 L40,72 L78,98 L118,50 L150,84 L190,40 L228,80 L268,56 L300,88 L300,150 L0,150 Z" fill="url(#ah-peak)"/>
+      <path d="M112,58 L118,50 L128,66 L120,66 Z M184,50 L190,40 L200,58 L192,58 Z" fill="#f4e4c8" opacity="0.85"/>
+      <!-- boulder field, in shadow -->
+      <rect y="150" width="300" height="70" fill="#5b4a3f"/>
+      <g fill="#463830">
+        <ellipse cx="46" cy="170" rx="40" ry="24"/>
+        <ellipse cx="120" cy="182" rx="52" ry="30"/>
+        <ellipse cx="210" cy="172" rx="46" ry="26"/>
+        <ellipse cx="272" cy="186" rx="40" ry="24"/>
+      </g>
+      <!-- the arch, framing a peak -->
+      <g fill="#3a2e28">
+        <path d="M118,178
+                 C112,150 132,138 150,140
+                 C170,142 180,158 176,178
+                 L166,178
+                 C168,162 160,150 148,150
+                 C134,150 128,162 130,178 Z"/>
+      </g>
+      <!-- peak visible through arch -->
+      <path d="M138,150 L148,132 L160,150 Z" fill="url(#ah-peak)" opacity="0.9"/>
+    </svg>
+    <span class="visual-label">Alpenglow · arch frames Whitney</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.5</span>
+      <span class="stop-when">Golden hour → camp</span>
+    </div>
+    <h3>Alabama Hills</h3>
+    <p>The payoff. Rounded granite boulders and natural arches with <b>Mt. Whitney and the Sierra crest</b> behind — one of the most-shot spots on the whole route, and it earns it. <b>Mobius Arch</b> is the classic (short walk from the Movie Rd trailhead) — it frames Whitney through the opening. Scout compositions in the good light, sleep here, shoot it again at dawn.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Sunset warms boulders; dawn = alpenglow on crest</dd></div>
+      <div><dt>Glass</dt><dd>16–35 for arch foreground · tele for crest</dd></div>
+      <div><dt>Camp</dt><dd>Free dispersed on Movie Rd</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Mobius Arch low and close, wide lens, Whitney centered in the opening. Sunset for warm granite; set an alarm and come back for pink alpenglow at first light.
+    </div>
+  </div>
+</article>
+
+<div class="camp">
+  <span class="ci">▲</span>
+  <div><b>Camp — Alabama Hills</b> (free BLM dispersed, Movie Road) or <b>Tuttle Creek CG</b> nearby for a table + vault toilet. Arrive before dark to claim a spot and scout. Desert nights here are mild but the wind kicks up.</div>
+</div>
+
+<!-- ============ DAY 2 ============ -->
+<section class="day" style="--accent: var(--day2);">
+  <p class="day-tag">Day 2 · Saturday · Climbing the East Side</p>
+  <h2 class="day-title">Lone Pine → June Lake</h2>
+  <p class="day-sub">Dawn on the crest, then work north through Bishop into alpine country. Cooler air, bigger water, your reservation night. ~120 mi + detours.</p>
+  <div class="day-legs">
+    <span class="chip"><b>dawn</b> Alabama Hills</span>
+    <span class="chip"><b>early</b> Manzanar</span>
+    <span class="chip"><b>AM</b> Bishop · Rowell gallery</span>
+    <span class="chip"><b>opt</b> Bristlecones</span>
+    <span class="chip"><b>PM</b> Convict · Hot Creek</span>
+    <span class="chip"><b>golden</b> June Lake</span>
+  </div>
+  <div class="day-brief">
+    <span><b>⛽ Fuel</b> Bishop (cheapest on the route) and Mammoth.</span>
+    <span><b>📵 Signal</b> Solid in Bishop/Mammoth; dead on the Bristlecone &amp; Crowley dirt.</span>
+    <span><b>🏔 Altitude</b> Up to 10,000 ft at the bristlecones — pace yourself, layer up.</span>
+    <span><b>🚗 Drive</b> ~120 mi + detours</span>
+  </div>
+</section>
+
+<!-- Stop: Manzanar -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Reflective · stark · Sierra behind</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.1</span>
+      <span class="stop-when">Early morning · reflective stop</span>
+    </div>
+    <h3>Manzanar<span class="opt">historic site</span></h3>
+    <p>The WWII camp where the U.S. incarcerated over 10,000 Japanese-Americans — a <b>National Historic Site</b> right on US-395 between Lone Pine and Independence. Not a "shot" so much as a place you stop: the stone sentry posts and entrance sign, a reconstructed guard tower and barracks, the white cemetery monument standing against the Sierra wall. Drive the 3.2-mi auto tour; the museum in the old auditorium is worth an hour. <b>Free.</b></p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Flat AM is fine — it's about content</dd></div>
+      <div><dt>Glass</dt><dd>35 / 50 · documentary, restrained</dd></div>
+      <div><dt>Time</dt><dd>45–90 min incl. museum</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      The guard tower against the crest, or a stone sentry post framing the empty valley. Let it be quiet — restraint over drama does this place justice.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Bristlecone -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="bc-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2f4b6e"/><stop offset="1" stop-color="#a9713f"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="220" fill="url(#bc-sky)"/>
+      <!-- distant ranges -->
+      <path d="M0,150 L80,128 L160,146 L240,124 L300,142 L300,220 L0,220 Z" fill="#6b5238" opacity="0.7"/>
+      <rect y="176" width="300" height="44" fill="#8a6a44"/>
+      <!-- gnarled ancient tree, twisting -->
+      <g stroke="#c9a878" stroke-width="7" fill="none" stroke-linecap="round">
+        <path d="M150,200 C144,170 158,158 150,130 C144,110 160,100 154,78"/>
+        <path d="M150,150 C168,146 176,128 170,110"/>
+        <path d="M152,124 C136,120 128,104 134,88"/>
+      </g>
+      <g stroke="#e0c49a" stroke-width="3" fill="none" stroke-linecap="round">
+        <path d="M154,78 C150,66 160,60 158,50"/>
+        <path d="M170,110 C176,100 186,102 190,92"/>
+        <path d="M134,88 C126,80 116,84 112,74"/>
+      </g>
+      <!-- weathered dead-wood streaks -->
+      <path d="M150,200 C147,175 153,160 150,138" stroke="#8a6a48" stroke-width="2.5" fill="none"/>
+    </svg>
+    <span class="visual-label">Sculptural · high &amp; cool · texture</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.2 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Morning · big detour</span>
+    </div>
+    <h3>Ancient Bristlecone Pines<span class="opt">+2–3 hrs</span></h3>
+    <p>East of Bishop, a long climb to ~10,000 ft and the <b>oldest trees on earth</b> — twisted, sculptural, silver-and-amber against high desert. A Heaton patient-landscape subject, and cool even in summer thanks to the elevation. It's a committed out-and-back; make it a pace call. Before you leave Bishop, duck into the <b>Mountain Light Gallery</b> — Galen Rowell's life work of this exact landscape, and the best possible tuning-fork for your eye.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Low sun rakes the grain; storms are a gift</dd></div>
+      <div><dt>Glass</dt><dd>35–85 · isolate one tree's form</dd></div>
+      <div><dt>Cost</dt><dd class="warn">Half a day round-trip</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      One tree, backlit, against clean sky or a dark distant range. Let the dead silver wood and living needles fight in the same frame. Sidelight for the grain.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Crowley Columns -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="300" height="220" fill="#cdb892"/>
+      <rect width="300" height="96" fill="#a9bcc9"/>
+      <!-- lake line -->
+      <rect y="92" width="300" height="10" fill="#7f97a6"/>
+      <!-- cliff of columns -->
+      <rect y="100" width="300" height="120" fill="#b89e74"/>
+      <!-- vertical columns w/ arch tops -->
+      <g fill="#8f7850">
+        <path d="M20,120 q10,-14 20,0 L40,220 L20,220 Z"/>
+        <path d="M50,116 q11,-15 22,0 L72,220 L50,220 Z"/>
+        <path d="M84,122 q10,-13 20,0 L104,220 L84,220 Z"/>
+        <path d="M116,114 q11,-16 22,0 L138,220 L116,220 Z"/>
+        <path d="M150,120 q10,-14 20,0 L170,220 L150,220 Z"/>
+        <path d="M182,116 q11,-15 22,0 L204,220 L182,220 Z"/>
+        <path d="M216,122 q10,-13 20,0 L236,220 L216,220 Z"/>
+        <path d="M248,116 q11,-15 22,0 L270,220 L248,220 Z"/>
+      </g>
+      <!-- shadow gaps between columns -->
+      <g fill="#5f4e33" opacity="0.7">
+        <rect x="40" y="128" width="10" height="92"/>
+        <rect x="72" y="126" width="12" height="94"/>
+        <rect x="104" y="130" width="12" height="90"/>
+        <rect x="138" y="126" width="12" height="94"/>
+        <rect x="170" y="130" width="12" height="90"/>
+        <rect x="204" y="128" width="12" height="92"/>
+        <rect x="236" y="128" width="12" height="92"/>
+      </g>
+    </svg>
+    <span class="visual-label">Repeating forms · odd &amp; graphic</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.3 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Midday bonus</span>
+    </div>
+    <h3>Crowley Lake Columns<span class="opt">conditions</span></h3>
+    <p>Strange eroded stone columns along the shoreline — a lesser-known, very graphic subject. Access can involve a dirt road and it depends on <b>lake level</b>, so treat it as a bonus if conditions cooperate. Rewards a longer lens and repetition.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Raking sun into the arches</dd></div>
+      <div><dt>Glass</dt><dd>50–135 · pattern &amp; repetition</dd></div>
+      <div><dt>Depends</dt><dd class="warn">Lake level + dirt access</dd></div>
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Convict Lake -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="cv-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#cfd8dd"/><stop offset="1" stop-color="#e9dfc9"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="112" fill="url(#cv-sky)"/>
+      <!-- dramatic peaks -->
+      <path d="M0,100 L44,40 L90,86 L134,30 L182,80 L228,44 L300,88 L300,112 L0,112 Z" fill="#8a8478"/>
+      <path d="M0,100 L44,40 L90,86 L134,30 L182,80 L228,44 L300,88" fill="none"/>
+      <path d="M126,40 L134,30 L146,48 L136,50 Z M174,90 L182,80 L192,96 L182,96 Z" fill="#efe9df" opacity="0.8"/>
+      <!-- shoreline -->
+      <path d="M0,108 L60,104 L140,110 L220,104 L300,110 L300,112 L0,112 Z" fill="#5f6a52"/>
+      <!-- still lake w/ mirrored peaks -->
+      <rect y="112" width="300" height="108" fill="#4a5f6a"/>
+      <path d="M0,124 L44,184 L90,138 L134,194 L182,144 L228,180 L300,136 L300,112 L0,112 Z" fill="#5f7683" opacity="0.55"/>
+      <g stroke="#7d94a0" stroke-width="1" opacity="0.4">
+        <line x1="0" y1="150" x2="300" y2="150"/>
+        <line x1="0" y1="176" x2="300" y2="176"/>
+        <line x1="0" y1="200" x2="300" y2="200"/>
+      </g>
+    </svg>
+    <span class="visual-label">Reflection · symmetry · glassy</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.4</span>
+      <span class="stop-when">Late afternoon</span>
+    </div>
+    <h3>Convict Lake</h3>
+    <p>Big dramatic peaks dropping straight into water, a short easy drive off 395 — <b>huge payoff for almost no effort</b>. Classically a sunrise lake, but golden hour puts warm light on the peaks with the reflection still holding. Walk the north shore for the cleanest mirror.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>PM warms peaks · calm = mirror</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · centered symmetry</dd></div>
+      <div><dt>Effort</dt><dd>Minimal — roadside + short walk</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Dead-center symmetry, waterline on the horizontal third, let the reflection do half the work. Shoot before evening wind ruffles the surface.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Hot Creek -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Turquoise · steam · mineral white</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.5</span>
+      <span class="stop-when">Midday · geothermal detour</span>
+    </div>
+    <h3>Hot Creek<span class="opt">geologic site</span></h3>
+    <p>A geothermal gorge where <b>cobalt and turquoise hot springs</b> boil up through a cold trout stream, banked in bleached mineral white and rust. Short paved road off US-395 just south of Mammoth, with an easy overlook and a trail down to the water. The colors punch hardest under <b>high midday sun</b> — a rare stop that rewards the flat light you're dodging everywhere else. No swimming: scalding and unpredictable.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>High noon makes the blues glow</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + polarizer to cut glare</dd></div>
+      <div><dt>Access</dt><dd class="warn">Paved to lot — stay out of the water</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Shoot down the gorge, turquoise pools leading into the green creek with white mineral banks framing. Polarize to kill surface glare and saturate the blue.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: June Lake -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="jl-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e0925a"/><stop offset="1" stop-color="#f0d6a6"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="118" fill="url(#jl-sky)"/>
+      <circle cx="60" cy="70" r="16" fill="#ffe9c0" opacity="0.85"/>
+      <!-- granite peaks -->
+      <path d="M0,104 L52,52 L108,92 L156,44 L210,88 L262,58 L300,90 L300,118 L0,118 Z" fill="#9a8d84"/>
+      <path d="M148,52 L156,44 L168,60 L158,62 Z" fill="#f0e6da" opacity="0.8"/>
+      <!-- treeline -->
+      <rect y="110" width="300" height="14" fill="#3c4b34"/>
+      <!-- lake -->
+      <rect y="124" width="300" height="96" fill="#3f5a63"/>
+      <path d="M0,134 L52,176 L108,146 L156,182 L210,150 L262,172 L300,144 L300,124 L0,124 Z" fill="#5a7681" opacity="0.5"/>
+      <!-- shoreline warm reflection -->
+      <rect y="124" width="300" height="30" fill="#e0925a" opacity="0.12"/>
+    </svg>
+    <span class="visual-label">Alpine · warm crest · calm water</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.6</span>
+      <span class="stop-when">Golden hour → camp</span>
+    </div>
+    <h3>June Lake Loop</h3>
+    <p>The "Switzerland of California" — alpine lakes ringed by granite, on a scenic loop off 395. Aspens won't have turned yet this early, but the water, peaks and evening light carry it. Drive the loop, pick a west-facing shoreline, and shoot the last warm light on the crest reflecting off calm water.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Sunset on the crest + reflection</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · foreground rocks help</dd></div>
+      <div><dt>Camp</dt><dd class="warn">Book ahead — Sat night</dd></div>
+    </div>
+  </div>
+</article>
+
+<div class="camp">
+  <span class="ci">▲</span>
+  <div><b>Camp — June Lake Loop</b> (Oh! Ridge, June Lake, Silver, Gull) or Mammoth-area FS campgrounds. <b>This is your one competitive night</b> — summer Saturday, these fill. Reserve early or have a dispersed national-forest backup pinned before you arrive.</div>
+</div>
+
+<!-- ============ DAY 3 ============ -->
+<section class="day" style="--accent: var(--day3);">
+  <p class="day-tag">Day 3 · Sunday · Out Through the Basin</p>
+  <h2 class="day-title">Mono Lake → Reno</h2>
+  <p class="day-sub">Build the morning around the tufa at dawn, then wander north through high country into Nevada ranch land. Arrive Reno evening. ~140 mi + detours.</p>
+  <div class="day-legs">
+    <span class="chip"><b>sunrise</b> Mono South Tufa</span>
+    <span class="chip"><b>opt</b> Tioga Pass</span>
+    <span class="chip"><b>midday</b> Conway Summit</span>
+    <span class="chip"><b>pm</b> Bodie</span>
+    <span class="chip"><b>late</b> Travertine · Bridgeport</span>
+    <span class="chip"><b>eve</b> Reno</span>
+  </div>
+  <div class="day-brief">
+    <span><b>⛽ Fuel</b> Lee Vining &amp; Bridgeport — pricey, top off anyway before Bodie/Tioga.</span>
+    <span><b>📵 Signal</b> Dead at Bodie and up Tioga; returns near Bridgeport.</span>
+    <span><b>🚗 Drive</b> ~140 mi to Reno + Bodie detour (adds ~1 hr)</span>
+  </div>
+</section>
+
+<!-- Stop: Mono Lake -->
+<article class="stop" style="--accent: var(--day3);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="mn-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#4a3f66"/><stop offset="0.5" stop-color="#d17a53"/><stop offset="1" stop-color="#f2c079"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="132" fill="url(#mn-sky)"/>
+      <circle cx="210" cy="104" r="14" fill="#ffe7b0"/>
+      <!-- distant hills -->
+      <path d="M0,120 L90,104 L180,116 L300,102 L300,132 L0,132 Z" fill="#7a5a4e" opacity="0.6"/>
+      <!-- lake -->
+      <rect y="132" width="300" height="88" fill="#8a7a6e"/>
+      <rect y="132" width="300" height="88" fill="#c98a55" opacity="0.28"/>
+      <!-- tufa towers, silhouetted, reflecting -->
+      <g fill="#241a16">
+        <path d="M40,132 C36,108 46,96 44,80 C48,96 54,104 52,132 Z"/>
+        <path d="M96,132 C92,100 104,84 100,64 C108,86 112,104 110,132 Z"/>
+        <path d="M150,132 C147,114 154,104 152,92 C158,106 160,118 160,132 Z"/>
+        <path d="M240,132 C236,110 246,98 244,84 C250,100 254,112 252,132 Z"/>
+      </g>
+      <!-- reflections -->
+      <g fill="#241a16" opacity="0.28">
+        <path d="M40,132 C36,156 46,168 44,184 C48,168 54,160 52,132 Z"/>
+        <path d="M96,132 C92,164 104,180 100,200 C108,178 112,160 110,132 Z"/>
+        <path d="M150,132 C147,150 154,160 152,172 C158,158 160,146 160,132 Z"/>
+        <path d="M240,132 C236,154 246,166 244,180 C250,164 254,152 252,132 Z"/>
+      </g>
+    </svg>
+    <span class="visual-label">Dawn silhouette · tufa · still</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">3.1</span>
+      <span class="stop-when">Sunrise · the shot of the trip</span>
+    </div>
+    <h3>Mono Lake — South Tufa</h3>
+    <p>The signature Eastern Sierra frame: <b>tufa spires rising straight out of a still, alien lake</b> with the desert ranges behind. Build the whole morning around dawn here — colour behind the towers, glassy surface before the wind, the place nearly empty. South Tufa reserve, small fee. Get in position in the dark.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Pre-dawn glow behind towers, E</dd></div>
+      <div><dt>Glass</dt><dd>16–35 for scale · tele to isolate</dd></div>
+      <div><dt>Timing</dt><dd class="warn">Arrive before first light</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Low, one hero tufa anchoring the foreground, cluster behind it, colour band on the horizon reflected in dead-still water. Go before any wind touches the surface.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Tioga -->
+<article class="stop" style="--accent: var(--day3);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="300" height="118" fill="#7fa4c4"/>
+      <!-- high granite peaks -->
+      <path d="M0,110 L50,40 L100,92 L150,32 L200,86 L250,46 L300,94 L300,118 L0,118 Z" fill="#8b93a0"/>
+      <path d="M0,110 L50,40 L100,92 L150,32 L200,86 L250,46 L300,94" fill="none"/>
+      <g fill="#eef1f4" opacity="0.85">
+        <path d="M42,52 L50,40 L60,56 L50,58 Z"/>
+        <path d="M142,44 L150,32 L162,52 L150,52 Z"/>
+        <path d="M242,58 L250,46 L260,62 L250,62 Z"/>
+      </g>
+      <!-- treeline -->
+      <rect y="112" width="300" height="12" fill="#33452f"/>
+      <!-- high alpine lake, deep teal -->
+      <rect y="124" width="300" height="96" fill="#2f6068"/>
+      <path d="M0,132 L60,120 L150,132 L240,120 L300,132 L300,124 L0,124 Z" fill="#3f7a80" opacity="0.7"/>
+      <path d="M0,150 L300,150" stroke="#4a8b90" stroke-width="1" opacity="0.5"/>
+    </svg>
+    <span class="visual-label">High country · deep teal · granite</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">3.2 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Morning detour · open in summer</span>
+    </div>
+    <h3>Tioga Pass spur<span class="opt">out-and-back</span></h3>
+    <p>From Lee Vining, Tioga Rd climbs to California's highest highway pass past <b>Ellery and Tioga Lakes</b> — crazy granite, deep teal alpine water. You don't need to enter Yosemite; just drive up to the lakes and back for a stunning hour. It eats into your Reno arrival, so gauge it against how the morning ran.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Mid-morning is fine up high</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · roadside pullouts</dd></div>
+      <div><dt>Cost</dt><dd>1–2 hrs round trip</dd></div>
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Bodie -->
+<article class="stop" style="--accent: var(--day3);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Arrested decay · silvered wood · high sun</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">3.3</span>
+      <span class="stop-when">Midday · big detour</span>
+    </div>
+    <h3>Bodie<span class="opt">+2–3 hrs</span></h3>
+    <p>The <b>best-preserved ghost town in the West</b> — 100+ weathered buildings held in official "arrested decay," a gold-rush town frozen mid-collapse at 8,375 ft. Turn east off US-395 onto Hwy 270; the <b>last 3 mi are rough dirt</b> (fine dry, any vehicle). Rusted autos in the sage, the leaning Methodist church, the Standard Mill, interiors left exactly as abandoned. Flat light is no enemy here — it's texture and story, not golden hour. Small day-use fee, cash.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Flat OK · hard sun for wood grain</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + longer to compress; shoot interiors through glass</dd></div>
+      <div><dt>Access</dt><dd class="warn">3 mi dirt · fee · 2–3 hr round trip</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      A rusted Model-A in tall grass with the town behind, or the leaning church against bare hills. Then go close on silvered wood grain and the peeling wallpaper behind wavy window glass.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Travertine / Bridgeport -->
+<article class="stop" style="--accent: var(--day3);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="tv-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b7c4cf"/><stop offset="1" stop-color="#e6dcc6"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="104" fill="url(#tv-sky)"/>
+      <!-- Sierra behind -->
+      <path d="M0,98 L60,60 L130,90 L200,56 L270,86 L300,72 L300,104 L0,104 Z" fill="#8791a0" opacity="0.85"/>
+      <path d="M192,66 L200,56 L210,72 L200,72 Z" fill="#eef0f2" opacity="0.7"/>
+      <!-- terraced travertine, warm mineral -->
+      <path d="M0,104 L300,104 L300,124 L0,128 Z" fill="#c69a5e"/>
+      <path d="M0,128 L300,124 L300,150 L0,156 Z" fill="#d8ab63"/>
+      <path d="M0,156 L300,150 L300,180 L0,188 Z" fill="#b98a4c"/>
+      <!-- turquoise pools -->
+      <ellipse cx="80" cy="140" rx="46" ry="10" fill="#4fa9a2" opacity="0.85"/>
+      <ellipse cx="210" cy="168" rx="60" ry="12" fill="#57b3ac" opacity="0.8"/>
+      <path d="M0,188 L300,180 L300,220 L0,220 Z" fill="#9a6f3e"/>
+    </svg>
+    <span class="visual-label">Terraces · turquoise · warm mineral</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">3.4</span>
+      <span class="stop-when">Afternoon · last frame</span>
+    </div>
+    <h3>Travertine Hot Springs<span class="opt">Bridgeport</span></h3>
+    <p>Just outside Bridgeport — a BLM site of terraced mineral pools, turquoise water banked in warm orange travertine with the <b>Sierra as backdrop</b>. Good closing landscape (and a soak if you want one). North of here 395 opens into Nevada ranch country — Bridgeport valley and the Walker River canyon give you big Carver-style open compositions if the light holds.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Afternoon warms the terraces</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · pools as lead-in lines</dd></div>
+      <div><dt>Also</dt><dd>Conway Summit vista en route</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Use a turquoise pool as foreground, its edge as a leading line pointing back at the snow-flecked crest. Late light makes the mineral terraces glow.
+    </div>
+  </div>
+</article>
+
+<div class="camp" style="border-color: var(--line);">
+  <span class="ci">◆</span>
+  <div><b>Final run:</b> 395 N through Gardnerville and Carson City into <b>Reno</b> for Sunday evening. If you're chasing one last frame, the high-desert ranch light north of Bridgeport is the sleeper of the whole drive.</div>
+</div>
+
+<!-- ============ FIELD NOTES ============ -->
+<section class="notes">
+  <h2>Field notes</h2>
+  <div class="notegrid">
+    <div class="note">
+      <h4>Heat is the spine of the plan</h4>
+      <p>Shoot the desert in Friday's cool early hours, drive the midday heat while gaining elevation, and by Saturday night you're camped at 7,000+ ft. <b>Bring a real warm layer</b> — the east side drops fast after dark even in summer.</p>
+    </div>
+    <div class="note">
+      <h4>Water &amp; fuel</h4>
+      <p>Long gaps between services on 395. Top off at <b>Ridgecrest, Bishop, Lee Vining</b>. Carry more water than you think for the desert day — there's none at Trona.</p>
+    </div>
+    <div class="note">
+      <h4>The one reservation</h4>
+      <p>Sat night around <b>June Lake / Mammoth</b> is competitive in summer. Book ahead or pin a dispersed FS backup. Days 1 &amp; 3 camping is open and easy.</p>
+    </div>
+    <div class="note">
+      <h4>Why not Death Valley</h4>
+      <p>Early September routinely runs 110°F+ — miserable and unsafe to camp. <b>Trona gives you the same tufa/dry-lakebed look</b> without the oven. Good call skipping it.</p>
+    </div>
+    <div class="note">
+      <h4>Dirt-road stops</h4>
+      <p>Trona (5 mi), Crowley Columns, Cerro Gordo — all graded/rough dirt. Crawl the washboard, watch clearance, and don't attempt anything soft after rain.</p>
+    </div>
+    <div class="note">
+      <h4>Rhythm</h4>
+      <p>Two golden hours a day is the target: dawn + dusk. Midday is for driving and the flat-light detail work (Randsburg, bristlecone grain). Don't burn energy shooting harsh noon landscapes.</p>
+    </div>
+  </div>
+
+  <p class="colophon">
+    <b>Art direction · look &amp; palette.</b> Each stop leads with reference photographs of the actual place — tap any to view it full-screen. The light, glass and ‘the shot’ notes are the art direction: the look to chase at each stop, not a guarantee of the conditions you’ll get.<br>
+    <b>Reference photographers:</b> Nick Carver (large-format Americana, facades, weathered signage) · Michael Shainblum (desert &amp; tufa, dramatic light) · Thomas Heaton (patient minimal landscape, single strong subject) · Nick Page (bold light, graphic compositions).<br>
+    <b>Route:</b> San Diego → I-15 N → CA-395 N → Reno. Timings assume a 4:00 AM Friday departure. Verify campground reservations, Tioga Pass status, and any dirt-road / fire closures close to your dates.
+  </p>
+</section>
+
+</div><!-- /body -->
+</div><!-- /trip-root -->

@@ -1,0 +1,57 @@
+{
+  "slug": "2026-395",
+  "title": "Eastern Sierra 395 — Photographer's Shooting Script",
+  "output": "2026-late-summer-395.html",
+  "content": "content.html",
+
+  "order": ["trona", "randsburg", "fossilfalls", "owens", "alabama", "manzanar", "bristlecone", "crowley", "convict", "hotcreek", "june", "mono", "tioga", "bodie", "travertine"],
+
+  "feed": { "owens": ["owens", "cerrogordo"] },
+
+  "roles": { "wide": "the place", "shot": "toward ‘the shot’", "detail": "detail", "mood": "mood · light" },
+
+  "disp": {
+    "trona": "Trona Pinnacles", "randsburg": "Randsburg", "fossilfalls": "Fossil Falls",
+    "owens": "Owens Lake", "cerrogordo": "Cerro Gordo", "alabama": "Alabama Hills · Mobius Arch",
+    "manzanar": "Manzanar", "bristlecone": "Ancient Bristlecone Pines", "crowley": "Crowley Lake Columns",
+    "convict": "Convict Lake", "hotcreek": "Hot Creek", "june": "June Lake Loop · Silver Lake",
+    "mono": "Mono Lake · South Tufa", "tioga": "Tioga Pass · Ellery Lake", "bodie": "Bodie",
+    "travertine": "Travertine Hot Springs"
+  },
+
+  "gps": {
+    "trona": { "lat": 35.6142, "lng": -117.3664, "label": "BLM tufa area, off CA-178", "elev": "1,690 ft" },
+    "randsburg": { "lat": 35.3686, "lng": -117.6558, "label": "Butte Ave, main street", "elev": "3,523 ft" },
+    "fossilfalls": { "lat": 35.9700, "lng": -117.9126, "label": "trailhead off US-395", "elev": "3,200 ft" },
+    "owens": { "lat": 36.4231, "lng": -117.9339, "label": "Owens dry lakebed", "elev": "3,600 ft",
+      "alt": [{ "name": "Cerro Gordo", "lat": 36.5383, "lng": -117.8056, "elev": "8,200 ft" }] },
+    "alabama": { "lat": 36.6046, "lng": -118.1206, "label": "Mobius Arch, off Movie Rd", "elev": "4,800 ft" },
+    "manzanar": { "lat": 36.7283, "lng": -118.1547, "label": "auto-tour entrance", "elev": "3,900 ft" },
+    "bristlecone": { "lat": 37.3847, "lng": -118.1717, "label": "Schulman Grove visitor ctr", "elev": "10,000 ft" },
+    "crowley": { "lat": 37.5686, "lng": -118.7258, "label": "columns, SE shore", "elev": "6,780 ft" },
+    "convict": { "lat": 37.5906, "lng": -118.8564, "label": "north-shore day use", "elev": "7,850 ft" },
+    "hotcreek": { "lat": 37.6614, "lng": -118.8280, "label": "geologic site lot", "elev": "7,200 ft" },
+    "june": { "lat": 37.7778, "lng": -119.1289, "label": "Silver Lake, June Lake Loop", "elev": "7,215 ft" },
+    "mono": { "lat": 37.9382, "lng": -119.0272, "label": "South Tufa parking", "elev": "6,380 ft" },
+    "tioga": { "lat": 37.9357, "lng": -119.2340, "label": "Ellery Lake, Tioga Rd", "elev": "9,500 ft" },
+    "bodie": { "lat": 38.2124, "lng": -119.0137, "label": "townsite, via Hwy 270", "elev": "8,375 ft" },
+    "travertine": { "lat": 38.2489, "lng": -119.2047, "label": "BLM pools, S of Bridgeport", "elev": "6,500 ft" }
+  },
+
+  "days": [
+    { "label": "Day 1", "stops": [["trona", "Trona"], ["randsburg", "Randsburg"], ["fossilfalls", "Fossil Falls"], ["owens", "Owens"], ["alabama", "Alabama Hills"]] },
+    { "label": "Day 2", "stops": [["manzanar", "Manzanar"], ["bristlecone", "Bristlecone"], ["crowley", "Crowley"], ["convict", "Convict"], ["hotcreek", "Hot Creek"], ["june", "June Lake"]] },
+    { "label": "Day 3", "stops": [["mono", "Mono Lake"], ["tioga", "Tioga"], ["bodie", "Bodie"], ["travertine", "Travertine"]] }
+  ],
+
+  "moon": { "start": "2026-08-18", "end": "2026-09-08", "windowLabel": "late Aug – early Sep" },
+  "darkSites": "Trona, Alabama Hills, the bristlecones, Mono",
+
+  "credits": [
+    ["trona", "Trona Pinnacles"], ["randsburg", "Randsburg"], ["fossilfalls", "Fossil Falls"],
+    ["owens", "Owens Lake"], ["cerrogordo", "Cerro Gordo"], ["alabama", "Alabama Hills"],
+    ["manzanar", "Manzanar"], ["bristlecone", "Bristlecone Pines"], ["crowley", "Crowley Columns"],
+    ["convict", "Convict Lake"], ["hotcreek", "Hot Creek"], ["june", "June / Silver Lake"],
+    ["mono", "Mono Lake"], ["tioga", "Ellery Lake"], ["bodie", "Bodie"], ["travertine", "Travertine Springs"]
+  ]
+}

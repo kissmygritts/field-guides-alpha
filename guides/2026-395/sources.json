@@ -1,0 +1,18 @@
+{
+  "trona": { "mode": "search", "query": "Trona Pinnacles tufa California" },
+  "randsburg": { "mode": "search", "query": "Randsburg California ghost town" },
+  "fossilfalls": { "mode": "search", "query": "Fossil Falls Coso Owens California" },
+  "owens": { "mode": "category", "query": "Category:Owens Lake" },
+  "cerrogordo": { "mode": "search", "query": "Cerro Gordo California ghost town" },
+  "alabama": { "mode": "search", "query": "Alabama Hills Mobius Arch California" },
+  "manzanar": { "mode": "category", "query": "Category:Manzanar National Historic Site" },
+  "bristlecone": { "mode": "search", "query": "Bristlecone pine Pinus longaeva White Mountains California" },
+  "crowley": { "mode": "search", "query": "Crowley Lake stone columns California" },
+  "convict": { "mode": "search", "query": "Convict Lake California Sierra" },
+  "hotcreek": { "mode": "search", "query": "Hot Creek geologic Mono County California hot spring" },
+  "june": { "mode": "search", "query": "Silver Lake June Lake Loop California" },
+  "mono": { "mode": "search", "query": "Mono Lake South Tufa California" },
+  "tioga": { "mode": "search", "query": "Ellery Lake Tioga Pass California" },
+  "bodie": { "mode": "category", "query": "Category:Bodie, California" },
+  "travertine": { "mode": "category", "query": "Category:Travertine Hot Springs" }
+}

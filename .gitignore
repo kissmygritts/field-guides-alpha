@@ -1,0 +1,14 @@
+node_modules/
+
+# Per-guide working files (candidates, contact sheets, raw sources) — not committed.
+# The curated manifest.json IS committed so rebuilds need no network.
+guides/*/work/
+guides/*/sheets/
+**/*.src
+
+# Verify artifacts
+build/.verify/
+*.screenshot.png
+
+# OS
+.DS_Store
