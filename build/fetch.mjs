@@ -6,10 +6,13 @@
 // candidates: reads guides/<slug>/sources.json  { stop: query | [query | {mode,query}] }
 //             Each stop fills from Unsplash first, then Flickr, then Wikimedia —
 //             a source is only queried if the stop is still short of the cap
-//             (sequential fallback). Sources without an API key are skipped
-//             (UNSPLASH_KEY, FLICKR_KEY; Wikimedia needs none). Wikimedia honors
-//             {mode:'category',query} to walk a Category:…; everything else is a
-//             plain text search. Writes thumbs to guides/<slug>/work/<stop>/NN.jpg
+//             (sequential fallback). Exception: a stop that names a Category:
+//             ({mode:'category'}) sources Wikimedia FIRST — for obscure place
+//             names Unsplash's text search otherwise fills the cap with off-topic
+//             frames and the on-topic Commons category never runs. Sources without
+//             an API key are skipped (UNSPLASH_KEY, FLICKR_KEY; Wikimedia needs
+//             none). Wikimedia honors {mode:'category',query} to walk a Category:…;
+//             everything else is a plain text search. Thumbs -> work/<stop>/NN.jpg
 //             and work/index.json ([NN, ref, source, title]). Then run `sheet` and
 //             eyeball; put your picks in selections.json.
 //
@@ -42,17 +45,29 @@ const readJson = (f) => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
 // A query spec is a plain string or {mode,query} (mode only matters to Wikimedia).
 const asQuery = (q) => (typeof q === 'string' ? { query: q } : q);
 
+// Per-stop source order. A stop that names a Category: (mode:'category') is an
+// obscure place-name the author knows Commons covers cleanly, so trust Wikimedia
+// first — otherwise Unsplash's text search fills the whole cap with off-topic
+// frames (a lake named X, a town named Y) and the good Commons results never run.
+// Stops with no category keep the default Unsplash-first order for nicer scenics.
+const orderFor = (queries) =>
+  queries.some((q) => q.mode === 'category')
+    ? ['wikimedia', ...ORDER.filter((s) => s !== 'wikimedia')]
+    : ORDER;
+
 async function candidates() {
   const sources = readJson('sources.json');
   const index = {};
   for (const [stop, spec] of Object.entries(sources)) {
     const queries = (Array.isArray(spec) ? spec : [spec]).map(asQuery);
+    const order = orderFor(queries);
+    if (order[0] === 'wikimedia') console.log(`  ${stop}: Wikimedia-first (category query)`);
     const out = path.join(dir, 'work', stop);
     fs.mkdirSync(out, { recursive: true });
     const seen = new Set();
     const found = [];
     // Sequential fallback: each source is only queried if the stop is still short.
-    for (const src of ORDER) {
+    for (const src of order) {
       if (found.length >= CAP) break;
       const adapter = ADAPTERS[src];
       if (!adapter.enabled()) { console.log(`  ${stop}/${src}: no key, skipped`); continue; }

@@ -60,15 +60,24 @@ network needed. This is the cheap path; prefer it whenever imagery isn't changin
    be `{ "mode": "category"|"search", "query": "…" }` — `mode` only affects Wikimedia
    (`category` walks a `Category:…`; otherwise `search` forces `filetype:bitmap` to
    dodge PDFs/maps/diagrams). The same query string is reused across all three
-   sources. See `references/wikimedia.md`.
-2. `node build/fetch.mjs <slug> candidates` — fills each stop Unsplash→Flickr→Wikimedia
-   up to the cap, downloads thumbs to `work/<stop>/`, records `[NN, ref, source, title]`
-   in `work/index.json`. Prints the per-source mix per stop.
-3. `node build/sheet.mjs <slug>` — builds `sheets/<stop>.jpg` contact sheets; each tile
-   is labeled `NNs` where `s` is the source letter (`u`/`f`/`w`).
-   **Read each sheet** and actually look. Favor obscure/moody frames; the user wants
-   variety (a hero "place" shot, a "the shot" composition, a detail, a mood frame).
-   **Reject frames with people/intrusions** unless the subject genuinely needs scale.
+   sources. **For any obscure place-name stop (a specific lake, ghost town, landmark),
+   give it a `Category:` query** — that both walks the clean Commons category and makes
+   the stop source **Wikimedia-first**, where the file titles are trustworthy. Reserve
+   bare text queries (Unsplash-first) for generic scenics where you want the nicer
+   stock photo and don't mind eyeballing. See `references/wikimedia.md`.
+2. `node build/fetch.mjs <slug> candidates` — fills each stop up to the cap
+   (Unsplash→Flickr→Wikimedia, or Wikimedia-first for category stops), downloads thumbs
+   to `work/<stop>/`, records `[NN, ref, source, title]` in `work/index.json`. Prints
+   the per-source mix and flags which stops went Wikimedia-first.
+3. **Curate mainly from titles, not by eyeballing every sheet.** `work/index.json` holds
+   each candidate's `title` — for Wikimedia-first stops those titles are reliable
+   (`Category:Walker Lake (Nevada)` files *are* Walker Lake), so pick from them and let
+   the authored copy frame the roles. Build sheets (`node build/sheet.mjs <slug>` →
+   `sheets/<stop>.jpg`, tiles labeled `NNs`) and **read a sheet only to spot-check** —
+   confirm the subject is right (Unsplash text search drifts badly — a lake/town of the
+   same name), and reject frames with people/intrusions or archival junk. Don't vision-
+   curate for aesthetics; the guide's editorial voice comes from the content, not from
+   ranking frames by mood.
 4. **Write picks** into `selections.json`: `{ "<stop>": [[<key>, "<role>"], …] }`. A
    `<key>` is the candidate number `NN` from the sheet (simplest), a `"<source>:<id>"`
    ref (e.g. `"unsplash:abc123"`, `"wikimedia:File:Foo.jpg"`), or a legacy bare

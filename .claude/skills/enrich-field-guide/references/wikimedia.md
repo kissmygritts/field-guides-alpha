@@ -32,6 +32,14 @@ not exist; a `search` for "Fossil Falls Coso Owens California" did). If a catego
 returns 0 pages, fall back to search. Candidates are filtered to ≥ 800×600 to drop
 thumbnails and icons.
 
+**A category also changes source order.** In `fetch.mjs`, a stop that names any
+`{mode:'category'}` query sources **Wikimedia first** (instead of Unsplash→Flickr→
+Wikimedia). This is the fix for obscure place names: Unsplash's text search returns a
+full page of off-topic frames (a different lake/town of the same name), fills the 36
+cap, and the on-topic Commons category never runs. Because Wikimedia titles are
+reliable, you can then curate those stops from titles and only glance at a sheet to
+spot-check — instead of vision-reading every grid.
+
 ## Verify attribution — never guess
 
 `imageInfo()` pulls `Artist` and `LicenseShortName` from the API's `extmetadata` and

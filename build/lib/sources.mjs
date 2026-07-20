@@ -10,6 +10,8 @@
 //
 // Candidates are gathered in ORDER with sequential fallback: each stop fills from
 // the first source, then the next only if still short of the cap, then the next.
+// fetch.mjs overrides ORDER per stop: a stop naming a Category: sources Wikimedia
+// first, since Unsplash text search buries obscure place names under off-topic hits.
 import * as unsplash from './unsplash.mjs';
 import * as flickr from './flickr.mjs';
 import * as wikimedia from './wikimedia.mjs';
