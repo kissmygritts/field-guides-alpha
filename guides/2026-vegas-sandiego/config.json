@@ -1,0 +1,49 @@
+{
+  "slug": "2026-vegas-sandiego",
+  "title": "Las Vegas to San Diego — Photographer's Shooting Script",
+  "output": "2026-vegas-sandiego.html",
+  "content": "content.html",
+
+  "order": ["cima", "holeinthewall", "kelsodepot", "kelsodunes", "amboycrater", "roys", "joshuatree", "theslot", "fontspoint", "montezuma", "julian", "sunrise"],
+
+  "roles": { "wide": "the place", "shot": "toward ‘the shot’", "detail": "detail", "mood": "mood · light" },
+
+  "disp": {
+    "cima": "Cima Dome", "holeinthewall": "Hole-in-the-Wall", "kelsodepot": "Kelso Depot",
+    "kelsodunes": "Kelso Dunes", "amboycrater": "Amboy Crater", "roys": "Roy's · Amboy",
+    "joshuatree": "Joshua Tree", "theslot": "The Slot", "fontspoint": "Font's Point",
+    "montezuma": "Montezuma Grade", "julian": "Julian", "sunrise": "Sunrise Hwy"
+  },
+
+  "gps": {
+    "cima": { "lat": 35.2717, "lng": -115.5407, "label": "Teutonia Peak TH, Cima Rd", "elev": "5,220 ft",
+      "alt": [{ "name": "Cima Dome summit", "lat": 35.3003, "lng": -115.5250, "elev": "5,745 ft" }] },
+    "holeinthewall": { "lat": 35.0458, "lng": -115.3931, "label": "Hole-in-the-Wall, Black Canyon Rd", "elev": "4,270 ft" },
+    "kelsodepot": { "lat": 35.0114, "lng": -115.6534, "label": "Kelso Depot, Kelbaker Rd", "elev": "2,126 ft" },
+    "kelsodunes": { "lat": 34.8925, "lng": -115.7108, "label": "Kelso Dunes TH, off Kelbaker Rd", "elev": "2,650 ft" },
+    "amboycrater": { "lat": 34.5486, "lng": -115.7864, "label": "Amboy Crater, Route 66", "elev": "980 ft" },
+    "roys": { "lat": 34.5583, "lng": -115.7442, "label": "Roy's, Amboy · Route 66", "elev": "640 ft" },
+    "joshuatree": { "lat": 33.7442, "lng": -115.9267, "label": "Cholla Garden, Pinto Basin Rd", "elev": "2,250 ft",
+      "alt": [{ "name": "Jumbo Rocks · Skull Rock", "lat": 33.9944, "lng": -116.0636, "elev": "4,400 ft" }] },
+    "theslot": { "lat": 33.2189, "lng": -116.1470, "label": "The Slot, Borrego Mtn", "elev": "780 ft" },
+    "fontspoint": { "lat": 33.2766, "lng": -116.2803, "label": "Font's Point, wash off S-22", "elev": "1,290 ft" },
+    "montezuma": { "lat": 33.2447, "lng": -116.4033, "label": "Crawford Overlook, S-22", "elev": "3,000 ft" },
+    "julian": { "lat": 33.0786, "lng": -116.6019, "label": "Main St, Julian", "elev": "4,235 ft" },
+    "sunrise": { "lat": 32.8785, "lng": -116.4247, "label": "Sunrise Hwy (S-1), Mt. Laguna", "elev": "5,980 ft" }
+  },
+
+  "days": [
+    { "label": "Day 1", "stops": [["cima", "Cima Dome"], ["holeinthewall", "Hole-in-the-Wall"], ["kelsodepot", "Kelso Depot"], ["kelsodunes", "Kelso Dunes"], ["amboycrater", "Amboy Crater"], ["roys", "Roy's"]] },
+    { "label": "Day 2", "stops": [["joshuatree", "Joshua Tree"], ["theslot", "The Slot"], ["fontspoint", "Font's Point"], ["montezuma", "Montezuma"], ["julian", "Julian"], ["sunrise", "Sunrise Hwy"]] }
+  ],
+
+  "moon": { "start": "2026-10-16", "end": "2026-10-18", "windowLabel": "mid-October" },
+  "darkSites": "Mojave Preserve (Kelso, Hole-in-the-Wall), Amboy on Route 66, and Anza-Borrego",
+
+  "credits": [
+    ["cima", "Cima Dome"], ["holeinthewall", "Hole-in-the-Wall"], ["kelsodepot", "Kelso Depot"],
+    ["kelsodunes", "Kelso Dunes"], ["amboycrater", "Amboy Crater"], ["roys", "Roy's · Amboy"],
+    ["joshuatree", "Joshua Tree"], ["theslot", "The Slot"], ["fontspoint", "Font's Point"],
+    ["montezuma", "Montezuma Grade"], ["julian", "Julian"], ["sunrise", "Sunrise Hwy"]
+  ]
+}

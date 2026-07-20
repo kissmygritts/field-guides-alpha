@@ -1,0 +1,58 @@
+{
+  "cima": [
+    { "mode": "category", "query": "Category:Cima Dome" },
+    { "mode": "category", "query": "Category:Teutonia Peak" },
+    "Cima Dome Mojave National Preserve Joshua tree"
+  ],
+  "holeinthewall": [
+    { "mode": "category", "query": "Category:Hole-in-the-Wall (Mojave National Preserve)" },
+    "Hole-in-the-Wall Mojave National Preserve Banshee Canyon",
+    "Mojave National Preserve Hole in the Wall rings trail"
+  ],
+  "kelsodepot": [
+    { "mode": "category", "query": "Category:Kelso Depot" },
+    "Kelso Depot Mojave National Preserve"
+  ],
+  "kelsodunes": [
+    { "mode": "category", "query": "Category:Kelso Dunes" },
+    "Kelso Dunes Mojave National Preserve"
+  ],
+  "amboycrater": [
+    { "mode": "category", "query": "Category:Amboy Crater" },
+    "Amboy Crater California lava field"
+  ],
+  "roys": [
+    { "mode": "category", "query": "Category:Roy's Motel and Café" },
+    "Roy's Cafe Amboy Route 66 neon sign",
+    "Amboy California Route 66"
+  ],
+  "joshuatree": [
+    { "mode": "category", "query": "Category:Cholla Cactus Garden" },
+    "Cholla Cactus Garden Joshua Tree National Park sunrise",
+    "Skull Rock Joshua Tree National Park"
+  ],
+  "theslot": [
+    "The Slot canyon Anza-Borrego Borrego Mountain",
+    "Anza-Borrego Desert State Park slot canyon",
+    { "mode": "category", "query": "Category:Anza-Borrego Desert State Park" }
+  ],
+  "fontspoint": [
+    { "mode": "category", "query": "Category:Font's Point" },
+    "Font's Point Anza-Borrego badlands overlook",
+    "Borrego Badlands Anza-Borrego"
+  ],
+  "montezuma": [
+    "Montezuma Grade Anza-Borrego overlook",
+    "Borrego Valley overlook Anza-Borrego S22",
+    "Anza-Borrego Desert State Park valley view"
+  ],
+  "julian": [
+    { "mode": "category", "query": "Category:Julian, California" },
+    "Julian California historic main street"
+  ],
+  "sunrise": [
+    { "mode": "category", "query": "Category:Laguna Mountains" },
+    "Sunrise Highway Laguna Mountains San Diego County",
+    "Mount Laguna California pine overlook"
+  ]
+}

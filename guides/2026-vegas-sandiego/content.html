@@ -1,0 +1,648 @@
+<!-- Las Vegas to San Diego — Photographer's Shooting Script -->
+<div id="trip-root">
+<style>
+  #trip-root {
+    --ink: #e8e4da;
+    --ink-dim: #a49f92;
+    --ink-faint: #6f6a5e;
+    --ground: #14140f;
+    --ground-2: #1c1c16;
+    --panel: #201f18;
+    --line: #35342a;
+    --sun: #e8a13c;
+    --sun-deep: #c76b2a;
+    --sky: #6f86a3;
+    --sage: #8a9a72;
+    --alarm: #d8663f;
+    --day1: #c76b2a;
+    --day2: #6f86a3;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: "Avenir Next", "Segoe UI", -apple-system, system-ui, sans-serif;
+    --mono: "SFMono-Regular", "Roboto Mono", Menlo, Consolas, monospace;
+    color: var(--ink);
+    font-family: var(--sans);
+    background: var(--ground);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  #trip-root * { box-sizing: border-box; }
+
+  /* ---------- Masthead ---------- */
+  #trip-root .mast {
+    position: relative;
+    padding: 46px 30px 38px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(232,161,60,0.14), transparent 55%),
+      linear-gradient(180deg, #191811, #14140f);
+    overflow: hidden;
+  }
+  #trip-root .mast-ridge { position:absolute; left:0; right:0; bottom:-1px; height:120px; display:block; opacity:.5; }
+  #trip-root .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--sun);
+    margin: 0 0 16px;
+  }
+  #trip-root h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 15ch;
+  }
+  #trip-root h1 em { font-style: italic; color: var(--sun); }
+  #trip-root .dek {
+    font-size: 15px;
+    color: var(--ink-dim);
+    max-width: 56ch;
+    margin: 0 0 22px;
+  }
+  #trip-root .mast-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 26px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+    color: var(--ink-dim); position: relative; z-index: 2;
+  }
+  #trip-root .mast-meta b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Section wrap ---------- */
+  #trip-root .body { padding: 8px 22px 60px; }
+
+  /* ---------- Day header ---------- */
+  #trip-root .day {
+    margin: 40px 0 6px;
+    padding: 20px 20px 18px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--ground-2), #17170f);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  #trip-root .day::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--accent);
+  }
+  #trip-root .day-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
+  }
+  #trip-root .day-title {
+    font-family: var(--serif); font-size: 25px; font-weight: 500; margin: 0 0 4px;
+  }
+  #trip-root .day-sub { font-size: 13.5px; color: var(--ink-dim); margin: 0; }
+  #trip-root .day-legs {
+    margin-top: 12px; display:flex; flex-wrap:wrap; gap: 8px;
+  }
+  #trip-root .chip {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.04em;
+    padding: 4px 9px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-dim);
+    background: rgba(0,0,0,.2);
+  }
+  #trip-root .chip b { color: var(--ink); }
+
+  /* ---------- Stop card ---------- */
+  #trip-root .stop {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  #trip-root .stop-visual { position: relative; background: #0d0d09; min-height: 210px; }
+  #trip-root .stop-visual svg { display:block; width:100%; height:100%; }
+  #trip-root .visual-label {
+    position:absolute; left:10px; bottom:9px;
+    font-family: var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: rgba(255,255,255,.72);
+    background: rgba(0,0,0,.42); backdrop-filter: blur(2px);
+    padding: 3px 7px; border-radius: 5px;
+  }
+  #trip-root .stop-body { padding: 18px 20px 20px; }
+  #trip-root .stop-kicker {
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom: 3px;
+  }
+  #trip-root .stop-num {
+    font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing:.1em;
+  }
+  #trip-root .stop-when {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.08em;
+    color: var(--ink-faint); text-transform: uppercase;
+    margin-left:auto;
+  }
+  #trip-root .stop h3 {
+    font-family: var(--serif); font-size: 21px; font-weight: 500; margin: 0 0 8px;
+  }
+  #trip-root .stop h3 .opt {
+    font-family: var(--mono); font-size: 10px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sage); border:1px solid var(--line); padding:2px 6px; border-radius:5px;
+    vertical-align: middle; margin-left: 8px;
+  }
+  #trip-root .stop p { font-size: 13.5px; color: var(--ink-dim); margin: 0 0 12px; }
+  #trip-root .stop p b { color: var(--ink); font-weight: 600; }
+
+  /* direction row */
+  #trip-root .direct {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: 9px; overflow:hidden;
+    margin-top: 4px;
+  }
+  #trip-root .direct div { background: var(--ground-2); padding: 8px 11px; }
+  #trip-root .direct dt {
+    font-family: var(--mono); font-size: 9px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-faint); margin-bottom: 3px;
+  }
+  #trip-root .direct dd { margin:0; font-size: 12.5px; color: var(--ink); }
+  #trip-root .direct dd.warn { color: var(--alarm); }
+
+  /* the "shot" callout */
+  #trip-root .theshot {
+    margin-top: 12px; padding: 10px 13px;
+    border-left: 2px solid var(--accent);
+    background: linear-gradient(90deg, rgba(199,107,42,0.08), transparent);
+    font-size: 12.5px;
+  }
+  #trip-root .theshot span {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--accent); display:block; margin-bottom: 3px;
+  }
+
+  /* ---------- Camp banner ---------- */
+  #trip-root .camp {
+    margin: 16px 0 4px;
+    padding: 13px 16px;
+    border: 1px dashed var(--line);
+    border-radius: 11px;
+    background: rgba(127,155,109,0.06);
+    display:flex; gap:12px; align-items:flex-start;
+    font-size: 13px; color: var(--ink-dim);
+  }
+  #trip-root .camp b { color: var(--ink); }
+  #trip-root .camp .ci { flex-shrink:0; margin-top:1px; }
+
+  /* ---------- Field notes footer ---------- */
+  #trip-root .notes {
+    margin-top: 46px; padding: 26px 22px 30px;
+    border-top: 1px solid var(--line);
+  }
+  #trip-root .notes h2 {
+    font-family: var(--serif); font-size: 22px; font-weight:500; margin: 0 0 16px;
+  }
+  #trip-root .notegrid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px;
+  }
+  #trip-root .note {
+    border: 1px solid var(--line); border-radius: 11px; padding: 14px 15px;
+    background: var(--panel);
+  }
+  #trip-root .note h4 {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sun); margin: 0 0 7px;
+  }
+  #trip-root .note p { font-size: 12.8px; color: var(--ink-dim); margin: 0; }
+  #trip-root .note b { color: var(--ink); }
+
+  #trip-root .colophon {
+    margin-top: 26px; padding-top: 16px; border-top:1px solid var(--line);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.06em;
+    color: var(--ink-faint); line-height:1.7;
+  }
+  #trip-root .colophon b { color: var(--ink-dim); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    #trip-root .stop { grid-template-columns: 1fr; }
+    #trip-root .stop-visual { min-height: 170px; }
+    #trip-root .body { padding: 4px 14px 50px; }
+    #trip-root .mast { padding: 34px 20px 30px; }
+    #trip-root .stop-when { margin-left:0; width:100%; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #trip-root .stop { transition: border-color .25s ease; }
+    #trip-root .stop:hover { border-color: var(--accent); }
+  }
+</style>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="mast">
+  <svg class="mast-ridge" viewBox="0 0 940 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,120 L0,86 L90,70 L180,80 L280,58 L380,74 L470,52 L560,72 L650,60 L760,78 L850,64 L940,80 L940,120 Z" fill="#0f0f0a"/>
+  </svg>
+  <p class="eyebrow">Shooting Script · Overland · Mid-October</p>
+  <h1>Las Vegas to San Diego, the <em>back way</em></h1>
+  <p class="dek">Two days southwest that barely touch a freeway. Skip I-15 entirely: drop down US-95 into the volcanic heart of the Mojave National Preserve, run a forgotten stretch of Route 66, cross the badlands of Anza-Borrego, then climb the pine crest above San Diego and coast down after dark. Built around the ends of the day, with dark desert nights between.</p>
+  <div class="mast-meta">
+    <span><b>~600 mi</b> total</span>
+    <span><b>2 nights</b> · Preserve + 29 Palms</span>
+    <span>Depart <b>Fri PM</b></span>
+    <span>Route <b>no I-15</b></span>
+    <span>Waxing-crescent moon · dark late</span>
+  </div>
+</header>
+
+<div class="body">
+
+<!-- ============ DAY 1 ============ -->
+<section class="day" style="--accent: var(--day1);">
+  <p class="day-tag">Day 1 · Saturday · Preserve &amp; Route 66</p>
+  <h2 class="day-title">Vegas → Amboy → Twentynine Palms</h2>
+  <p class="day-sub">Slip out of Vegas Friday night, camp in the Mojave Preserve, and spend Saturday working its volcanic middle — a granite dome, a red-rock slot, a mission depot, booming dunes — then drop onto Route 66 for a cinder cone and the loneliest neon in California. ~230 mi.</p>
+  <div class="day-legs">
+    <span class="chip"><b>Fri PM</b> depart Vegas · US-95 S</span>
+    <span class="chip"><b>dawn</b> Cima Dome</span>
+    <span class="chip"><b>AM</b> Hole-in-the-Wall</span>
+    <span class="chip"><b>midday</b> Kelso Depot + Dunes</span>
+    <span class="chip"><b>pm</b> Amboy Crater</span>
+    <span class="chip"><b>dusk</b> Roy's → 29 Palms</span>
+  </div>
+  <div class="day-brief">
+    <span><b>⛽ Fuel</b> Fill up in Las Vegas — the Preserve has no gas at all. Next reliable pumps are Baker or Ludlow, then Twentynine Palms.</span>
+    <span><b>📵 Signal</b> Dead across the entire Preserve and Route 66. Download maps + this guide before you leave Vegas.</span>
+    <span><b>💧 Water</b> Carry 6+ L each — no potable water at any Preserve stop, and October still hits ~90°F midday on the low flats.</span>
+    <span><b>🚗 Drive</b> ~230 mi · much of it graded dirt · 5–6 hr moving + stops</span>
+  </div>
+</section>
+
+<!-- Stop: Cima Dome / Teutonia Peak -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Granite dome · Joshua trees · first light</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.1 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Dawn · first frame</span>
+    </div>
+    <h3>Cima Dome &amp; Teutonia Peak<span class="opt">Mojave Preserve</span></h3>
+    <p>A near-perfect granite dome — 75 square miles of it, rising so symmetrically it reads as almost engineered — with the boulder-stacked Teutonia Peak trail picking through what was the world's densest <b>Joshua-tree forest</b>. Honest note: the 2020 <b>Dome Fire</b> burned much of that forest, so today you're shooting survivors and silvered snags among the monzogranite, not the endless green army it was. Still a quiet, strange place to open the trip. Low sun rakes the boulders and backlights the Joshuas that made it.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>First light · low sun backlighting the Joshuas</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · wide to set the dome's curve</dd></div>
+      <div><dt>Access</dt><dd>Paved Cima Rd + short trail · fire-scarred</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      A lone surviving Joshua tree rim-lit at sunrise, stacked granite boulders behind it, the dome's clean arc on the horizon. Then a stark minimal — a single burned snag against boulder and sky.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Hole-in-the-Wall -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Red volcanic rock · pockets · iron rings</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.2</span>
+      <span class="stop-when">Morning</span>
+    </div>
+    <h3>Hole-in-the-Wall</h3>
+    <p>Rust-red volcanic rock pocked with hundreds of wind-and-gas hollows — debris from a violent eruption 18 million years ago. The <b>Rings Trail</b> drops you down through a slot in the rhyolite on iron rings bolted to the stone, walls closing overhead into <b>Banshee Canyon</b>. The oxidized tuff glows when low sun hits it. One of the Preserve's most graphic, texture-dense stops — Swiss-cheese walls from every angle.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Low sun ignites the red rock · flat is fine for the pockets</dd></div>
+      <div><dt>Glass</dt><dd>16–35 in the slot · 70–200 for wall texture</dd></div>
+      <div><dt>Access</dt><dd>Graded dirt (Black Canyon Rd) + ring scramble</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Down inside Banshee Canyon: pocked red walls curving around you, the iron rings or a figure for scale. Then tight abstracts of the tafoni — pockets within pockets, warm on cool.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Kelso Depot -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Mission depot · palms · Americana</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.3</span>
+      <span class="stop-when">Midday · roadside</span>
+    </div>
+    <h3>Kelso Depot<span class="opt">1924 · restored</span></h3>
+    <p>A gleaming white <b>Spanish-mission railroad depot</b> marooned in the middle of the desert — red-tile roof, arcaded veranda, built 1924 for the Union Pacific and now the Preserve's visitor center. Palms, a long empty platform, freight trains still grinding past on the mainline. Pure Americana: architectural symmetry against raw desert, the Providence Mountains behind. Works even under flat midday light — you're shooting the building, not the sky.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Front light on the white facade AM · warm side-light PM</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · symmetry, arches, receding veranda</dd></div>
+      <div><dt>Access</dt><dd>Paved (Kelbaker Rd) — any car</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      The depot dead-on and symmetrical, palms framing, red tile against blue. Then the arcade receding down the veranda in hard shadow — and hold for a freight stack blurring past behind it.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Kelso Dunes -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Rose-gold dunes · knife-edge crests · form</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.4</span>
+      <span class="stop-when">Afternoon → golden hour</span>
+    </div>
+    <h3>Kelso Dunes</h3>
+    <p>Six hundred feet of rose-gold sand piled into one of the tallest dune fields in the Mojave — and when you slide down the steep lee faces they <b>boom</b>, a low aircraft-engine drone from the shearing sand. A short walk off the trailhead puts you onto clean, unfootprinted ridgelines. This is your pure-form chapter: line, shadow, ripple, nothing else. Save it for the last hour, when raking light cuts the crests into knife-edges.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Last hour — raking light for ridgelines &amp; ripples</dd></div>
+      <div><dt>Glass</dt><dd>70–200 to compress crests · wide for the sweep</dd></div>
+      <div><dt>Access</dt><dd class="warn">Graded dirt to TH + ~1.5 mi soft-sand walk</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      A single sinuous crest dividing light from shadow, wind ripples leading in, not a footprint in frame. Go long to stack ridge on ridge; wait out the last low sun for the deepest shadow.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Amboy Crater -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Cinder cone · black lava sea · symmetry</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.5</span>
+      <span class="stop-when">Late afternoon</span>
+    </div>
+    <h3>Amboy Crater<span class="opt">Route 66</span></h3>
+    <p>A textbook <b>250-ft cinder cone</b> sitting alone on a black lava field beside Route 66, last erupted maybe 10,000 years ago. A trail crosses the basalt to a breach in the west wall and climbs to the rim; all around, the flow is a dead-flat sea of black rock. Shoot it late — low sun models the cone's symmetry and throws the lava field into long shadow. Midday here is brutal and flat, so don't waste that light on it.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Late afternoon models the cone · skip midday</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · wide for the lava sea, tele to isolate the cone</dd></div>
+      <div><dt>Access</dt><dd class="warn">Paved lot off Route 66 + exposed lava trail</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      The symmetrical cone across the black flow, warm rim-light, a thread of trail leading in for scale. Then get low and shoot the cracked basalt into the sun for texture and a sun-star.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Roy's Café -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Googie neon · Mother Road · blue hour</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.6</span>
+      <span class="stop-when">Dusk · blue hour</span>
+    </div>
+    <h3>Roy's Motel &amp; Café<span class="opt">the sign</span></h3>
+    <p>The great googie boomerang sign of <b>Roy's</b> — Amboy's 1950s Route 66 outpost, population near zero, the most photographed neon in the Mojave. The soaring pylon, the shuttered café, a rusted gas pump, and the dead-straight Mother Road running off to a vanishing point. They relight the neon on occasion; even dark, the sign against a blue-hour or star-filled sky is the frame. This is your last stop before the run down Amboy Road to Twentynine Palms.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Blue hour into full dark · neon or stars behind the pylon</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + wide · tripod for the dark frames</dd></div>
+      <div><dt>Access</dt><dd>Paved, right on Route 66</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      The boomerang pylon dead-center against a deep post-sunset blue, Route 66 leading straight to it. Later, if it's dark and clear, the sign silhouetted under stars. A rusted pump detail for the diptych.
+    </div>
+  </div>
+</article>
+
+<div class="camp">
+  <span class="ci">▲</span>
+  <div><b>Overnight — Twentynine Palms</b> (motels + the Joshua Tree gateway), or dispersed on Amboy Road / back in the Preserve if you'd rather stay under stars. Fuel up and eat before you turn in — Sunday is the long day. The crescent moon sets early, so if it's clear, walk out from the sign for stars before you go.</div>
+</div>
+
+<!-- ============ DAY 2 ============ -->
+<section class="day" style="--accent: var(--day2);">
+  <p class="day-tag">Day 2 · Sunday · Badlands to the Pines</p>
+  <h2 class="day-title">29 Palms → Anza-Borrego → San Diego</h2>
+  <p class="day-sub">The long day. Traverse Joshua Tree at dawn, take the one unavoidable freeway hop, then drop into the Anza-Borrego badlands — a Grand-Canyon overlook and a slot canyon — before climbing the switchbacks to apple-pie Julian and running the pine crest down into San Diego after dark. ~250 mi.</p>
+  <div class="day-legs">
+    <span class="chip"><b>dawn</b> Joshua Tree traverse</span>
+    <span class="chip"><b>—</b> brief I-10 hop</span>
+    <span class="chip"><b>midday</b> The Slot</span>
+    <span class="chip"><b>pm</b> Font's Point</span>
+    <span class="chip"><b>golden</b> Montezuma Grade</span>
+    <span class="chip"><b>dusk</b> Julian</span>
+    <span class="chip"><b>dark</b> Sunrise Hwy → San Diego</span>
+  </div>
+  <div class="day-brief">
+    <span><b>⛽ Fuel</b> Fill in Twentynine Palms before the park; then Chiriaco Summit / Indio on I-10. Borrego Springs and Julian both have gas.</span>
+    <span><b>📵 Signal</b> Dead in Joshua Tree and across Anza-Borrego; returns on I-10 and in Julian.</span>
+    <span><b>🏜 Heat → 🏔 Cold</b> Anza-Borrego's floor bakes past 90°F midday; Julian and Mt. Laguna sit at 4,000–6,000 ft and turn cold after dark — pack a real layer.</span>
+    <span><b>🚗 Drive</b> ~250 mi · one ~35-mi stint on I-10 is the only freeway · plan the whole day</span>
+  </div>
+</section>
+
+<!-- Stop: Joshua Tree -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Cholla backlight · granite jumbles · dawn</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.1 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Dawn · traverse</span>
+    </div>
+    <h3>Joshua Tree<span class="opt">north → south traverse</span></h3>
+    <p>Enter at Twentynine Palms and drive the park's spine south to Cottonwood — the fastest low-road link toward the coast, and a worthy first frame either way. Up high: the namesake trees and monzogranite jumbles around <b>Jumbo Rocks</b> and Skull Rock. Dropping into the Pinto Basin, the <b>Cholla Cactus Garden</b> lights up like fur when low sun backlights ten thousand spines. Shoot the cholla at first light, grab the rocks on the way through, then keep moving — the day is long.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>First light backlighting the cholla · long shadows in the rocks</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · macro / tele for cholla halos</dd></div>
+      <div><dt>Access</dt><dd>Paved park road end-to-end · entrance fee</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      The Cholla Garden backlit at sunrise, every spine a halo, one plant isolated against shadowed hills. Up in the rocks: a Joshua tree against a granite pile, hard dawn shadow raking across.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: The Slot -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Sandstone slot · rock bridge · soft light</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.2</span>
+      <span class="stop-when">Midday · flat-light friendly</span>
+    </div>
+    <h3>The Slot<span class="opt">Anza-Borrego</span></h3>
+    <p>A narrow sandstone slot you walk down into — walls pinching to shoulder-width overhead, a natural <b>rock bridge</b> spanning the gap, soft light bouncing down sculpted mudstone. Unlike the badland overlooks, a slot shoots <b>best under flat midday sun</b>, when top light filters down without blowing the rim — so this is the stop to drop into when you roll in around noon. Short, easy, out of the wind, and completely unlike anything else on the drive.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Midday soft top-light is ideal · avoid hard low sun</dd></div>
+      <div><dt>Glass</dt><dd>16–35, vertical · the walls do the composing</dd></div>
+      <div><dt>Access</dt><dd class="warn">Sandy access road + short walk · never in flash-flood weather</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Vertical, looking up the pinched walls to a ribbon of sky, the rock bridge crossing overhead. Then a tight study of the wind-carved flutes where the bounced light goes warm.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Font's Point -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Badland labyrinth · cliff edge · raking light</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.3</span>
+      <span class="stop-when">Late afternoon · raking light</span>
+    </div>
+    <h3>Font's Point<span class="opt">Anza-Borrego</span></h3>
+    <p>"California's Grand Canyon" — an abrupt cliff-edge over the Borrego Badlands, a chaos of eroded mudstone ridges and washes falling away toward the Salton basin. Raw and enormous. Low, raking light carves the badland fins into three dimensions; harsh overhead sun flattens them to mush — so if you got here midday, do The Slot first and circle back for the <b>late side-light</b>. The four miles in are a soft-sand wash: air down, 4WD advised, and don't attempt it if rain threatens.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Sunset (or sunrise) rakes the ridges · midday kills it</dd></div>
+      <div><dt>Glass</dt><dd>24–70 wide at the rim · tele to isolate the fins</dd></div>
+      <div><dt>Access</dt><dd class="warn">4 mi soft-sand wash · high-clearance 4WD, air down</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Standing at the rim, wide, the whole badland maze raking away in low side-light. Then go long and pull single eroded fins out of the chaos, layer stacked on layer.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Montezuma Grade -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Switchbacks · valley overlook · blue shadow</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.4 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Golden hour · on the climb</span>
+    </div>
+    <h3>Montezuma Grade<span class="opt">S-22 climb</span></h3>
+    <p>The road out of the basin. County <b>S-22</b> claws 3,000 feet up from the Borrego floor to Ranchita in a run of switchbacks, and the pullouts near the top — the <b>Crawford Overlook</b> especially — open onto the whole Borrego Valley, its badlands, and the Salton Sea beyond. It's at its best when the setting sun sidelights the ridges and the valley floods with blue shadow. Time your climb for golden hour and stop at the rail.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Sunset — valley in warm side-light, shadows pooling</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · tele to compress the ridgelines into layers</dd></div>
+      <div><dt>Access</dt><dd>Paved (S-22) · paved pullouts — any car</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      From the overlook, the switchback road threading down into the vast valley, low sun raking the floor, the distant Salton Sea catching the last light. Or a tele compression of ridgelines going blue with haze.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Julian -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">False fronts · string lights · pine air</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.5</span>
+      <span class="stop-when">Dusk · blue hour</span>
+    </div>
+    <h3>Julian<span class="opt">mountain town</span></h3>
+    <p>A gold-rush mountain town gone to apples and pie, at <b>4,235 ft</b> in the Cuyamacas — false-front main street, wood boardwalks, cider mills, pine air. Mid-October is peak apple season, so it'll be busy and golden: warm-lit windows, string lights, woodsmoke at dusk. A complete change of key from the desert two hours behind you. Shoot the main street at blue hour, when the storefronts glow against the deepening sky.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Blue hour — lit storefronts against deep sky</dd></div>
+      <div><dt>Glass</dt><dd>35 / 50 · signage, warm windows, boardwalk detail</dd></div>
+      <div><dt>Access</dt><dd>Paved (CA-78/79) — any car · busy in fall</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Main Street at blue hour: warm false-front stores, a hand-painted or neon sign, string lights overhead. Put a slice of pie in the frame if you want the cliché — at this point you've earned it.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Sunrise Highway / Mt. Laguna -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Pine crest · desert overlook · dark sky</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.6</span>
+      <span class="stop-when">After dark · the descent</span>
+    </div>
+    <h3>Sunrise Highway<span class="opt">Mt. Laguna</span></h3>
+    <p>The last act. County <b>S-1</b> runs the crest of the Laguna Mountains at 5,000–6,000 ft through Jeffrey pine and black oak, the east side dropping in sheer overlooks straight down to the Anza-Borrego desert you just crossed. In daylight the Desert View and Stephenson Peak pullouts are staggering; by the time you reach them it may be full dark — so make it your dark-sky window. The crescent moon has set, and the desert glitters far below before the long coast down into San Diego and the city lights.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Overlooks at last light · then stars over the desert rim</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · tripod for the dark descent + any night frame</dd></div>
+      <div><dt>Access</dt><dd class="warn">Paved (S-1) · genuinely cold at 6,000 ft after dark</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      If you catch last light: the pine ridge dropping thousands of feet to the desert floor, backlit. After dark: a long exposure of stars and distant desert lights from a pullout, pines framing — then the switchbacks down to the coast.
+    </div>
+  </div>
+</article>
+
+<div class="camp" style="border-color: var(--line);">
+  <span class="ci">◆</span>
+  <div><b>Final run:</b> S-1 down off the mountains to I-8, then west into <b>San Diego</b> for Sunday night — arriving well after dark, salt air finally replacing desert dust. Roughly 600 miles and two golden days out of Las Vegas, and you barely touched a freeway the whole way.</div>
+</div>
+
+<!-- ============ FIELD NOTES ============ -->
+<section class="notes">
+  <h2>Field notes</h2>
+  <div class="notegrid">
+    <div class="note">
+      <h4>Skipping I-15 by design</h4>
+      <p>The direct Vegas–San Diego shot is I-15, four dull hours of freeway. This route trades that for <b>US-95 → Mojave Preserve → Route 66 → Amboy Rd → Joshua Tree → Anza-Borrego → Julian → Sunrise Hwy</b>, with a single unavoidable ~35-mi stint on I-10. Longer and slower on purpose — the point is what's between the dots.</p>
+    </div>
+    <div class="note">
+      <h4>Fuel &amp; signal</h4>
+      <p>Long dead legs. The <b>Mojave Preserve has no fuel and no signal at all</b> — fill in Vegas, download everything first. Top off again at Twentynine Palms, on I-10, and in Borrego Springs. Julian is your last mountain gas before the coast.</p>
+    </div>
+    <div class="note">
+      <h4>Dirt &amp; 4WD</h4>
+      <p>Your rig earns its keep here. <b>Font's Point</b> is 4 miles of soft-sand wash — air down, 4WD, and <b>never in the rain</b>. Kelso Dunes and Hole-in-the-Wall are graded dirt; the Preserve backroads are washboard but fine dry. Check for flash-flood weather before any wash or slot.</p>
+    </div>
+    <div class="note">
+      <h4>Heat, then real cold</h4>
+      <p>Mid-October is kind but split: desert floors (Amboy, Anza-Borrego) still <b>push past 90°F midday</b> — shoot them at the ends of the day, carry more water than you think. Then Julian and Mt. Laguna sit at <b>4,000–6,000 ft and go cold after dark</b>. Pack for both in the same day.</p>
+    </div>
+    <div class="note">
+      <h4>Dark skies, quiet moon</h4>
+      <p>Oct 16–18 is a <b>waxing crescent</b> (~28–49% lit) that sets not long after sunset — so the late nights go properly black in the Preserve and in <b>Anza-Borrego</b> (an International Dark-Sky park). The catch: by mid-October the Milky-Way <b>core sets soon after dusk</b>, so it's more a stars-and-foreground night than a core session.</p>
+    </div>
+    <div class="note">
+      <h4>The long Sunday</h4>
+      <p>Day 2 is the big one — a dawn start in Joshua Tree and a headlamp arrival in San Diego. Don't over-stack it: The Slot and Font's Point are the anchors, Montezuma and the Sunrise Hwy overlooks are drive-through wins. If you're running late, cut Font's and keep the golden-hour climb.</p>
+    </div>
+  </div>
+
+  <p class="colophon">
+    <b>Art direction · look &amp; palette.</b> Each stop leads with reference photographs of the actual place — tap any to view it full-screen. The light, glass and ‘the shot’ notes are the art direction: the look to chase at each stop, not a promise of the conditions you’ll get.<br>
+    <b>Reference photographers:</b> Nick Carver (large-format Americana — Kelso Depot, Roy's, Julian) · Michael Shainblum (desert, dunes &amp; night skies) · Thomas Heaton (patient minimal landscape — Kelso Dunes, Amboy) · Nick Page (bold light, graphic form — Hole-in-the-Wall, the cholla).<br>
+    <b>Route:</b> Las Vegas → US-95 → Mojave National Preserve → Route 66 → Amboy Rd → Joshua Tree → (brief I-10) → Anza-Borrego → Julian → Sunrise Hwy (S-1) → San Diego. Timings assume a Friday-evening departure and nights in the Preserve and Twentynine Palms. Verify fuel hours, park fees, and any dirt-road, wash, or fire closures close to your dates.
+  </p>
+</section>
+
+</div><!-- /body -->
+</div><!-- /trip-root -->

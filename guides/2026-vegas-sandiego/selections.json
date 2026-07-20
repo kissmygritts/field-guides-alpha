@@ -1,0 +1,14 @@
+{
+  "cima": [[14, "shot"], [1, "wide"], [0, "detail"], [21, "mood"]],
+  "holeinthewall": [[3, "wide"], [8, "detail"], [5, "mood"]],
+  "kelsodepot": [[1, "wide"], [33, "shot"], [5, "detail"], [25, "mood"]],
+  "kelsodunes": [[26, "shot"], [14, "wide"], [7, "detail"], [12, "mood"]],
+  "amboycrater": [[1, "wide"], [4, "shot"], [33, "detail"], [9, "mood"]],
+  "roys": [[5, "wide"], [22, "shot"], [28, "detail"], [21, "mood"]],
+  "joshuatree": [[16, "shot"], [8, "wide"], [18, "detail"], [6, "mood"]],
+  "theslot": [[2, "shot"], [1, "wide"]],
+  "fontspoint": [[1, "shot"], [0, "wide"], [21, "detail"], [20, "mood"]],
+  "montezuma": [[0, "wide"], [1, "shot"], [4, "detail"]],
+  "julian": [[1, "wide"], [14, "shot"], [13, "detail"], [0, "mood"]],
+  "sunrise": [[2, "wide"], [5, "shot"], [8, "mood"]]
+}
