@@ -29,6 +29,36 @@ ND — we re-encode); Unsplash = the Unsplash License (attribution, non-commerci
 personal use). Every image's source + artist + license lands in the manifest and the
 credits block.
 
+## 0. Scout the route first (new guide)
+
+**Before authoring anything, surface options — this is always the first step for a new
+trip.** The user gives a route (endpoints, region, or theme); you return a plain,
+fast list of candidate stops. No editorializing, no shooting script yet, no images —
+just names. **More is better: aim for 15–30 candidates** so the user has real choices
+to cut from. One line each — name, a 3–6 word hook, rough position along the route.
+Group loosely by leg/day if the geography suggests it.
+
+**Cast wide, not just down the highway.** Include worthwhile detours well off the
+direct line — a 1–2 hour side trip that earns it (e.g. Zabriskie Point / Death Valley
+for a Reno→Vegas run, hours east of US-95 but unmissable). Vary the *kinds* of stop
+too: ghost towns, alpine lakes, playas, hot springs, geologic oddities, dark-sky spots,
+roadside kitsch — not five variations on one theme. Note an off-route pick's rough
+detour cost so the user can weigh it. Better to over-offer and let the user cut.
+
+**Dirt and 4WD routes are fair game.** The user drives a capable overlanding vehicle,
+so unpaved / high-clearance / remote backcountry stops are welcome, not off-limits —
+recommend them freely. Flag the access honestly (e.g. "graded dirt", "high-clearance
+4WD", "seasonal / snow-gated") so the user can plan, but don't pre-filter a stop just
+because the pavement ends.
+
+The point is to narrow *your* focus cheaply and let the user drive selection before
+you spend tokens on prose or imagery. Do **not** open the toolchain, fetch, or draft
+`content.html` in this step. End by asking the user which stops to keep (and roughly
+how many days). Only once they've picked do you move to section B to author them.
+
+Skip this section only when the stops are already decided (rebuild, or the user hands
+you a fixed list).
+
 ## A. Rebuild an existing guide (no new imagery)
 
 The manifest already holds the images. Just:
@@ -42,6 +72,8 @@ npm run verify              # must PASS: 500/500, net 0, no JS errors
 network needed. This is the cheap path; prefer it whenever imagery isn't changing.
 
 ## B. Add stops or images
+
+Work from the stops the user kept in section 0 (or the fixed list they handed you).
 
 1. **Author the content.** Add each stop's `<article class="stop">` to
    `content.html` in geographic order — copy an existing stop as the template
