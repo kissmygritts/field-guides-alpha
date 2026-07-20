@@ -13,9 +13,12 @@ script enriched with real, cleanly-licensed reference photography and field data
 2. **Lean on a phone.** Images cap at ~640px wide / ~720px tall, WebP q80, re-encoded
    if still over ~120 KB. If a guide gets heavy, **tell the user the tradeoff** (e.g.
    "3.3 MB, 38 images") rather than silently shipping something huge.
-3. **Cleanly licensed + attributed.** Wikimedia Commons (CC BY / BY-SA / CC0). Every
-   image's artist + license is captured in the manifest and listed in the guide's
-   credits. **Verify attribution from the API — never guess it.**
+3. **Cleanly licensed + attributed.** Imagery is sourced per stop from Unsplash →
+   Flickr → Wikimedia Commons (sequential fallback). Wikimedia = CC BY/BY-SA/CC0;
+   Flickr = reuse-friendly CC/PD licenses only (no-derivatives excluded, since we
+   re-encode); Unsplash = the Unsplash License (attribution, non-commercial personal
+   use — not CC). Every image's source + artist + license is captured in the manifest
+   and listed in the guide's credits. **Verify attribution from each API — never guess it.**
 4. **Don't strip the shooting script.** Timing, sun direction, focal-length notes,
    "the shot" callouts, day structure — that authored content is the point.
 5. **Static-hostable.** Output is a plain directory of self-contained HTML. Deploys to
@@ -36,8 +39,10 @@ node build/sheet.mjs <slug>              # contact sheets for curation
 node build/fetch.mjs <slug> finalize     # picks -> manifest.json (base64)
 ```
 
-Set `WM_CONTACT` (an email/URL) when fetching — Commons requires a real
-User-Agent contact or it returns HTTP 429.
+When fetching, set the keys for whichever sources you want (each is skipped if unset;
+Wikimedia always backs the fallback): `WM_CONTACT` (an email/URL — Commons requires a
+real User-Agent contact or returns HTTP 429), `UNSPLASH_KEY`, `FLICKR_KEY`. None are
+needed to build from a committed manifest.
 
 ## Layout
 

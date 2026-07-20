@@ -1,0 +1,45 @@
+{
+  "slug": "2026-reno-vegas",
+  "title": "Reno to Las Vegas — Photographer's Shooting Script",
+  "output": "2026-reno-vegas.html",
+  "content": "content.html",
+
+  "order": ["fortchurchill", "walker", "hawthorne", "tonopah", "goldfield", "carforest", "rhyolite", "zabriskie", "ashmeadows"],
+
+  "roles": { "wide": "the place", "shot": "toward ‘the shot’", "detail": "detail", "mood": "mood · light" },
+
+  "disp": {
+    "fortchurchill": "Fort Churchill", "walker": "Walker Lake", "hawthorne": "Hawthorne Bunkers",
+    "tonopah": "Tonopah", "goldfield": "Goldfield", "carforest": "Int'l Car Forest",
+    "rhyolite": "Rhyolite · Goldwell", "zabriskie": "Zabriskie Point", "ashmeadows": "Ash Meadows"
+  },
+
+  "gps": {
+    "fortchurchill": { "lat": 39.2936, "lng": -119.2889, "label": "adobe ruins, off Alt US-95", "elev": "4,255 ft" },
+    "walker": { "lat": 38.6957, "lng": -118.7108, "label": "Sportsman's Beach, US-95", "elev": "4,100 ft" },
+    "hawthorne": { "lat": 38.5847, "lng": -118.6500, "label": "bunker field, US-95 N of town", "elev": "4,320 ft" },
+    "tonopah": { "lat": 38.0692, "lng": -117.2306, "label": "Historic Mining Park, Main St", "elev": "6,047 ft",
+      "alt": [{ "name": "Old Cemetery · Clown Motel", "lat": 38.0778, "lng": -117.2314, "elev": "6,030 ft" }] },
+    "goldfield": { "lat": 37.7086, "lng": -117.2364, "label": "Goldfield Hotel, US-95", "elev": "5,689 ft" },
+    "carforest": { "lat": 37.7047, "lng": -117.2478, "label": "Crystal Ave, W edge of Goldfield", "elev": "5,700 ft" },
+    "rhyolite": { "lat": 36.9019, "lng": -116.8281, "label": "townsite off NV-374", "elev": "3,796 ft",
+      "alt": [{ "name": "Goldwell Open Air Museum", "lat": 36.8992, "lng": -116.8300, "elev": "3,780 ft" }] },
+    "zabriskie": { "lat": 36.4200, "lng": -116.8113, "label": "Zabriskie Point, CA-190", "elev": "710 ft" },
+    "ashmeadows": { "lat": 36.4406, "lng": -116.3306, "label": "Crystal Reservoir / visitor ctr", "elev": "2,190 ft",
+      "alt": [{ "name": "Devils Hole", "lat": 36.4253, "lng": -116.2911, "elev": "2,360 ft" }] }
+  },
+
+  "days": [
+    { "label": "Day 1", "stops": [["fortchurchill", "Fort Churchill"], ["walker", "Walker Lake"], ["hawthorne", "Hawthorne"], ["tonopah", "Tonopah"]] },
+    { "label": "Day 2", "stops": [["goldfield", "Goldfield"], ["carforest", "Car Forest"], ["rhyolite", "Rhyolite"], ["zabriskie", "Zabriskie"], ["ashmeadows", "Ash Meadows"]] }
+  ],
+
+  "moon": { "start": "2026-09-24", "end": "2026-09-28", "windowLabel": "late September" },
+  "darkSites": "Tonopah, Goldfield, the Rhyolite flats",
+
+  "credits": [
+    ["fortchurchill", "Fort Churchill"], ["walker", "Walker Lake"], ["hawthorne", "Hawthorne Bunkers"],
+    ["tonopah", "Tonopah"], ["goldfield", "Goldfield"], ["carforest", "Int'l Car Forest"],
+    ["rhyolite", "Rhyolite · Goldwell"], ["zabriskie", "Zabriskie Point"], ["ashmeadows", "Ash Meadows"]
+  ]
+}

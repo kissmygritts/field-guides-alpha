@@ -1,0 +1,39 @@
+{
+  "fortchurchill": [
+    { "mode": "category", "query": "Category:Fort Churchill State Historic Park" },
+    "Fort Churchill Nevada adobe ruins"
+  ],
+  "walker": [
+    { "mode": "category", "query": "Category:Walker Lake (Nevada)" },
+    "Walker Lake Nevada Wassuk Range"
+  ],
+  "hawthorne": [
+    "Hawthorne Army Depot Nevada bunkers",
+    "Hawthorne Nevada ammunition storage igloos"
+  ],
+  "tonopah": [
+    { "mode": "category", "query": "Category:Tonopah, Nevada" },
+    "Tonopah Nevada historic mining park headframe"
+  ],
+  "goldfield": [
+    { "mode": "category", "query": "Category:Goldfield, Nevada" },
+    "Goldfield Nevada ghost town hotel"
+  ],
+  "carforest": [
+    "International Car Forest of the Last Church Goldfield Nevada",
+    "Goldfield Nevada car forest art installation"
+  ],
+  "rhyolite": [
+    { "mode": "category", "query": "Category:Rhyolite, Nevada" },
+    "Rhyolite Nevada ghost town Cook Bank",
+    "Goldwell Open Air Museum ghost sculpture"
+  ],
+  "zabriskie": [
+    { "mode": "category", "query": "Category:Zabriskie Point" },
+    "Zabriskie Point Death Valley badlands sunrise"
+  ],
+  "ashmeadows": [
+    { "mode": "category", "query": "Category:Ash Meadows National Wildlife Refuge" },
+    "Ash Meadows Nevada Crystal Spring turquoise"
+  ]
+}

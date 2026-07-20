@@ -1,0 +1,721 @@
+<!-- Reno to Las Vegas — Photographer's Shooting Script -->
+<div id="trip-root">
+<style>
+  #trip-root {
+    --ink: #e8e4da;
+    --ink-dim: #a49f92;
+    --ink-faint: #6f6a5e;
+    --ground: #14140f;
+    --ground-2: #1c1c16;
+    --panel: #201f18;
+    --line: #35342a;
+    --sun: #e8a13c;
+    --sun-deep: #c76b2a;
+    --sky: #6f86a3;
+    --sage: #8a9a72;
+    --alarm: #d8663f;
+    --day1: #6f86a3;
+    --day2: #c76b2a;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: "Avenir Next", "Segoe UI", -apple-system, system-ui, sans-serif;
+    --mono: "SFMono-Regular", "Roboto Mono", Menlo, Consolas, monospace;
+    color: var(--ink);
+    font-family: var(--sans);
+    background: var(--ground);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  #trip-root * { box-sizing: border-box; }
+
+  /* ---------- Masthead ---------- */
+  #trip-root .mast {
+    position: relative;
+    padding: 46px 30px 38px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(232,161,60,0.14), transparent 55%),
+      linear-gradient(180deg, #191811, #14140f);
+    overflow: hidden;
+  }
+  #trip-root .mast-ridge { position:absolute; left:0; right:0; bottom:-1px; height:120px; display:block; opacity:.5; }
+  #trip-root .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--sun);
+    margin: 0 0 16px;
+  }
+  #trip-root h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 15ch;
+  }
+  #trip-root h1 em { font-style: italic; color: var(--sun); }
+  #trip-root .dek {
+    font-size: 15px;
+    color: var(--ink-dim);
+    max-width: 56ch;
+    margin: 0 0 22px;
+  }
+  #trip-root .mast-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 26px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+    color: var(--ink-dim); position: relative; z-index: 2;
+  }
+  #trip-root .mast-meta b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Section wrap ---------- */
+  #trip-root .body { padding: 8px 22px 60px; }
+
+  /* ---------- Day header ---------- */
+  #trip-root .day {
+    margin: 40px 0 6px;
+    padding: 20px 20px 18px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--ground-2), #17170f);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  #trip-root .day::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--accent);
+  }
+  #trip-root .day-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
+  }
+  #trip-root .day-title {
+    font-family: var(--serif); font-size: 25px; font-weight: 500; margin: 0 0 4px;
+  }
+  #trip-root .day-sub { font-size: 13.5px; color: var(--ink-dim); margin: 0; }
+  #trip-root .day-legs {
+    margin-top: 12px; display:flex; flex-wrap:wrap; gap: 8px;
+  }
+  #trip-root .chip {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.04em;
+    padding: 4px 9px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-dim);
+    background: rgba(0,0,0,.2);
+  }
+  #trip-root .chip b { color: var(--ink); }
+
+  /* ---------- Stop card ---------- */
+  #trip-root .stop {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  #trip-root .stop-visual { position: relative; background: #0d0d09; min-height: 210px; }
+  #trip-root .stop-visual svg { display:block; width:100%; height:100%; }
+  #trip-root .visual-label {
+    position:absolute; left:10px; bottom:9px;
+    font-family: var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: rgba(255,255,255,.72);
+    background: rgba(0,0,0,.42); backdrop-filter: blur(2px);
+    padding: 3px 7px; border-radius: 5px;
+  }
+  #trip-root .stop-body { padding: 18px 20px 20px; }
+  #trip-root .stop-kicker {
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom: 3px;
+  }
+  #trip-root .stop-num {
+    font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing:.1em;
+  }
+  #trip-root .stop-when {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.08em;
+    color: var(--ink-faint); text-transform: uppercase;
+    margin-left:auto;
+  }
+  #trip-root .stop h3 {
+    font-family: var(--serif); font-size: 21px; font-weight: 500; margin: 0 0 8px;
+  }
+  #trip-root .stop h3 .opt {
+    font-family: var(--mono); font-size: 10px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sage); border:1px solid var(--line); padding:2px 6px; border-radius:5px;
+    vertical-align: middle; margin-left: 8px;
+  }
+  #trip-root .stop p { font-size: 13.5px; color: var(--ink-dim); margin: 0 0 12px; }
+  #trip-root .stop p b { color: var(--ink); font-weight: 600; }
+
+  /* direction row */
+  #trip-root .direct {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: 9px; overflow:hidden;
+    margin-top: 4px;
+  }
+  #trip-root .direct div { background: var(--ground-2); padding: 8px 11px; }
+  #trip-root .direct dt {
+    font-family: var(--mono); font-size: 9px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-faint); margin-bottom: 3px;
+  }
+  #trip-root .direct dd { margin:0; font-size: 12.5px; color: var(--ink); }
+  #trip-root .direct dd.warn { color: var(--alarm); }
+
+  /* the "shot" callout */
+  #trip-root .theshot {
+    margin-top: 12px; padding: 10px 13px;
+    border-left: 2px solid var(--accent);
+    background: linear-gradient(90deg, rgba(199,107,42,0.08), transparent);
+    font-size: 12.5px;
+  }
+  #trip-root .theshot span {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--accent); display:block; margin-bottom: 3px;
+  }
+
+  /* ---------- Camp banner ---------- */
+  #trip-root .camp {
+    margin: 16px 0 4px;
+    padding: 13px 16px;
+    border: 1px dashed var(--line);
+    border-radius: 11px;
+    background: rgba(127,155,109,0.06);
+    display:flex; gap:12px; align-items:flex-start;
+    font-size: 13px; color: var(--ink-dim);
+  }
+  #trip-root .camp b { color: var(--ink); }
+  #trip-root .camp .ci { flex-shrink:0; margin-top:1px; }
+
+  /* ---------- Field notes footer ---------- */
+  #trip-root .notes {
+    margin-top: 46px; padding: 26px 22px 30px;
+    border-top: 1px solid var(--line);
+  }
+  #trip-root .notes h2 {
+    font-family: var(--serif); font-size: 22px; font-weight:500; margin: 0 0 16px;
+  }
+  #trip-root .notegrid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px;
+  }
+  #trip-root .note {
+    border: 1px solid var(--line); border-radius: 11px; padding: 14px 15px;
+    background: var(--panel);
+  }
+  #trip-root .note h4 {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sun); margin: 0 0 7px;
+  }
+  #trip-root .note p { font-size: 12.8px; color: var(--ink-dim); margin: 0; }
+  #trip-root .note b { color: var(--ink); }
+
+  #trip-root .colophon {
+    margin-top: 26px; padding-top: 16px; border-top:1px solid var(--line);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.06em;
+    color: var(--ink-faint); line-height:1.7;
+  }
+  #trip-root .colophon b { color: var(--ink-dim); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    #trip-root .stop { grid-template-columns: 1fr; }
+    #trip-root .stop-visual { min-height: 170px; }
+    #trip-root .body { padding: 4px 14px 50px; }
+    #trip-root .mast { padding: 34px 20px 30px; }
+    #trip-root .stop-when { margin-left:0; width:100%; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #trip-root .stop { transition: border-color .25s ease; }
+    #trip-root .stop:hover { border-color: var(--accent); }
+  }
+</style>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="mast">
+  <svg class="mast-ridge" viewBox="0 0 940 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,120 L0,86 L90,70 L180,80 L280,58 L380,74 L470,52 L560,72 L650,60 L760,78 L850,64 L940,80 L940,120 Z" fill="#0f0f0a"/>
+  </svg>
+  <p class="eyebrow">Shooting Script · Solo · Late September</p>
+  <h1>Reno to Las Vegas, down the <em>empty middle</em></h1>
+  <p class="dek">Two days south on US-95 through the loneliest basins in Nevada — a cobalt desert lake, a valley of ammunition bunkers, three ghost towns and a forest of buried cars. Built around the ends of the day, with a full moon to light the ruins after dark. Not much between the dots — that's the point.</p>
+  <div class="mast-meta">
+    <span><b>~450 mi</b> total</span>
+    <span><b>1 night</b> Tonopah</span>
+    <span>Depart <b>Sat AM</b></span>
+    <span>Route <b>US-95 S</b></span>
+    <span>Golden hours + a full moon</span>
+  </div>
+</header>
+
+<div class="body">
+
+<!-- ============ DAY 1 ============ -->
+<section class="day" style="--accent: var(--day1);">
+  <p class="day-tag">Day 1 · Saturday · The High-Desert Run</p>
+  <h2 class="day-title">Reno → Tonopah</h2>
+  <p class="day-sub">Drop out of Reno onto US-95 and run the empty basins south. A river-fort ruin, a big blue lake, a valley of bunkers — then land in Tonopah for the mining town and a moonlit night at 6,000 ft. ~255 mi.</p>
+  <div class="day-legs">
+    <span class="chip"><b>AM</b> depart Reno · US-95 S</span>
+    <span class="chip"><b>opt</b> Fort Churchill</span>
+    <span class="chip"><b>midday</b> Walker Lake</span>
+    <span class="chip"><b>pm</b> Hawthorne bunkers</span>
+    <span class="chip"><b>dusk</b> Tonopah</span>
+  </div>
+  <div class="day-brief">
+    <span><b>⛽ Fuel</b> Fallon, Hawthorne, Tonopah — long empty gaps between. Top off every chance.</span>
+    <span><b>📵 Signal</b> Dead across most of US-95. Download maps + this guide before you leave.</span>
+    <span><b>💧 Water</b> Carry 4+ L — nothing roadside at Walker Lake or the bunkers.</span>
+    <span><b>🚗 Drive</b> ~255 mi · 4.5–5 hr moving</span>
+  </div>
+</section>
+
+<!-- Stop: Fort Churchill -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Adobe ruins · cottonwoods · low walls</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.1 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Morning · quick warm-up</span>
+    </div>
+    <h3>Fort Churchill<span class="opt">state park</span></h3>
+    <p>An 1860s U.S. Army cavalry post melting back into the desert — <b>roofless adobe walls</b> ranged along the Carson River, cottonwoods behind them, a small pioneer cemetery. A short detour off the Alt US-95 corridor near Silver Springs, almost nobody there. This is your Nick Carver warm-up: earth-colored walls, texture, restraint. Morning side-light rakes the eroded adobe best.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Low AM side-light on the walls</dd></div>
+      <div><dt>Glass</dt><dd>35 / 50 · documentary, restrained</dd></div>
+      <div><dt>Access</dt><dd>Paved park road — any car · small fee</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      One adobe wall raking away from camera, warm light catching the crumbling edges, cottonwoods and empty sky behind. Then a tight detail of eroded mud brick.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Walker Lake -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="wl-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#8fb0cc"/><stop offset="1" stop-color="#d9d3c0"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="120" fill="url(#wl-sky)"/>
+      <!-- barren Wassuk Range -->
+      <path d="M0,104 L54,66 L110,96 L166,58 L224,92 L300,66 L300,120 L0,120 Z" fill="#9a8266"/>
+      <path d="M0,104 L54,66 L110,96 L166,58 L224,92 L300,66" fill="none"/>
+      <!-- deep blue desert lake -->
+      <rect y="120" width="300" height="100" fill="#245e7e"/>
+      <rect y="120" width="300" height="40" fill="#2f7396" opacity="0.7"/>
+      <!-- faint reflected ridge + shore -->
+      <path d="M0,120 L54,150 L110,128 L166,158 L224,130 L300,150 L300,120 Z" fill="#6a5a44" opacity="0.28"/>
+      <g stroke="#3f7fa0" stroke-width="1" opacity="0.4">
+        <line x1="0" y1="176" x2="300" y2="176"/>
+        <line x1="0" y1="198" x2="300" y2="198"/>
+      </g>
+    </svg>
+    <span class="visual-label">Cobalt water · barren range · minimal</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.2</span>
+      <span class="stop-when">Midday · roadside</span>
+    </div>
+    <h3>Walker Lake</h3>
+    <p>A startling <b>deep-blue desert lake</b> with the barren Wassuk Range dropping straight into it — US-95 runs for miles right along the eastern shore, so it comes to you. Heaton-style minimalism: water, ridge, sky, nothing else. Pull off at <b>Sportsman's Beach</b> or any of the shoulder turnouts. The blue punches hardest under high sun; a polarizer deepens it.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Any · high sun saturates the blue</dd></div>
+      <div><dt>Glass</dt><dd>Wide for emptiness · long to stack ridge on water</dd></div>
+      <div><dt>Access</dt><dd>Paved turnouts right off US-95</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Horizon on the lower third, one clean band of cobalt water under the bare range. Polarize to kill glare and saturate. Or go long and compress the ridge onto the waterline.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Hawthorne bunkers -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="hw-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b7c3cf"/><stop offset="1" stop-color="#ddd2ba"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="96" fill="url(#hw-sky)"/>
+      <!-- distant range -->
+      <path d="M0,90 L80,70 L170,84 L260,68 L300,80 L300,96 L0,96 Z" fill="#8f7c60" opacity="0.6"/>
+      <!-- pale desert floor -->
+      <rect y="96" width="300" height="124" fill="#c3b590"/>
+      <!-- grid of turf-covered ammo igloos receding to horizon -->
+      <g fill="#8f9a72">
+        <ellipse cx="30" cy="118" rx="16" ry="6"/><ellipse cx="80" cy="118" rx="16" ry="6"/><ellipse cx="130" cy="118" rx="16" ry="6"/><ellipse cx="180" cy="118" rx="16" ry="6"/><ellipse cx="230" cy="118" rx="16" ry="6"/><ellipse cx="280" cy="118" rx="16" ry="6"/>
+        <ellipse cx="20" cy="140" rx="20" ry="8"/><ellipse cx="78" cy="140" rx="20" ry="8"/><ellipse cx="136" cy="140" rx="20" ry="8"/><ellipse cx="194" cy="140" rx="20" ry="8"/><ellipse cx="252" cy="140" rx="20" ry="8"/>
+        <ellipse cx="6" cy="170" rx="26" ry="11"/><ellipse cx="70" cy="170" rx="26" ry="11"/><ellipse cx="134" cy="170" rx="26" ry="11"/><ellipse cx="198" cy="170" rx="26" ry="11"/><ellipse cx="262" cy="170" rx="26" ry="11"/>
+        <ellipse cx="34" cy="206" rx="34" ry="15"/><ellipse cx="120" cy="206" rx="34" ry="15"/><ellipse cx="206" cy="206" rx="34" ry="15"/><ellipse cx="290" cy="206" rx="34" ry="15"/>
+      </g>
+      <!-- shadow sides -->
+      <g fill="#5f6a48" opacity="0.5">
+        <ellipse cx="34" cy="210" rx="34" ry="9"/><ellipse cx="120" cy="210" rx="34" ry="9"/><ellipse cx="206" cy="210" rx="34" ry="9"/>
+      </g>
+    </svg>
+    <span class="visual-label">Endless grid · surreal · repetition</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.3 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Afternoon · roadside only</span>
+    </div>
+    <h3>Hawthorne Army Depot<span class="opt">shoot from the road</span></h3>
+    <p>The world's largest ammunition depot — <b>thousands of turf-covered concrete bunkers</b> in a dead-flat grid, marching to the horizon on both sides of US-95. Utterly surreal, endlessly graphic, and free from the car window. <b>It's an active military base: do not enter or approach the fence.</b> Everything you want is a compression shot from public road shoulders. High flat light actually helps the repetition read.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Flat is fine · low sun rakes the mounds</dd></div>
+      <div><dt>Glass</dt><dd>70–200 · compress the grid into pattern</dd></div>
+      <div><dt>Access</dt><dd class="warn">Roadside only — no entry, active base</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Long lens straight down a row so the igloos stack into an infinite repeating rhythm. Keep a lone bunker off-center to break the grid. No fences, no signage in frame.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Tonopah -->
+<article class="stop" style="--accent: var(--day1);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="tp-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#20304e"/><stop offset="0.6" stop-color="#4a4a5e"/><stop offset="1" stop-color="#b98a54"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="220" fill="url(#tp-sky)"/>
+      <!-- full moon -->
+      <circle cx="232" cy="52" r="18" fill="#f3ecd6"/>
+      <circle cx="232" cy="52" r="18" fill="none" stroke="#fff" stroke-opacity="0.15" stroke-width="2"/>
+      <!-- mine tailings hill -->
+      <path d="M0,150 L120,96 L300,150 L300,220 L0,220 Z" fill="#3b3326"/>
+      <!-- headframe silhouette -->
+      <g stroke="#14120c" stroke-width="4" fill="none">
+        <path d="M150,200 L150,104 M182,200 L182,104 M150,104 L166,86 L182,104 M150,130 L182,130 M150,158 L182,158 M150,104 L182,158 M182,104 L150,158"/>
+        <path d="M150,104 L120,120 M182,104 L212,120"/>
+      </g>
+      <!-- a few lit town windows -->
+      <g fill="#e8a13c" opacity="0.85">
+        <rect x="60" y="176" width="4" height="5"/><rect x="74" y="180" width="4" height="5"/><rect x="240" y="182" width="4" height="5"/><rect x="256" y="178" width="4" height="5"/>
+      </g>
+    </svg>
+    <span class="visual-label">Headframes · moonlit · silver-boom bones</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">1.4</span>
+      <span class="stop-when">Blue hour → moonlit night</span>
+    </div>
+    <h3>Tonopah</h3>
+    <p>A silver-boom town frozen halfway to ghost — and the natural midpoint of the whole drive. The <b>Historic Mining Park</b> puts weathered headframes and hoist works on the hill directly above Main Street; the <b>Clown Motel</b> and the old cemetery sit side by side at the north end; the Mizpah Hotel anchors downtown. Tonopah is famous for some of the <b>darkest skies in the country</b> — but you're here on a full moon, so lean into it: silvered mine timbers and empty streets under moonlight instead of the core.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Blue hour on the headframes · moonlight after dark</dd></div>
+      <div><dt>Glass</dt><dd>24–70 · tripod for dusk + moonlit long exposures</dd></div>
+      <div><dt>Stay</dt><dd>Mizpah, Clown Motel, or dispersed BLM outside town</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      A headframe stark against the deep blue-to-black sky just after sunset, town lights beginning below. Later: the mining park bones lit only by the full moon, long exposure, hard shadows.
+    </div>
+  </div>
+</article>
+
+<div class="camp">
+  <span class="ci">▲</span>
+  <div><b>Overnight — Tonopah</b> (Mizpah or Clown Motel in town, or free dispersed BLM just outside). Your highest, coldest night at ~6,000 ft — pack a real warm layer even in September. Grab fuel and any food before you turn in; nothing's open early on the road south.</div>
+</div>
+
+<!-- ============ DAY 2 ============ -->
+<section class="day" style="--accent: var(--day2);">
+  <p class="day-tag">Day 2 · Sunday · Ghost Towns &amp; Blue Water</p>
+  <h2 class="day-title">Tonopah → Las Vegas</h2>
+  <p class="day-sub">The good stuff, packed into the southern half: two ghost towns, a forest of buried cars, an optional Death Valley overlook and a turquoise desert oasis — then the casino lights. ~210 mi + detours.</p>
+  <div class="day-legs">
+    <span class="chip"><b>AM</b> Goldfield</span>
+    <span class="chip"><b>AM</b> Car Forest</span>
+    <span class="chip"><b>midday</b> Rhyolite · Goldwell</span>
+    <span class="chip"><b>opt</b> Zabriskie Point</span>
+    <span class="chip"><b>pm</b> Ash Meadows</span>
+    <span class="chip"><b>eve</b> Las Vegas</span>
+  </div>
+  <div class="day-brief">
+    <span><b>⛽ Fuel</b> Tonopah and Beatty — top off at both; long empty legs between.</span>
+    <span><b>📵 Signal</b> Dead from Goldfield through Beatty; returns near Amargosa.</span>
+    <span><b>🏜 Heat</b> Death Valley &amp; Ash Meadows still hit 100°F+ in late Sept — shoot the low stops at dawn/early, carry extra water.</span>
+    <span><b>🚗 Drive</b> ~210 mi + Zabriskie detour (adds ~1 hr)</span>
+  </div>
+</section>
+
+<!-- Stop: Goldfield -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Living ghost town · rust · silvered wood</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.1</span>
+      <span class="stop-when">Early morning · first stop</span>
+    </div>
+    <h3>Goldfield</h3>
+    <p>Once the biggest city in Nevada, now ~250 people among the bones of a gold rush. The grand shuttered <b>Goldfield Hotel</b>, the stone courthouse, the Santa Fe Saloon, rusted autos and mine headframes scattered through the sage. This is your Americana chapter — hand-painted signage, sun-bleached siding, rust and patina. Flat morning light is fine; you're shooting texture and story, not sky.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Flat OK · low sun for wood grain</dd></div>
+      <div><dt>Glass</dt><dd>35 / 50 · tight on texture &amp; signage</dd></div>
+      <div><dt>Note</dt><dd>Buildings are private/fragile — shoot from public ground</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      The Goldfield Hotel dead-on, symmetrical, filling the frame — then break it with a tight detail: a cracked sign, a rusted fender, peeling paint on siding. Shoot for a diptych.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: International Car Forest -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="cf-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e0925a"/><stop offset="1" stop-color="#f0d6a6"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="150" fill="url(#cf-sky)"/>
+      <!-- low desert hills -->
+      <path d="M0,140 L90,124 L190,138 L300,122 L300,150 L0,150 Z" fill="#b0895c" opacity="0.6"/>
+      <!-- scrub floor -->
+      <rect y="150" width="300" height="70" fill="#a98a5b"/>
+      <!-- cars planted nose-down, tilted, stacked -->
+      <g>
+        <!-- planted vertical car -->
+        <g transform="rotate(-12 70 150)">
+          <rect x="52" y="70" width="34" height="82" rx="6" fill="#c0473a"/>
+          <rect x="56" y="78" width="26" height="20" fill="#2b2b30"/>
+          <circle cx="60" cy="150" r="7" fill="#1c1c18"/><circle cx="80" cy="150" r="7" fill="#1c1c18"/>
+        </g>
+        <!-- tilted car -->
+        <g transform="rotate(14 160 140)">
+          <rect x="132" y="96" width="60" height="30" rx="8" fill="#3f7d86"/>
+          <rect x="144" y="82" width="34" height="18" rx="6" fill="#356974"/>
+          <circle cx="146" cy="126" r="8" fill="#1c1c18"/><circle cx="180" cy="126" r="8" fill="#1c1c18"/>
+        </g>
+        <!-- stacked car -->
+        <g transform="rotate(-8 240 150)">
+          <rect x="212" y="60" width="34" height="84" rx="6" fill="#d1a02f"/>
+          <rect x="216" y="70" width="26" height="20" fill="#2b2b30"/>
+          <circle cx="220" cy="142" r="7" fill="#1c1c18"/><circle cx="240" cy="142" r="7" fill="#1c1c18"/>
+        </g>
+      </g>
+      <!-- graffiti splashes -->
+      <g opacity="0.8">
+        <circle cx="66" cy="110" r="4" fill="#f0e64a"/><circle cx="162" cy="108" r="4" fill="#e85aa0"/><circle cx="228" cy="100" r="4" fill="#4ad0e0"/>
+      </g>
+    </svg>
+    <span class="visual-label">Buried cars · graffiti · Mad-Max sculpture</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.2</span>
+      <span class="stop-when">Morning · quick &amp; strange</span>
+    </div>
+    <h3>Int'l Car Forest of the Last Church<span class="opt">free · open</span></h3>
+    <p>On the scrub at the west edge of Goldfield: <b>40+ cars, buses and a limo planted nose-down and stacked into towers</b>, every panel covered in spray-paint art. Cadillac Ranch by way of Mad Max. Free, always open, a graded-dirt lot — walk right in among them. Wild in any light; golden hour sets the paint and rust glowing, and it'd be eerie under the full moon if you're still nearby after dark.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Golden hour on the paint · harsh sun works too</dd></div>
+      <div><dt>Glass</dt><dd>16–35 · get in among them, shoot up</dd></div>
+      <div><dt>Access</dt><dd class="warn">Short graded dirt — fine dry · pack out trash</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Low and wide beneath a planted car so it looms against sky, graffiti reading edge-to-edge. Then a tight abstract of peeling paint on rusted steel. Sun-star behind a tower at golden hour.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Rhyolite / Goldwell -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="rh-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d98a4a"/><stop offset="0.6" stop-color="#e8c187"/><stop offset="1" stop-color="#f1dcb2"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="220" fill="url(#rh-sky)"/>
+      <!-- bare hills -->
+      <path d="M0,120 L80,96 L170,114 L260,92 L300,108 L300,150 L0,150 Z" fill="#c79a63" opacity="0.75"/>
+      <rect y="150" width="300" height="70" fill="#a97f4c"/>
+      <!-- Cook Bank ruin shell, three stories -->
+      <g fill="#8a6238">
+        <rect x="150" y="70" width="60" height="90"/>
+      </g>
+      <g fill="#f1dcb2">
+        <rect x="158" y="80" width="12" height="18"/><rect x="176" y="80" width="12" height="18"/><rect x="194" y="80" width="8" height="18"/>
+        <rect x="158" y="106" width="12" height="18"/><rect x="176" y="106" width="12" height="18"/><rect x="194" y="106" width="8" height="18"/>
+        <rect x="162" y="134" width="16" height="26"/>
+      </g>
+      <g fill="#6f4d2b">
+        <rect x="150" y="66" width="60" height="6"/>
+      </g>
+      <!-- ghost sculpture: white plaster shrouded figures -->
+      <g fill="#e9e6df">
+        <path d="M40,160 C36,140 52,134 50,120 C58,132 60,146 58,160 Z"/>
+        <path d="M66,160 C62,138 80,132 76,116 C86,130 88,148 86,160 Z"/>
+        <path d="M96,160 C92,142 108,136 104,122 C114,134 116,150 114,160 Z"/>
+      </g>
+      <g fill="#c9c4ba" opacity="0.5">
+        <ellipse cx="52" cy="160" rx="16" ry="3"/><ellipse cx="80" cy="160" rx="16" ry="3"/><ellipse cx="106" cy="160" rx="16" ry="3"/>
+      </g>
+    </svg>
+    <span class="visual-label">Boomtown ruin · ghost figures · sunset</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.3</span>
+      <span class="stop-when">Late afternoon → sunset</span>
+    </div>
+    <h3>Rhyolite &amp; Goldwell<span class="opt">the marquee</span></h3>
+    <p>The payoff. A 1900s boomtown that emptied almost as fast as it filled, just off NV-374 near Beatty: the three-story <b>Cook Bank</b> shell, the glass-walled <b>Bottle House</b>, the old train depot standing alone in the flats. At the entrance, the <b>Goldwell Open Air Museum</b> — a cluster of ghostly white plaster figures ("The Last Supper") staring out over the desert. Sunset warms the ruins; then the ghosts glow under the full moon.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Sunset on the ruins · moonlight on the white figures</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + wide · foreground ghost, ruin behind</dd></div>
+      <div><dt>Access</dt><dd>Paved to both · free · open dusk-to-dawn</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Cook Bank's empty windows against a burning sky, low sun through the openings. Then a shrouded Goldwell figure close and low at blue hour, ruin or moon behind it. Come back after full dark for the plaster to go luminous.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Zabriskie Point -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg aria-hidden="true"></svg>
+    <span class="visual-label">Golden badlands · dawn only · heat</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.4 <span style="color:var(--sage)">optional</span></span>
+      <span class="stop-when">Dawn only · big detour</span>
+    </div>
+    <h3>Zabriskie Point<span class="opt">Death Valley</span></h3>
+    <p>If you overnight in Beatty instead and can make a dawn run, Death Valley's most famous overlook is ~30 min west on NV-374/CA-190: <b>rippling golden badlands</b> below the sharp spine of Manly Beacon, the whole basin catching first light. It's a classic for a reason. <b>The catch is heat</b> — late September still routinely hits 100°F+ by mid-morning here, so this is a get-in-at-sunrise-and-leave stop, not a midday one.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>Sunrise only — first light sets the badlands glowing</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + tele to isolate the eroded ridgelines</dd></div>
+      <div><dt>Heat</dt><dd class="warn">100°F+ by mid-AM · dawn dash, carry water</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Manly Beacon lit warm against the shadowed folds below, sun just cresting. Go long to pull out the erosion patterns, or wide to set the ridge into the whole basin. Be gone before the heat.
+    </div>
+  </div>
+</article>
+
+<!-- Stop: Ash Meadows -->
+<article class="stop" style="--accent: var(--day2);">
+  <div class="stop-visual">
+    <svg viewBox="0 0 300 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="am-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9fb6cc"/><stop offset="1" stop-color="#e7ddc9"/>
+        </linearGradient>
+      </defs>
+      <rect width="300" height="110" fill="url(#am-sky)"/>
+      <!-- Funeral Mountains -->
+      <path d="M0,100 L70,74 L150,94 L230,72 L300,90 L300,110 L0,110 Z" fill="#8a7a6a" opacity="0.7"/>
+      <!-- pale alkali flat -->
+      <rect y="110" width="300" height="44" fill="#d7ccb5"/>
+      <!-- turquoise spring pool -->
+      <ellipse cx="150" cy="176" rx="130" ry="42" fill="#3fb0b6"/>
+      <ellipse cx="150" cy="176" rx="130" ry="42" fill="none"/>
+      <ellipse cx="150" cy="172" rx="112" ry="34" fill="#57c6cb" opacity="0.6"/>
+      <!-- reflected ridge in pool -->
+      <path d="M40,158 L90,180 L150,160 L210,180 L262,160 L262,176 L40,176 Z" fill="#7a6a5a" opacity="0.18"/>
+      <!-- reed fringe -->
+      <g stroke="#6f8a4a" stroke-width="2" stroke-linecap="round">
+        <line x1="26" y1="150" x2="24" y2="138"/><line x1="34" y1="152" x2="36" y2="140"/><line x1="270" y1="150" x2="272" y2="138"/><line x1="278" y1="152" x2="276" y2="140"/>
+      </g>
+    </svg>
+    <span class="visual-label">Turquoise springs · desert oasis · mirror</span>
+  </div>
+  <div class="stop-body">
+    <div class="stop-kicker">
+      <span class="stop-num">2.5</span>
+      <span class="stop-when">Afternoon · last frame</span>
+    </div>
+    <h3>Ash Meadows<span class="opt">wildlife refuge</span></h3>
+    <p>An improbable <b>desert oasis</b> in the Amargosa hardpan near the California line — <b>turquoise spring pools</b> so clear they look tropical, fed by fossil water, with boardwalks over them and the Funeral Mountains behind. Crystal Reservoir mirrors the ranges; <b>Devils Hole</b> (the fenced blue slot that's home to one tiny endangered fish) is a short drive on. A cool, saturated closer before the run into Vegas. Midday high sun makes the blues glow.</p>
+    <div class="direct">
+      <div><dt>Light</dt><dd>High sun saturates the spring blue · calm = reflection</dd></div>
+      <div><dt>Glass</dt><dd>24–70 + polarizer · boardwalks as lead-in lines</dd></div>
+      <div><dt>Access</dt><dd class="warn">Some graded-dirt refuge roads — fine dry · stay on boardwalks</dd></div>
+    </div>
+    <div class="theshot">
+      <span>The shot</span>
+      Shoot down into a spring, turquoise water against pale desert, a boardwalk edge leading in. Polarize to cut surface glare and push the blue. At Crystal Reservoir, center the ridge on its own reflection.
+    </div>
+  </div>
+</article>
+
+<div class="camp" style="border-color: var(--line);">
+  <span class="ci">◆</span>
+  <div><b>Final run:</b> US-95 S through Amargosa Valley and Indian Springs into <b>Las Vegas</b> for Sunday evening. The desert stays wide and empty almost to the casino glow — if the light's still working near Indian Springs, that Joshua-tree flat is the sleeper frame of the drive.</div>
+</div>
+
+<!-- ============ FIELD NOTES ============ -->
+<section class="notes">
+  <h2>Field notes</h2>
+  <div class="notegrid">
+    <div class="note">
+      <h4>Full moon, not dark skies</h4>
+      <p>Late Sept 2026 lands on a <b>full moon (Sep 26)</b>, not the new moon — so this isn't a Milky-Way trip. Lean into it: moonlit ghost towns, silvered mine timbers and desert lit like day. If the core is the goal, shift <b>~2 weeks earlier or ~1 week later</b> and the same route goes properly dark.</p>
+    </div>
+    <div class="note">
+      <h4>Fuel &amp; signal</h4>
+      <p>US-95 is genuinely empty. Top off at <b>Fallon, Hawthorne, Tonopah and Beatty</b> — long legs between, and no cell signal across most of it. Download maps and this guide before you leave pavement you know.</p>
+    </div>
+    <div class="note">
+      <h4>Heat by latitude</h4>
+      <p>The northern half is mild and the Tonopah night is <b>cold at 6,000 ft</b> — bring a warm layer. The southern low stops (Death Valley, Ash Meadows) still <b>bake past 100°F</b>; shoot them early and carry more water than you think.</p>
+    </div>
+    <div class="note">
+      <h4>Ghost-town etiquette</h4>
+      <p>Rhyolite and Goldfield are fragile and partly private — <b>no trespassing, take nothing</b>. Rhyolite is BLM "arrested decay." The Car Forest is free and open but has no services: <b>pack everything out</b>.</p>
+    </div>
+    <div class="note">
+      <h4>Hawthorne is an active base</h4>
+      <p>The bunker field is stunning but it's a live <b>Army depot</b>. Shoot only from public road shoulders — <b>no entering, no approaching the fence</b>, and keep gates and signage out of frame.</p>
+    </div>
+    <div class="note">
+      <h4>Rhythm</h4>
+      <p>Two golden hours plus a moonlit night is the target. Midday is for driving and flat-light texture work — Goldfield siding, the bunker grid, Walker Lake's saturated blue. Don't burn energy on harsh-noon landscapes.</p>
+    </div>
+  </div>
+
+  <p class="colophon">
+    <b>Art direction · look &amp; palette.</b> Each stop leads with reference photographs of the actual place — tap any to view it full-screen. The light, glass and ‘the shot’ notes are the art direction: the look to chase at each stop, not a guarantee of the conditions you’ll get.<br>
+    <b>Reference photographers:</b> Nick Carver (large-format Americana, facades, weathered signage) · Michael Shainblum (desert &amp; night skies) · Thomas Heaton (patient minimal landscape, single strong subject) · Nick Page (bold light, graphic compositions).<br>
+    <b>Route:</b> Reno → US-95 S → Las Vegas. Timings assume a Saturday-morning departure and one night in Tonopah. Verify fuel hours, Death Valley / Tioga-style seasonal access, and any dirt-road or fire closures close to your dates.
+  </p>
+</section>
+
+</div><!-- /body -->
+</div><!-- /trip-root -->

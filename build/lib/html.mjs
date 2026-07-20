@@ -56,13 +56,27 @@ export function moonPanel(report, { windowLabel, darkSites }) {
 
 // Attribution block. `credits` is an ordered [[slug, label], ...]; images come
 // from the manifest keyed by slug.
+const SOURCE_LABEL = { unsplash: 'Unsplash', flickr: 'Flickr', wikimedia: 'Wikimedia Commons' };
+
+// Prose list of the sources actually used, e.g. "Unsplash, Flickr and Wikimedia Commons".
+function sourcesUsed(manifest) {
+  const seen = [];
+  for (const it of Object.values(manifest).flat()) {
+    const s = it.source || 'wikimedia';
+    if (!seen.includes(s)) seen.push(s);
+  }
+  const names = seen.map((s) => SOURCE_LABEL[s] || s);
+  if (names.length <= 1) return names[0] || 'Wikimedia Commons';
+  return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
+}
+
 export function creditsBlock(credits, manifest) {
   const lines = credits.map(([slug, label]) => {
     const parts = (manifest[slug] || []).map((it) => `<span>${esc(it.artist)} <i>(${esc(it.license)})</i></span>`);
     return `<b>${esc(label)}:</b> ${parts.join(' · ')}<br>`;
   }).join('\n    ');
   return `\n  <div class="credits">
-    <b>Location photographs</b> — all Wikimedia Commons, reused under their stated CC licenses (CC BY / BY-SA / CC0). Attribution by stop:<br>
+    <b>Location photographs</b> — from ${esc(sourcesUsed(manifest))}, reused under their stated licenses. Attribution by stop:<br>
     ${lines}
     <br><b>Offline &amp; field use:</b> every image is embedded (WebP, ~640px) in this one file — nothing loads from the network, so it works with no signal. Tap any photo to open it full-screen and page through that stop’s shots. ◉ coordinates are decimal degrees (WGS84); tapping opens your default maps app.
   </div>`;

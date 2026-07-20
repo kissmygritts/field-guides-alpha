@@ -3,6 +3,9 @@
 // REQUIRED (anonymous/bot UAs get HTTP 429 "reduce your request rate"), and
 // requests must be throttled with exponential backoff on 429.
 
+export const name = 'wikimedia';
+export const enabled = () => true; // no key required, so it always backs the fallback chain
+
 const API = 'https://commons.wikimedia.org/w/api.php';
 
 // A compliant UA is mandatory. Override CONTACT via env for your own runs.
@@ -59,7 +62,7 @@ export async function findImages(query, { mode = 'search', limit = 40, thumb = 4
   return Object.values(pages)
     .map((p) => ({ title: p.title, ii: (p.imageinfo || [])[0] }))
     .filter((p) => p.ii?.thumburl && (p.ii.width || 0) >= minW && (p.ii.height || 0) >= minH)
-    .map((p) => ({ title: p.title, thumburl: p.ii.thumburl, width: p.ii.width, height: p.ii.height }));
+    .map((p) => ({ source: name, id: p.title, title: p.title, thumburl: p.ii.thumburl, width: p.ii.width, height: p.ii.height }));
 }
 
 // Full metadata + a wide thumb URL for one File: title.
@@ -69,6 +72,7 @@ export async function imageInfo(title, { thumb = 1024 } = {}) {
   const ii = p.imageinfo[0];
   const m = ii.extmetadata || {};
   return {
+    source: name,
     title: title.replace(/^File:/, ''),
     thumburl: ii.thumburl,
     artist: clean(m.Artist?.value) || 'Unknown',

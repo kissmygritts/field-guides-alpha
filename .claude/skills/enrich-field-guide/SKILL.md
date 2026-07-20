@@ -14,8 +14,20 @@ The toolchain does the mechanical work; you do judgment (which images, what copy
 Read `CLAUDE.md` first for the non-negotiables. Work a guide by its `<slug>`
 (e.g. `2026-395`) under `guides/<slug>/`.
 
-**Set `WM_CONTACT` before any fetch** (`export WM_CONTACT="…email or url…"`) — Commons
-429s an anonymous User-Agent. See `references/wikimedia.md`.
+**API keys before any fetch.** Imagery comes from three sources, tried per stop in
+order with sequential fallback: **Unsplash → Flickr → Wikimedia Commons**. Set the
+keys for the sources you want; a source with no key is skipped (Wikimedia needs none,
+so it always backs the chain):
+
+- `WM_CONTACT` — an email/URL (Commons 429s an anonymous User-Agent). See `references/wikimedia.md`.
+- `UNSPLASH_KEY` — Access Key from https://unsplash.com/developers.
+- `FLICKR_KEY` — API key from https://www.flickr.com/services/apps.
+
+Licensing differs by source and is captured from each API, never guessed: Wikimedia
+= CC BY/BY-SA/CC0; Flickr = restricted to reuse-friendly CC/PD licenses (no
+ND — we re-encode); Unsplash = the Unsplash License (attribution, non-commercial
+personal use). Every image's source + artist + license lands in the manifest and the
+credits block.
 
 ## A. Rebuild an existing guide (no new imagery)
 
@@ -44,18 +56,24 @@ network needed. This is the cheap path; prefer it whenever imagery isn't changin
 ## C. Source & curate imagery
 
 1. **Write queries** into `guides/<slug>/sources.json`:
-   `{ "<stop>": { "mode": "category"|"search", "query": "…" } }` (a list per stop is
-   allowed). Prefer a real `Category:…` when one exists; else `search` (it forces
-   `filetype:bitmap` to dodge PDFs/maps/diagrams). See `references/wikimedia.md`.
-2. `node build/fetch.mjs <slug> candidates` — downloads thumbs to `work/<stop>/`.
-3. `node build/sheet.mjs <slug>` — builds `sheets/<stop>.jpg` contact sheets.
+   `{ "<stop>": "plain text query" }`. A list per stop is allowed, and any entry may
+   be `{ "mode": "category"|"search", "query": "…" }` — `mode` only affects Wikimedia
+   (`category` walks a `Category:…`; otherwise `search` forces `filetype:bitmap` to
+   dodge PDFs/maps/diagrams). The same query string is reused across all three
+   sources. See `references/wikimedia.md`.
+2. `node build/fetch.mjs <slug> candidates` — fills each stop Unsplash→Flickr→Wikimedia
+   up to the cap, downloads thumbs to `work/<stop>/`, records `[NN, ref, source, title]`
+   in `work/index.json`. Prints the per-source mix per stop.
+3. `node build/sheet.mjs <slug>` — builds `sheets/<stop>.jpg` contact sheets; each tile
+   is labeled `NNs` where `s` is the source letter (`u`/`f`/`w`).
    **Read each sheet** and actually look. Favor obscure/moody frames; the user wants
    variety (a hero "place" shot, a "the shot" composition, a detail, a mood frame).
    **Reject frames with people/intrusions** unless the subject genuinely needs scale.
-4. **Write picks** into `selections.json`: `{ "<stop>": [["File:<title>", "<role>"], …] }`
-   using the exact titles from `work/index.json`. Roles: `wide`, `shot`, `detail`,
-   `mood`. Order matters — the first is the frame shown before the lightbox opens, so
-   lead with the strongest.
+4. **Write picks** into `selections.json`: `{ "<stop>": [[<key>, "<role>"], …] }`. A
+   `<key>` is the candidate number `NN` from the sheet (simplest), a `"<source>:<id>"`
+   ref (e.g. `"unsplash:abc123"`, `"wikimedia:File:Foo.jpg"`), or a legacy bare
+   `"File:Foo.jpg"`. Roles: `wide`, `shot`, `detail`, `mood`. Order matters — the
+   first is the frame shown before the lightbox opens, so lead with the strongest.
 5. `node build/fetch.mjs <slug> finalize` — full-res fetch, WebP encode, real
    attribution from the API, writes `manifest.json`. It prints per-image KB and a
    total — **report the total MB to the user** (constraint 2).

@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { moonReport } from './lib/moon.mjs';
+import { SOURCE_LABEL } from './lib/sources.mjs';
 import * as H from './lib/html.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -26,7 +27,7 @@ function imagesFor(slug, config, manifest) {
       out.push({
         img: it,
         cap: `${config.disp[ms]} — ${config.roles[it.role] || it.role}`,
-        credit: `${it.artist} · ${it.license} · Wikimedia Commons`,
+        credit: `${it.artist} · ${it.license} · ${SOURCE_LABEL[it.source] || 'Wikimedia Commons'}`,
       });
     }
   }

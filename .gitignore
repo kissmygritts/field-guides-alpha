@@ -10,5 +10,8 @@ guides/*/sheets/
 build/.verify/
 *.screenshot.png
 
+# Local env / secrets (API keys for image sources)
+mise.local.toml
+
 # OS
 .DS_Store
