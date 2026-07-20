@@ -13,9 +13,29 @@ function jd(date) { // date: JS Date (UTC midnight)
   return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + D + B - 1524.5 + 0.5;
 }
 
+// Julian Day -> UTC Date (Fliegel–Van Flandern via Meeus). Used to place the
+// real nearest new/full moon on the calendar, not just the window's extremes.
+function jdToDate(jdv) {
+  const J = jdv + 0.5, Z = Math.floor(J), F = J - Z;
+  let A = Z;
+  if (Z >= 2299161) { const a = Math.floor((Z - 1867216.25) / 36524.25); A = Z + 1 + a - Math.floor(a / 4); }
+  const B = A + 1524, C = Math.floor((B - 122.1) / 365.25), D = Math.floor(365.25 * C), E = Math.floor((B - D) / 30.6001);
+  const day = Math.floor(B - D - Math.floor(30.6001 * E) + F);
+  const month = E < 14 ? E - 1 : E - 13;
+  const year = month > 2 ? C - 4716 : C - 4715;
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
 function illum(date) {
   const age = ((jd(date) - REF_NEW_JD) % SYNODIC + SYNODIC) % SYNODIC;
   return { age, illum: (1 - Math.cos((2 * Math.PI * age) / SYNODIC)) / 2 };
+}
+
+// Real lunar event (new: phase 0; full: phase SYNODIC/2) nearest a reference JD.
+function nearestPhase(refJD, phaseOffset) {
+  const base = REF_NEW_JD + phaseOffset;
+  const k = Math.round((refJD - base) / SYNODIC);
+  return jdToDate(base + k * SYNODIC);
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -47,21 +67,39 @@ export function moonReport(startISO, endISO) {
   const waning = (d) => d.age > SYNODIC / 2;
   const bright = spans((d) => d.illum >= 0.75);
   const dark = spans((d) => d.illum <= 0.30);
-  const transition = spans((d) => waning(d) && d.illum > 0.30 && d.illum < 0.75);
+  const mid = spans((d) => d.illum > 0.30 && d.illum < 0.75);
 
-  // Nearest new / full moon dates (min/max illum days).
-  const extreme = (cmp) => days.reduce((a, b) => (cmp(b.illum, a.illum) ? b : a)).date;
-  const newMoon = extreme((x, y) => x < y);
-  const fullMoon = extreme((x, y) => x > y);
+  // Phase state (waxing vs waning) of a span, judged by its first day.
+  const isWaning = ([s]) => waning(days.find((d) => d.date.getTime() === s.getTime()));
 
   const cards = [];
-  if (bright[0]) cards.push({ range: range(...bright[0]), text: 'full moon. Bright nights — shoot moonlit foregrounds; skip the core.' });
-  if (transition[0]) cards.push({ range: range(...transition[0]), text: 'waning gibbous. Moon rises late; early evening goes dark.' });
-  if (dark[0]) cards.push({ dark: true, range: range(...dark[0]), text: 'last-quarter → new. Dark skies, prime Milky Way.' });
+  if (bright[0]) {
+    cards.push({ range: range(...bright[0]), text: 'full moon. Bright nights — shoot moonlit foregrounds, skip the core.' });
+  }
+  if (mid[0]) {
+    cards.push({
+      range: range(...mid[0]),
+      text: isWaning(mid[0])
+        ? 'waning gibbous. Moon rises late; early evening goes dark.'
+        : 'waxing crescent → first quarter. Moon sets before midnight; late nights go dark.',
+    });
+  }
+  if (dark[0]) {
+    cards.push({
+      dark: true,
+      range: range(...dark[0]),
+      text: isWaning(dark[0])
+        ? 'last-quarter → new. Dark skies, prime Milky Way.'
+        : 'new → thin crescent. Moon sets just after sunset — dark all night.',
+    });
+  }
+
+  // Real nearest new / full moon to the middle of the window.
+  const midJD = (jd(days[0].date) + jd(days[days.length - 1].date)) / 2;
 
   return {
-    newMoon: fmt(newMoon),
-    fullMoon: fmt(fullMoon),
+    newMoon: fmt(nearestPhase(midJD, 0)),
+    fullMoon: fmt(nearestPhase(midJD, SYNODIC / 2)),
     cards,
     days, // raw, for callers that want the table
   };
