@@ -1,0 +1,234 @@
+<style>
+  #trip-root {
+    --ink: #e8e4da;
+    --ink-dim: #a49f92;
+    --ink-faint: #6f6a5e;
+    --ground: #14140f;
+    --ground-2: #1c1c16;
+    --panel: #201f18;
+    --line: #35342a;
+    --sun: #e8a13c;
+    --sun-deep: #c76b2a;
+    --sky: #6f86a3;
+    --sage: #8a9a72;
+    --alarm: #d8663f;
+    --day1: #c76b2a;
+    --day2: #6f86a3;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: "Avenir Next", "Segoe UI", -apple-system, system-ui, sans-serif;
+    --mono: "SFMono-Regular", "Roboto Mono", Menlo, Consolas, monospace;
+    color: var(--ink);
+    font-family: var(--sans);
+    background: var(--ground);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  #trip-root * { box-sizing: border-box; }
+
+  /* ---------- Masthead ---------- */
+  #trip-root .mast {
+    position: relative;
+    padding: 46px 30px 38px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(232,161,60,0.14), transparent 55%),
+      linear-gradient(180deg, #191811, #14140f);
+    overflow: hidden;
+  }
+  #trip-root .mast-ridge { position:absolute; left:0; right:0; bottom:-1px; height:120px; display:block; opacity:.5; }
+  #trip-root .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--sun);
+    margin: 0 0 16px;
+  }
+  #trip-root h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    max-width: 15ch;
+  }
+  #trip-root h1 em { font-style: italic; color: var(--sun); }
+  #trip-root .dek {
+    font-size: 15px;
+    color: var(--ink-dim);
+    max-width: 56ch;
+    margin: 0 0 22px;
+  }
+  #trip-root .mast-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 26px;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+    color: var(--ink-dim); position: relative; z-index: 2;
+  }
+  #trip-root .mast-meta b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Section wrap ---------- */
+  #trip-root .body { padding: 8px 22px 60px; }
+
+  /* ---------- Day header ---------- */
+  #trip-root .day {
+    margin: 40px 0 6px;
+    padding: 20px 20px 18px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--ground-2), #17170f);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  #trip-root .day::before {
+    content: "";
+    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--accent);
+  }
+  #trip-root .day-tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
+  }
+  #trip-root .day-title {
+    font-family: var(--serif); font-size: 25px; font-weight: 500; margin: 0 0 4px;
+  }
+  #trip-root .day-sub { font-size: 13.5px; color: var(--ink-dim); margin: 0; }
+  #trip-root .day-legs {
+    margin-top: 12px; display:flex; flex-wrap:wrap; gap: 8px;
+  }
+  #trip-root .chip {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.04em;
+    padding: 4px 9px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-dim);
+    background: rgba(0,0,0,.2);
+  }
+  #trip-root .chip b { color: var(--ink); }
+
+  /* ---------- Stop card ---------- */
+  #trip-root .stop {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    margin: 18px 0;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  #trip-root .stop-visual { position: relative; background: #0d0d09; min-height: 210px; }
+  #trip-root .stop-visual svg { display:block; width:100%; height:100%; }
+  #trip-root .visual-label {
+    position:absolute; left:10px; bottom:9px;
+    font-family: var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: rgba(255,255,255,.72);
+    background: rgba(0,0,0,.42); backdrop-filter: blur(2px);
+    padding: 3px 7px; border-radius: 5px;
+  }
+  #trip-root .stop-body { padding: 18px 20px 20px; }
+  #trip-root .stop-kicker {
+    display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom: 3px;
+  }
+  #trip-root .stop-num {
+    font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing:.1em;
+  }
+  #trip-root .stop-when {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.08em;
+    color: var(--ink-faint); text-transform: uppercase;
+    margin-left:auto;
+  }
+  #trip-root .stop h3 {
+    font-family: var(--serif); font-size: 21px; font-weight: 500; margin: 0 0 8px;
+  }
+  #trip-root .stop h3 .opt {
+    font-family: var(--mono); font-size: 10px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sage); border:1px solid var(--line); padding:2px 6px; border-radius:5px;
+    vertical-align: middle; margin-left: 8px;
+  }
+  #trip-root .stop p { font-size: 13.5px; color: var(--ink-dim); margin: 0 0 12px; }
+  #trip-root .stop p b { color: var(--ink); font-weight: 600; }
+
+  /* direction row */
+  #trip-root .direct {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: 9px; overflow:hidden;
+    margin-top: 4px;
+  }
+  #trip-root .direct div { background: var(--ground-2); padding: 8px 11px; }
+  #trip-root .direct dt {
+    font-family: var(--mono); font-size: 9px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-faint); margin-bottom: 3px;
+  }
+  #trip-root .direct dd { margin:0; font-size: 12.5px; color: var(--ink); }
+  #trip-root .direct dd.warn { color: var(--alarm); }
+
+  /* the "shot" callout */
+  #trip-root .theshot {
+    margin-top: 12px; padding: 10px 13px;
+    border-left: 2px solid var(--accent);
+    background: linear-gradient(90deg, rgba(199,107,42,0.08), transparent);
+    font-size: 12.5px;
+  }
+  #trip-root .theshot span {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--accent); display:block; margin-bottom: 3px;
+  }
+
+  /* ---------- Camp banner ---------- */
+  #trip-root .camp {
+    margin: 16px 0 4px;
+    padding: 13px 16px;
+    border: 1px dashed var(--line);
+    border-radius: 11px;
+    background: rgba(127,155,109,0.06);
+    display:flex; gap:12px; align-items:flex-start;
+    font-size: 13px; color: var(--ink-dim);
+  }
+  #trip-root .camp b { color: var(--ink); }
+  #trip-root .camp .ci { flex-shrink:0; margin-top:1px; }
+
+  /* ---------- Field notes footer ---------- */
+  #trip-root .notes {
+    margin-top: 46px; padding: 26px 22px 30px;
+    border-top: 1px solid var(--line);
+  }
+  #trip-root .notes h2 {
+    font-family: var(--serif); font-size: 22px; font-weight:500; margin: 0 0 16px;
+  }
+  #trip-root .notegrid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px;
+  }
+  #trip-root .note {
+    border: 1px solid var(--line); border-radius: 11px; padding: 14px 15px;
+    background: var(--panel);
+  }
+  #trip-root .note h4 {
+    font-family: var(--mono); font-size: 11px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--sun); margin: 0 0 7px;
+  }
+  #trip-root .note p { font-size: 12.8px; color: var(--ink-dim); margin: 0; }
+  #trip-root .note b { color: var(--ink); }
+
+  #trip-root .colophon {
+    margin-top: 26px; padding-top: 16px; border-top:1px solid var(--line);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing:.06em;
+    color: var(--ink-faint); line-height:1.7;
+  }
+  #trip-root .colophon b { color: var(--ink-dim); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 640px) {
+    #trip-root .stop { grid-template-columns: 1fr; }
+    #trip-root .stop-visual { min-height: 170px; }
+    #trip-root .body { padding: 4px 14px 50px; }
+    #trip-root .mast { padding: 34px 20px 30px; }
+    #trip-root .stop-when { margin-left:0; width:100%; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #trip-root .stop { transition: border-color .25s ease; }
+    #trip-root .stop:hover { border-color: var(--accent); }
+  }
+</style>
