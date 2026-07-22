@@ -1,0 +1,98 @@
+# Sample guide — exercises every branch of the shared schema (handoff-spec §3).
+# Not a real trip; it exists so the data layer has a well-formed guide to load
+# and validate. Real guides are hand-ported in later migration tickets (§9).
+masthead:
+  eyebrow: Sample route
+  title: A *two-day* scaffold loop
+  dek: A minimal but complete guide used to validate the **data layer**.
+  meta:
+    - 2 days
+    - 4 stops
+    - ~180 mi
+  startDate: 2026-09-17
+
+moon:
+  start: 2026-09-17
+  end: 2026-09-18
+
+darkSites: Great Basin skies — Bortle 2 away from the highway corridor.
+
+days:
+  - theme: High desert to the basin floor
+    route: Trailhead → overlook → dry lake
+    summary: An easy first day; save the *long* light for the overlook.
+    legs:
+      - at: 07:00
+        text: Roll out from the trailhead
+      - at: 18:30
+        text: Golden hour at the overlook
+    brief:
+      - label: Fuel
+        value: Top off before the pass — **no services** for 90 mi.
+        icon: "⛽"
+      - label: Signal
+        value: Dead past the cattle guard.
+        warn: true
+    stops:
+      - id: trailhead
+        name: North Trailhead
+        badge: state park
+        when: Low AM · quick stop
+        teaser: A gentle warm-up with *good* foreground rock.
+        description: Wide sage flats with the range stacked behind. Shoot **wide** early.
+        location: Basin State Park
+        gps:
+          lat: 39.1234
+          lng: -114.5678
+          label: North Trailhead
+          elev: 6120
+        directions:
+          - label: Light
+            value: Backlit before 9am; front-lit after.
+          - label: Access
+            value: Graded dirt, fine for *any* vehicle.
+        theShot: Get low and let the trail lead **into** the range.
+        images:
+          - file: trailhead-wide.webp
+            role: wide
+            source: wikimedia
+            artist: A. Photographer
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0/
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Sample_trailhead.jpg
+      - id: overlook
+        name: Ridge Overlook
+        optional: true
+        when: Golden hour
+        description: The payoff view — *stack* the ranges with a long lens.
+        gps:
+          lat: 39.2001
+          lng: -114.6100
+          label: Ridge Overlook
+          elev: 7480
+        directions:
+          - label: Glass
+            value: 70-200 to compress the ridges.
+
+  - theme: Basin floor and the dry lake
+    route: Overlook → dry lake bed
+    stops:
+      - id: dry-lake
+        name: Dry Lake Bed
+        description: Cracked playa that goes *pink* at dusk. Watch for **soft** mud after rain.
+        gps:
+          lat: 39.0500
+          lng: -114.8000
+          label: Dry Lake Bed
+          elev: 5210
+
+fieldNotes:
+  - heading: Water
+    body: Carry **all** of it — nothing reliable on route.
+  - heading: Cell
+    body: Download offline maps before the pass.
+
+colophon:
+  artDirection: Field Guide project
+  photographers: See per-image credits
+  route: Hand-scouted, not driven

@@ -1,5 +1,10 @@
 node_modules/
 
+# Nuxt build artifacts
+.nuxt/
+.output/
+.data/
+
 # Per-guide working files (candidates, contact sheets, raw sources) — not committed.
 # The curated manifest.json IS committed so rebuilds need no network.
 guides/*/work/
