@@ -84,3 +84,17 @@ Build command `npm run build`, output directory `dist`. No functions, no env nee
 Use the **`enrich-field-guide`** skill — it has the full procedure (sourcing, curation
 via contact sheets, feature wiring, verification) and the gotcha references. Load it
 before starting rather than re-deriving the flow.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs live as GitHub issues in `kissmygritts/field-guides-alpha`, managed via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five-role vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
