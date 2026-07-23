@@ -61,9 +61,20 @@ export function stopNumber(dayIndex: number, stopIndex: number): string {
   return `${dayIndex + 1}.${stopIndex + 1}`
 }
 
+/**
+ * Stable in-page anchor for a stop, `s-<id>` (matches the old `#s-<slug>`
+ * convention). The jump-nav link targets it and `StopCard` renders it as the
+ * element id, so the two always resolve to each other.
+ */
+export function stopAnchor(id: string): string {
+  return `s-${id}`
+}
+
 /** Plain props for a `StopCard` — derived, presentational-ready. */
 export interface StopView {
   num: string
+  /** In-page anchor id (`s-<id>`), the target of this stop's jump-nav link. */
+  anchor: string
   name: string
   badge?: string
   optional: boolean
@@ -89,6 +100,71 @@ export interface DayView {
   stops: StopView[]
 }
 
+/** One stop entry in the jump-nav index (handoff-spec §6.3). */
+export interface JumpStop {
+  num: string
+  name: string
+  /** Matches the target stop's {@link StopView.anchor} (`s-<id>`). */
+  anchor: string
+}
+
+/** One day row in the jump-nav index — its label and the stops under it. */
+export interface JumpDay {
+  label: string
+  stops: JumpStop[]
+}
+
+/**
+ * Derive the jump-nav anchor index (handoff-spec §5, §6.3): each day's derived
+ * `Day N · Weekday` label with its stops' numbers, names, and anchors. Never
+ * authored — computed from day/stop order so a link always resolves to its stop.
+ */
+export function deriveJumpNav(guide: Guide): JumpDay[] {
+  return guide.days.map((day, di) => ({
+    label: dayLabel(guide.masthead.startDate, di),
+    stops: day.stops.map((stop, si) => ({
+      num: stopNumber(di, si),
+      name: stop.name,
+      anchor: stopAnchor(stop.id),
+    })),
+  }))
+}
+
+/** One attribution row in the credits list (handoff-spec §5, §6.3). */
+export interface CreditItem {
+  /** The stop the image belongs to (its display name). */
+  name: string
+  artist: string
+  source: Image['source']
+  license: string
+  /** Source/description page — the attribution link. */
+  sourceUrl: string
+}
+
+/**
+ * Derive the credits list (handoff-spec §5): the union of every stop's
+ * `images[]`, one row per image in document order, carrying the stop name plus
+ * each image's attribution. Derived — never authored; the yml only holds the
+ * per-stop `images` arrays that `finalize` upserts.
+ */
+export function deriveCredits(guide: Guide): CreditItem[] {
+  const rows: CreditItem[] = []
+  for (const day of guide.days) {
+    for (const stop of day.stops) {
+      for (const img of stop.images) {
+        rows.push({
+          name: stop.name,
+          artist: img.artist,
+          source: img.source,
+          license: img.license,
+          sourceUrl: img.sourceUrl,
+        })
+      }
+    }
+  }
+  return rows
+}
+
 /** Plain props for the dumb `MoonPanel` — derived moon data (handoff-spec §6.3). */
 export interface MoonView {
   windowLabel: string
@@ -106,8 +182,12 @@ export interface GuideView {
     dek: string
     meta: string[]
   }
+  /** Day/stop anchor index rendered by `JumpNav` (derived). */
+  jumpNav: JumpDay[]
   days: DayView[]
   moon: MoonView
+  /** Attribution union rendered by `Credits`, one row per image (derived). */
+  credits: CreditItem[]
 }
 
 /**
@@ -125,6 +205,7 @@ export function deriveGuideView(guide: Guide, slug: string): GuideView {
       dek: guide.masthead.dek,
       meta: guide.masthead.meta,
     },
+    jumpNav: deriveJumpNav(guide),
     days: guide.days.map((day, di) => ({
       label: dayLabel(guide.masthead.startDate, di),
       theme: day.theme,
@@ -135,6 +216,7 @@ export function deriveGuideView(guide: Guide, slug: string): GuideView {
       accentIndex: di,
       stops: day.stops.map((stop, si) => ({
         num: stopNumber(di, si),
+        anchor: stopAnchor(stop.id),
         name: stop.name,
         badge: stop.badge,
         optional: stop.optional ?? false,
@@ -157,5 +239,7 @@ export function deriveGuideView(guide: Guide, slug: string): GuideView {
       end: guide.moon.end,
       darkSites: guide.darkSites,
     },
+    // Attribution union — one row per image across every stop (§5).
+    credits: deriveCredits(guide),
   }
 }
