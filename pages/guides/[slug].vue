@@ -43,6 +43,13 @@ useHead({ title: guide.masthead.eyebrow })
         :accent-index="day.accentIndex"
         :stops="day.stops"
       />
+      <MoonPanel
+        :window-label="view.moon.windowLabel"
+        :phase-label="view.moon.phaseLabel"
+        :start="view.moon.start"
+        :end="view.moon.end"
+        :dark-sites="view.moon.darkSites"
+      />
     </div>
   </main>
 </template>
