@@ -1,0 +1,587 @@
+# 2026-reno-vegas — the worked-example migration (handoff-spec §8, migration-spec §3).
+#
+# STRUCTURE (moon, darkSites, gps, day/stop membership, elev→number, alt promotion)
+# was generated from guides/2026-reno-vegas/config.json with:
+#     node build/config-to-yml.mjs 2026-reno-vegas
+# PROSE (masthead, descriptions, directions, theShot, day themes/briefs/legs,
+# fieldNotes, colophon) is hand-ported from guides/2026-reno-vegas/content.html —
+# the copy IS the product (non-negotiable #4). The SVG stop-visual placeholders are
+# dropped; galleries come from finalize (public/guides/<slug>/ + images: below).
+masthead:
+  eyebrow: Shooting Script · Solo · Late September
+  title: Reno to Las Vegas, down the *empty middle*
+  dek: >-
+    Two days south on US-95 through the loneliest basins in Nevada — a cobalt desert lake, a valley of ammunition bunkers, three ghost towns and a forest of buried cars. Built around the ends of the day, with a full moon to light the ruins after dark. Not much between the dots — that's the point.
+  meta:
+    - ~450 mi total
+    - 1 night Tonopah
+    - Depart Sat AM
+    - Route US-95 S
+    - Golden hours + a full moon
+  # Saturday departure — drives the derived "Day N · Weekday" labels (Sat, Sun).
+  startDate: 2026-09-26
+
+moon:
+  start: 2026-09-24
+  end: 2026-09-28
+
+darkSites: Tonopah, Goldfield, the Rhyolite flats
+
+days:
+  - theme: The High-Desert Run
+    route: Reno → Tonopah
+    summary: >-
+      Drop out of Reno onto US-95 and run the empty basins south. A river-fort ruin, a big blue lake, a valley of bunkers — then land in Tonopah for the mining town and a moonlit night at 6,000 ft. ~255 mi.
+    legs:
+      - at: AM
+        text: depart Reno · US-95 S
+      - at: opt
+        text: Fort Churchill
+      - at: midday
+        text: Walker Lake
+      - at: pm
+        text: Hawthorne bunkers
+      - at: dusk
+        text: Tonopah
+    brief:
+      - label: Fuel
+        icon: "⛽"
+        value: Fallon, Hawthorne, Tonopah — long empty gaps between. Top off every chance.
+      - label: Signal
+        icon: "📵"
+        value: Dead across most of US-95. Download maps + this guide before you leave.
+      - label: Water
+        icon: "💧"
+        value: Carry 4+ L — nothing roadside at Walker Lake or the bunkers.
+      - label: Drive
+        icon: "🚗"
+        value: ~255 mi · 4.5–5 hr moving
+      - label: Camp
+        icon: "▲"
+        value: >-
+          Overnight Tonopah — Mizpah or Clown Motel in town, or free dispersed BLM just outside. Your highest, coldest night at ~6,000 ft; pack a real warm layer even in September. Fuel and food before you turn in.
+    stops:
+      - id: fortchurchill
+        name: Fort Churchill
+        badge: state park
+        optional: true
+        when: Morning · quick warm-up
+        gps:
+          lat: 39.2936
+          lng: -119.2889
+          label: adobe ruins, off Alt US-95
+          elev: 4255
+        description: >-
+          An 1860s U.S. Army cavalry post melting back into the desert — **roofless adobe walls** ranged along the Carson River, cottonwoods behind them, a small pioneer cemetery. A short detour off the Alt US-95 corridor near Silver Springs, almost nobody there. This is your Nick Carver warm-up — earth-colored walls, texture, restraint. Morning side-light rakes the eroded adobe best.
+        directions:
+          - label: Light
+            value: Low AM side-light on the walls
+          - label: Glass
+            value: 35 / 50 · documentary, restrained
+          - label: Access
+            value: Paved park road — any car · small fee
+        theShot: >-
+          One adobe wall raking away from camera, warm light catching the crumbling edges, cottonwoods and empty sky behind. Then a tight detail of eroded mud brick.
+        images:
+          - file: fortchurchill-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Peretz Partensky from San Francisco, USA
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Fort_Churchill_(5752450217).jpg
+          - file: fortchurchill-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Kelapstick
+            license: CC BY 3.0
+            licenseUrl: https://creativecommons.org/licenses/by/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Fort_Churchill,_Nevada_Ruins_3DSC09896.JPG
+          - file: fortchurchill-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Jpledia
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Fort_Churchill_Gelatin.jpg
+
+      - id: walker
+        name: Walker Lake
+        when: Midday · roadside
+        gps:
+          lat: 38.6957
+          lng: -118.7108
+          label: Sportsman's Beach, US-95
+          elev: 4100
+        description: >-
+          A startling **deep-blue desert lake** with the barren Wassuk Range dropping straight into it — US-95 runs for miles right along the eastern shore, so it comes to you. Heaton-style minimalism — water, ridge, sky, nothing else. Pull off at **Sportsman's Beach** or any of the shoulder turnouts. The blue punches hardest under high sun; a polarizer deepens it.
+        directions:
+          - label: Light
+            value: Any · high sun saturates the blue
+          - label: Glass
+            value: Wide for emptiness · long to stack ridge on water
+          - label: Access
+            value: Paved turnouts right off US-95
+        theShot: >-
+          Horizon on the lower third, one clean band of cobalt water under the bare range. Polarize to kill glare and saturate. Or go long and compress the ridge onto the waterline.
+        images:
+          - file: walker-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Famartin
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:2015-04-29_15_55_21_View_southeast_from_the_northwest_end_of_Walker_Lake,_Nevada.jpg
+          - file: walker-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Famartin
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:2015-04-29_16_10_19_View_northeast_from_along_U.S._Route_95_on_the_southwest_end_of_Walker_Lake,_Nevada.jpg
+          - file: walker-mood.webp
+            role: mood
+            source: wikimedia
+            artist: BLM Nevada
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Walker_Lake,_Nevada_(19984175181).jpg
+          - file: walker-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Famartin
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:2015-04-29_15_55_24_View_south-southwest_towards_Mount_Grant_from_the_northwest_end_of_Walker_Lake,_Nevada.jpg
+
+      - id: hawthorne
+        name: Hawthorne Army Depot
+        badge: shoot from the road
+        optional: true
+        when: Afternoon · roadside only
+        gps:
+          lat: 38.5847
+          lng: -118.65
+          label: bunker field, US-95 N of town
+          elev: 4320
+        description: >-
+          The world's largest ammunition depot — **thousands of turf-covered concrete bunkers** in a dead-flat grid, marching to the horizon on both sides of US-95. Utterly surreal, endlessly graphic, and free from the car window. **It's an active military base — do not enter or approach the fence.** Everything you want is a compression shot from public road shoulders. High flat light actually helps the repetition read.
+        directions:
+          - label: Light
+            value: Flat is fine · low sun rakes the mounds
+          - label: Glass
+            value: 70–200 · compress the grid into pattern
+          - label: Access
+            value: Roadside only — no entry, active base
+            warn: true
+        theShot: >-
+          Long lens straight down a row so the igloos stack into an infinite repeating rhythm. Keep a lone bunker off-center to break the grid. No fences, no signage in frame.
+        images:
+          - file: hawthorne-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Ken Lund from Reno, Nevada, USA
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ammunition_Bunkers,_Hawthorne_Army_Depot,_Hawthorne,_Nevada_(15517175898).jpg
+          - file: hawthorne-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Ken Lund from Reno, Nevada, USA
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ammunition_Bunkers,_Hawthorne_Army_Depot,_Hawthorne,_Nevada_(15516707159).jpg
+          - file: hawthorne-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Ken Lund from Reno, Nevada, USA
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ammunition_Bunkers,_Hawthorne_Army_Depot,_Hawthorne,_Nevada_(15702568375).jpg
+
+      - id: tonopah
+        name: Tonopah
+        when: Blue hour → moonlit night
+        gps:
+          lat: 38.0692
+          lng: -117.2306
+          label: Historic Mining Park, Main St
+          elev: 6047
+        description: >-
+          A silver-boom town frozen halfway to ghost — and the natural midpoint of the whole drive. The **Historic Mining Park** puts weathered headframes and hoist works on the hill directly above Main Street; the **Clown Motel** and the old cemetery sit side by side at the north end; the Mizpah Hotel anchors downtown. Tonopah is famous for some of the **darkest skies in the country** — but you're here on a full moon, so lean into it — silvered mine timbers and empty streets under moonlight instead of the core.
+        directions:
+          - label: Light
+            value: Blue hour on the headframes · moonlight after dark
+          - label: Glass
+            value: 24–70 · tripod for dusk + moonlit long exposures
+          - label: Stay
+            value: Mizpah, Clown Motel, or dispersed BLM outside town
+        theShot: >-
+          A headframe stark against the deep blue-to-black sky just after sunset, town lights beginning below. Later — the mining park bones lit only by the full moon, long exposure, hard shadows.
+        images:
+          - file: tonopah-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Famartin
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:2015-05-04_00_43_16_View_southeast_along_Main_Street_(U.S._Routes_6_and_95)_near_Oddie_Avenue_in_Tonopah,_Nevada_at_night.jpg
+          - file: tonopah-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Famartin
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:2013-09-19_12_59_58_View_of_Tonopah,_Nevada_from_the_southwest.jpg
+          - file: tonopah-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Famartin
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:2015-05-03_18_35_37_The_Clown_Motel_on_Main_Street_(U.S._Route_6_and_95)_in_Tonopah,_Nevada.jpg
+          - file: tonopah-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Pierce, C.C. (Charles C.), 1861-1946
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Panoramic_view_of_the_Tonopah_Mining_Park_(now_a_historic_site)_and_Mount_Butler_in_the_distance,_Tonopah,_Nevada,_ca.1904_(CHS-5418).jpg
+
+      - id: tonopah-alt
+        name: Old Cemetery · Clown Motel
+        optional: true
+        when: Night · north end of Main St
+        gps:
+          lat: 38.0778
+          lng: -117.2314
+          label: old cemetery & motel, north end of Main St
+          elev: 6030
+        description: >-
+          The old town cemetery and the roadside-famous **Clown Motel** share a lot at the north end of Main Street — weathered headboards against desert, kitsch neon against the dark. A quick, strange add-on to the mining park under the same full moon.
+
+  - theme: Ghost Towns & Blue Water
+    route: Tonopah → Las Vegas
+    summary: >-
+      The good stuff, packed into the southern half — two ghost towns, a forest of buried cars, an optional Death Valley overlook and a turquoise desert oasis, then the casino lights. ~210 mi + detours.
+    legs:
+      - at: AM
+        text: Goldfield
+      - at: AM
+        text: Car Forest
+      - at: midday
+        text: Rhyolite · Goldwell
+      - at: opt
+        text: Zabriskie Point
+      - at: pm
+        text: Ash Meadows
+      - at: eve
+        text: Las Vegas
+    brief:
+      - label: Fuel
+        icon: "⛽"
+        value: Tonopah and Beatty — top off at both; long empty legs between.
+      - label: Signal
+        icon: "📵"
+        value: Dead from Goldfield through Beatty; returns near Amargosa.
+      - label: Heat
+        icon: "🏜"
+        value: >-
+          Death Valley & Ash Meadows still hit 100°F+ in late Sept — shoot the low stops at dawn/early, carry extra water.
+      - label: Drive
+        icon: "🚗"
+        value: ~210 mi + Zabriskie detour (adds ~1 hr)
+      - label: Finish
+        icon: "◆"
+        value: >-
+          US-95 S through Amargosa Valley and Indian Springs into Las Vegas for Sunday evening. If the light's still working near Indian Springs, that Joshua-tree flat is the sleeper frame of the drive.
+    stops:
+      - id: goldfield
+        name: Goldfield
+        when: Early morning · first stop
+        gps:
+          lat: 37.7086
+          lng: -117.2364
+          label: Goldfield Hotel, US-95
+          elev: 5689
+        description: >-
+          Once the biggest city in Nevada, now ~250 people among the bones of a gold rush. The grand shuttered **Goldfield Hotel**, the stone courthouse, the Santa Fe Saloon, rusted autos and mine headframes scattered through the sage. This is your Americana chapter — hand-painted signage, sun-bleached siding, rust and patina. Flat morning light is fine; you're shooting texture and story, not sky.
+        directions:
+          - label: Light
+            value: Flat OK · low sun for wood grain
+          - label: Glass
+            value: 35 / 50 · tight on texture & signage
+          - label: Note
+            value: Buildings are private/fragile — shoot from public ground
+        theShot: >-
+          The Goldfield Hotel dead-on, symmetrical, filling the frame — then break it with a tight detail — a cracked sign, a rusted fender, peeling paint on siding. Shoot for a diptych.
+        images:
+          - file: goldfield-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Rick Cooper
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Goldfield_NV_-_street_scenery.jpg
+          - file: goldfield-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Rick Cooper
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Goldfield_NV_-_w_Goldfield_Hotel.jpg
+          - file: goldfield-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Jerry Willis from Tomé, NM, United States of America
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Florence_Hill_Mines,_Goldfield_NV.jpg
+          - file: goldfield-mood.webp
+            role: mood
+            source: wikimedia
+            artist: samiamx
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Goldfield_NV_Cemetery_-_52133105338.jpg
+
+      - id: carforest
+        name: Int'l Car Forest of the Last Church
+        badge: free · open
+        when: Morning · quick & strange
+        gps:
+          lat: 37.7047
+          lng: -117.2478
+          label: Crystal Ave, W edge of Goldfield
+          elev: 5700
+        description: >-
+          On the scrub at the west edge of Goldfield — **40+ cars, buses and a limo planted nose-down and stacked into towers**, every panel covered in spray-paint art. Cadillac Ranch by way of Mad Max. Free, always open, a graded-dirt lot — walk right in among them. Wild in any light; golden hour sets the paint and rust glowing, and it'd be eerie under the full moon if you're still nearby after dark.
+        directions:
+          - label: Light
+            value: Golden hour on the paint · harsh sun works too
+          - label: Glass
+            value: 16–35 · get in among them, shoot up
+          - label: Access
+            value: Short graded dirt — fine dry · pack out trash
+            warn: true
+        theShot: >-
+          Low and wide beneath a planted car so it looms against sky, graffiti reading edge-to-edge. Then a tight abstract of peeling paint on rusted steel. Sun-star behind a tower at golden hour.
+        images:
+          - file: carforest-wide.webp
+            role: wide
+            source: unsplash
+            artist: Quentin Burgess
+            license: Unsplash License
+            licenseUrl: https://unsplash.com/license
+            sourceUrl: https://unsplash.com/photos/brown-and-white-car-graffiti-G4hOp60XGrM
+          - file: carforest-shot.webp
+            role: shot
+            source: wikimedia
+            artist: sam may from Beaverton OR, USA
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:International_Car_Forest_of_the_Last_Church_(52133099798).jpg
+          - file: carforest-mood.webp
+            role: mood
+            source: unsplash
+            artist: Quentin Burgess
+            license: Unsplash License
+            licenseUrl: https://unsplash.com/license
+            sourceUrl: https://unsplash.com/photos/blue-white-and-red-graffiti-fS-pdfgEUoY
+
+      - id: rhyolite
+        name: Rhyolite & Goldwell
+        badge: the marquee
+        when: Late afternoon → sunset
+        gps:
+          lat: 36.9019
+          lng: -116.8281
+          label: townsite off NV-374
+          elev: 3796
+        description: >-
+          The payoff. A 1900s boomtown that emptied almost as fast as it filled, just off NV-374 near Beatty — the three-story **Cook Bank** shell, the glass-walled **Bottle House**, the old train depot standing alone in the flats. At the entrance, the **Goldwell Open Air Museum** — a cluster of ghostly white plaster figures ("The Last Supper") staring out over the desert. Sunset warms the ruins; then the ghosts glow under the full moon.
+        directions:
+          - label: Light
+            value: Sunset on the ruins · moonlight on the white figures
+          - label: Glass
+            value: 24–70 + wide · foreground ghost, ruin behind
+          - label: Access
+            value: Paved to both · free · open dusk-to-dawn
+        theShot: >-
+          Cook Bank's empty windows against a burning sky, low sun through the openings. Then a shrouded Goldwell figure close and low at blue hour, ruin or moon behind it. Come back after full dark for the plaster to go luminous.
+        images:
+          - file: rhyolite-wide.webp
+            role: wide
+            source: wikimedia
+            artist: samiamx
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Rhyolite_NV_Ghost_Town_-_52132067307.jpg
+          - file: rhyolite-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Terrisa Meeks from Las Vegas
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Rhyolite_Graffitti_on_Ruins_(23729545539).jpg
+          - file: rhyolite-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Marc Cooper from Woodland Hills, California
+            license: CC0
+            licenseUrl: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ghost_Rider_(23426287514).jpg
+          - file: rhyolite-detail.webp
+            role: detail
+            source: wikimedia
+            artist: samiamx
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Rhyolite_NV_Ghost_Town_-_52133328214.jpg
+
+      - id: rhyolite-alt
+        name: Goldwell Open Air Museum
+        optional: true
+        when: Blue hour → moonlit
+        gps:
+          lat: 36.8992
+          lng: -116.83
+          label: at the Rhyolite entrance, off NV-374
+          elev: 3780
+        description: >-
+          The open-air sculpture park at the Rhyolite turnoff — Charles Albert Szukalski's ghostly white plaster **"Last Supper"** figures and a towering cinderblock *Venus*, out on the open desert. Best at blue hour and under the full moon, when the plaster goes luminous.
+
+      - id: zabriskie
+        name: Zabriskie Point
+        badge: Death Valley
+        optional: true
+        when: Dawn only · big detour
+        gps:
+          lat: 36.42
+          lng: -116.8113
+          label: Zabriskie Point, CA-190
+          elev: 710
+        description: >-
+          If you overnight in Beatty instead and can make a dawn run, Death Valley's most famous overlook is ~30 min west on NV-374/CA-190 — **rippling golden badlands** below the sharp spine of Manly Beacon, the whole basin catching first light. It's a classic for a reason. **The catch is heat** — late September still routinely hits 100°F+ by mid-morning here, so this is a get-in-at-sunrise-and-leave stop, not a midday one.
+        directions:
+          - label: Light
+            value: Sunrise only — first light sets the badlands glowing
+          - label: Glass
+            value: 24–70 + tele to isolate the eroded ridgelines
+          - label: Heat
+            value: 100°F+ by mid-AM · dawn dash, carry water
+            warn: true
+        theShot: >-
+          Manly Beacon lit warm against the shadowed folds below, sun just cresting. Go long to pull out the erosion patterns, or wide to set the ridge into the whole basin. Be gone before the heat.
+        images:
+          - file: zabriskie-shot.webp
+            role: shot
+            source: unsplash
+            artist: john ko
+            license: Unsplash License
+            licenseUrl: https://unsplash.com/license
+            sourceUrl: https://unsplash.com/photos/brown-rocky-mountain-under-blue-sky-during-daytime-xBaNrpGz5Cw
+          - file: zabriskie-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Paul Hermans
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Death_Valley_Zabriskie_Point_met_Manly_Beacon_7-10-2012_14-41-39.JPG
+          - file: zabriskie-detail.webp
+            role: detail
+            source: unsplash
+            artist: Alistair Corden
+            license: Unsplash License
+            licenseUrl: https://unsplash.com/license
+            sourceUrl: https://unsplash.com/photos/brown-rocky-mountain-under-blue-sky-during-daytime-0J9YSYygXmw
+          - file: zabriskie-mood.webp
+            role: mood
+            source: unsplash
+            artist: Terry Granger
+            license: Unsplash License
+            licenseUrl: https://unsplash.com/license
+            sourceUrl: https://unsplash.com/photos/a-river-running-through-a-valley-surrounded-by-mountains-gOeFZ8aTaWE
+
+      - id: ashmeadows
+        name: Ash Meadows
+        badge: wildlife refuge
+        when: Afternoon · last frame
+        gps:
+          lat: 36.4406
+          lng: -116.3306
+          label: Crystal Reservoir / visitor ctr
+          elev: 2190
+        description: >-
+          An improbable **desert oasis** in the Amargosa hardpan near the California line — **turquoise spring pools** so clear they look tropical, fed by fossil water, with boardwalks over them and the Funeral Mountains behind. Crystal Reservoir mirrors the ranges; **Devils Hole** (the fenced blue slot that's home to one tiny endangered fish) is a short drive on. A cool, saturated closer before the run into Vegas. Midday high sun makes the blues glow.
+        directions:
+          - label: Light
+            value: High sun saturates the spring blue · calm = reflection
+          - label: Glass
+            value: 24–70 + polarizer · boardwalks as lead-in lines
+          - label: Access
+            value: Some graded-dirt refuge roads — fine dry · stay on boardwalks
+            warn: true
+        theShot: >-
+          Shoot down into a spring, turquoise water against pale desert, a boardwalk edge leading in. Polarize to cut surface glare and push the blue. At Crystal Reservoir, center the ridge on its own reflection.
+        images:
+          - file: ashmeadows-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ash_Meadows_Crystal_Reservoir_2.jpg
+          - file: ashmeadows-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ash_Meadows_Crystal_Reservoir_1.jpg
+          - file: ashmeadows-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Murray Foubister
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ash_Meadows_Nat%27l._Wildlife_Ref.,_NW_of_Pahrump,_Nev_-_(18103044781).jpg
+
+      - id: ashmeadows-alt
+        name: Devils Hole
+        optional: true
+        when: Detour · midday
+        gps:
+          lat: 36.4253
+          lng: -116.2911
+          label: detached Death Valley NP unit, E of the refuge
+          elev: 2360
+        description: >-
+          A fenced, water-filled limestone cavern — a detached unit of Death Valley National Park and the entire world range of the **Devils Hole pupfish**. You shoot it through the fence — deep blue water in pale rock, warning signs, a viewing platform. A strange, saturated coda a short drive east of the refuge.
+
+fieldNotes:
+  - heading: Full moon, not dark skies
+    body: >-
+      Late Sept 2026 lands on a **full moon (Sep 26)**, not the new moon — so this isn't a Milky-Way trip. Lean into it — moonlit ghost towns, silvered mine timbers and desert lit like day. If the core is the goal, shift **~2 weeks earlier or ~1 week later** and the same route goes properly dark.
+  - heading: Fuel & signal
+    body: >-
+      US-95 is genuinely empty. Top off at **Fallon, Hawthorne, Tonopah and Beatty** — long legs between, and no cell signal across most of it. Download maps and this guide before you leave pavement you know.
+  - heading: Heat by latitude
+    body: >-
+      The northern half is mild and the Tonopah night is **cold at 6,000 ft** — bring a warm layer. The southern low stops (Death Valley, Ash Meadows) still **bake past 100°F**; shoot them early and carry more water than you think.
+  - heading: Ghost-town etiquette
+    body: >-
+      Rhyolite and Goldfield are fragile and partly private — **no trespassing, take nothing**. Rhyolite is BLM "arrested decay." The Car Forest is free and open but has no services — **pack everything out**.
+  - heading: Hawthorne is an active base
+    body: >-
+      The bunker field is stunning but it's a live **Army depot**. Shoot only from public road shoulders — **no entering, no approaching the fence**, and keep gates and signage out of frame.
+  - heading: Rhythm
+    body: >-
+      Two golden hours plus a moonlit night is the target. Midday is for driving and flat-light texture work — Goldfield siding, the bunker grid, Walker Lake's saturated blue. Don't burn energy on harsh-noon landscapes.
+
+colophon:
+  artDirection: >-
+    Each stop leads with reference photographs of the actual place — tap any to view it full-screen. The light, glass and 'the shot' notes are the art direction — the look to chase at each stop, not a guarantee of the conditions you'll get.
+  photographers: >-
+    Nick Carver (large-format Americana, facades, weathered signage) · Michael Shainblum (desert & night skies) · Thomas Heaton (patient minimal landscape, single strong subject) · Nick Page (bold light, graphic compositions).
+  route: >-
+    Reno → US-95 S → Las Vegas. Timings assume a Saturday-morning departure and one night in Tonopah. Verify fuel hours, Death Valley / Tioga-style seasonal access, and any dirt-road or fire closures close to your dates.
