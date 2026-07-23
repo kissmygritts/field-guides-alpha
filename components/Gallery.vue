@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import type { GalleryImage } from '~/utils/derive'
+import { useLightbox } from '~/composables/useLightbox'
 
 // Gallery (handoff-spec §6.3): a stop's multi-photo grid. Each image renders via
 // <NuxtImg> from its absolute /guides/<slug>/<file> src (§7) at 640px q80 with a
 // retina (x2) variant — the IPX provider bakes those transforms at `nuxt generate`
 // (§7, SSR-on). No base64 anywhere. Below each photo: its role-label caption (a
 // rendering constant, §5) and per-image attribution (artist · source · license,
-// linked to the source page). Presentational — props in, markup out.
-defineProps<{ images: GalleryImage[] }>()
+// linked to the source page). Clicking a photo opens the shared full-screen
+// Lightbox at that index via useLightbox() (§6.6). Presentational — props in,
+// markup out; the only behavior is delegating the open to shared view state.
+const props = defineProps<{ images: GalleryImage[] }>()
+
+const { open } = useLightbox()
 </script>
 
 <template>
@@ -22,6 +27,11 @@ defineProps<{ images: GalleryImage[] }>()
         quality="80"
         loading="lazy"
         class="gallery-img"
+        role="button"
+        tabindex="0"
+        @click="open(props.images, i)"
+        @keydown.enter="open(props.images, i)"
+        @keydown.space.prevent="open(props.images, i)"
       />
       <figcaption class="gallery-cap">
         <span class="gallery-role">{{ img.roleLabel }}</span>
