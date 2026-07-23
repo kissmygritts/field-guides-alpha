@@ -8,6 +8,7 @@ import type { GalleryImage } from '~/utils/derive'
 // from the enclosing DaySection.
 defineProps<{
   num: string
+  anchor: string
   name: string
   badge?: string
   optional: boolean
@@ -23,7 +24,7 @@ defineProps<{
 </script>
 
 <template>
-  <article class="stop">
+  <article :id="anchor" class="stop">
     <div class="stop-body">
       <div class="stop-kicker">
         <span class="stop-num">

@@ -31,6 +31,7 @@ useHead({ title: guide.masthead.eyebrow })
       :meta="view.masthead.meta"
     />
     <div class="body">
+      <JumpNav :days="view.jumpNav" />
       <DaySection
         v-for="(day, i) in view.days"
         :key="i"
@@ -50,6 +51,7 @@ useHead({ title: guide.masthead.eyebrow })
         :end="view.moon.end"
         :dark-sites="view.moon.darkSites"
       />
+      <Credits :items="view.credits" />
     </div>
   </main>
 </template>
