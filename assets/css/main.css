@@ -1,0 +1,367 @@
+/*
+ * Global tokenized stylesheet (handoff-spec §6.4). Ports the current guide look
+ * (the ~236-line CSS block that used to be duplicated in every content.html) into
+ * one shared sheet: design tokens on :root, plain class selectors instead of the
+ * old `#trip-root` scope. Scoped component styles layer on top where needed.
+ *
+ * Day accent is data-derived and cannot defer to a later token sprint: the palette
+ * lives here as --day1..3; DaySection binds --accent from its day index and it
+ * cascades to the stops inside (§6.4). Authored YAML carries no color.
+ */
+
+:root {
+  --ink: #e8e4da;
+  --ink-dim: #a49f92;
+  --ink-faint: #6f6a5e;
+  --ground: #14140f;
+  --ground-2: #1c1c16;
+  --panel: #201f18;
+  --line: #35342a;
+  --sun: #e8a13c;
+  --sun-deep: #c76b2a;
+  --sky: #6f86a3;
+  --sage: #7f9b6d;
+  --alarm: #d8663f;
+
+  /* Fixed 3-color day-accent palette (§6.4): orange / blue / sage. */
+  --day1: #c76b2a;
+  --day2: #6f86a3;
+  --day3: #7f9b6d;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: "Avenir Next", "Segoe UI", -apple-system, system-ui, sans-serif;
+  --mono: "SFMono-Regular", "Roboto Mono", Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ground);
+}
+
+.guide {
+  color: var(--ink);
+  font-family: var(--sans);
+  background: var(--ground);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.guide a {
+  color: var(--sun);
+}
+
+.guide code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  color: var(--sun);
+}
+
+/* ---------- Masthead ---------- */
+.mast {
+  position: relative;
+  padding: 46px 30px 38px;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(120% 90% at 78% 8%, rgba(232, 161, 60, 0.14), transparent 55%),
+    linear-gradient(180deg, #191811, #14140f);
+  overflow: hidden;
+}
+.mast-ridge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 120px;
+  display: block;
+  opacity: 0.5;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--sun);
+  margin: 0 0 16px;
+  position: relative;
+  z-index: 2;
+}
+.mast h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(30px, 6vw, 52px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  max-width: 15ch;
+  position: relative;
+  z-index: 2;
+}
+.mast h1 em {
+  font-style: italic;
+  color: var(--sun);
+}
+.dek {
+  font-size: 15px;
+  color: var(--ink-dim);
+  max-width: 56ch;
+  margin: 0 0 22px;
+  position: relative;
+  z-index: 2;
+}
+.mast-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+  position: relative;
+  z-index: 2;
+}
+.mast-meta b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- Section wrap ---------- */
+.body {
+  padding: 8px 22px 60px;
+}
+
+/* ---------- Day header ---------- */
+.day-section {
+  display: block;
+}
+.day {
+  margin: 40px 0 6px;
+  padding: 20px 20px 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--ground-2), #17170f);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.day::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+}
+.day-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+.day-title {
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+.day-sub {
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  margin: 0;
+}
+.day-legs {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-dim);
+  background: rgba(0, 0, 0, 0.2);
+}
+.chip b {
+  color: var(--ink);
+}
+
+/* ---------- Stop card ---------- */
+.stop {
+  margin: 18px 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--panel);
+}
+.stop-body {
+  padding: 18px 20px 20px;
+}
+.stop-kicker {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 3px;
+}
+.stop-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.stop-num .opt-flag {
+  color: var(--sage);
+  margin-left: 6px;
+}
+.stop-when {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-left: auto;
+}
+.stop h3 {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+.stop h3 .opt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  border-radius: 5px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+.stop-locale {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin: -4px 0 10px;
+}
+.stop p {
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  margin: 0 0 12px;
+}
+.stop p b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.stop-teaser {
+  font-style: italic;
+}
+
+/* geo line (label · elevation · coordinates) */
+.stop-geo {
+  margin: -2px 0 11px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  align-items: baseline;
+  color: var(--ink-faint);
+}
+.stop-geo .elev {
+  color: var(--ink-faint);
+}
+
+/* the "shot" callout */
+.theshot {
+  margin-top: 12px;
+  padding: 10px 13px;
+  border-left: 2px solid var(--accent);
+  background: linear-gradient(90deg, rgba(199, 107, 42, 0.08), transparent);
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.theshot .theshot-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* ---------- Field list (shared: directions + day brief) ---------- */
+.field-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  overflow: hidden;
+  margin: 4px 0 0;
+}
+.field-list .field {
+  background: var(--ground-2);
+  padding: 8px 11px;
+}
+.field-list dt {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 3px;
+}
+.field-list .field-icon {
+  margin-right: 5px;
+  letter-spacing: 0;
+}
+.field-list dd {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.field-list .field.warn dd {
+  color: var(--alarm);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .body {
+    padding: 4px 14px 50px;
+  }
+  .mast {
+    padding: 34px 20px 30px;
+  }
+  .stop-when {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stop {
+    transition: border-color 0.25s ease;
+  }
+  .stop:hover {
+    border-color: var(--accent);
+  }
+}

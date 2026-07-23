@@ -13,6 +13,9 @@ export default defineNuxtConfig({
   // validated by the shared Zod schema, loaded via a typed composable.
   modules: [],
 
+  // Global tokenized stylesheet — ports the current guide look (§6.4).
+  css: ['~/assets/css/main.css'],
+
   // @rollup/plugin-yaml lets `content/*.yml` be imported as data at build time.
   vite: {
     plugins: [yaml()],
