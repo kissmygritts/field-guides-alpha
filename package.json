@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "sharp": "^0.33.5",
+    "yaml": "^2.9.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
