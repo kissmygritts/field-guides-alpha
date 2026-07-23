@@ -85,6 +85,14 @@ days:
           lng: -114.8000
           label: Dry Lake Bed
           elev: 5210
+        images:
+          - file: dry-lake-mood.webp
+            role: mood
+            source: unsplash
+            artist: B. Shooter
+            license: Unsplash License
+            licenseUrl: https://unsplash.com/license
+            sourceUrl: https://unsplash.com/photos/sample-playa
 
 fieldNotes:
   - heading: Water

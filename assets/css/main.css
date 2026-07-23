@@ -308,6 +308,51 @@ body {
   margin-bottom: 3px;
 }
 
+/* ---------- Gallery (per-stop photo grid, @nuxt/image) ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+.gallery-item {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ground-2);
+}
+.gallery-img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: var(--ground);
+}
+.gallery-cap {
+  padding: 7px 10px 8px;
+}
+.gallery-role {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3px;
+}
+.gallery-attr {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+.gallery-attr a {
+  color: var(--ink-dim);
+}
+
 /* ---------- Field list (shared: directions + day brief) ---------- */
 .field-list {
   display: grid;
