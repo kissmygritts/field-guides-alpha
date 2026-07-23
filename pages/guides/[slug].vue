@@ -53,5 +53,7 @@ useHead({ title: guide.masthead.eyebrow })
       />
       <Credits :items="view.credits" />
     </div>
+    <!-- One Lightbox per page (§6.6); every Gallery drives it via useLightbox(). -->
+    <Lightbox />
   </main>
 </template>

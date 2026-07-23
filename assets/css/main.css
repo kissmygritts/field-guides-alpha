@@ -328,6 +328,7 @@ body {
   height: 180px;
   object-fit: cover;
   background: var(--ground);
+  cursor: zoom-in;
 }
 .gallery-cap {
   padding: 7px 10px 8px;
@@ -351,6 +352,109 @@ body {
 }
 .gallery-attr a {
   color: var(--ink-dim);
+}
+
+/* ---------- Lightbox (§6.6: one full-screen viewer, teleported to body) ---------- */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(8, 8, 6, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lb-imgbox {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  max-width: 94vw;
+  max-height: 78vh;
+}
+.lb-img {
+  max-width: 94vw;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.6);
+}
+.lb-cap {
+  display: block;
+  margin-top: 13px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink);
+  max-width: 90vw;
+}
+.lb-cap .cr {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+  letter-spacing: 0.03em;
+}
+.lb-cap .cr a {
+  color: var(--ink-dim);
+}
+.lb-btn {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.42);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lb-btn:active {
+  background: rgba(0, 0, 0, 0.7);
+}
+.lb-close {
+  top: 16px;
+  right: 16px;
+}
+.lb-prev {
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lb-next {
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lb-tools {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.lb-dots {
+  display: flex;
+  gap: 6px;
+}
+.lb-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+}
+.lb-dots i.on {
+  background: var(--sun);
 }
 
 /* ---------- Field list (shared: directions + day brief) ---------- */
@@ -491,6 +595,19 @@ body {
   .stop-when {
     margin-left: 0;
     width: 100%;
+  }
+  .lb-imgbox,
+  .lb-img {
+    max-width: 96vw;
+    max-height: 74vh;
+  }
+  .lb-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .lb-close {
+    top: 10px;
+    right: 10px;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
