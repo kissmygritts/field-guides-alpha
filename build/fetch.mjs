@@ -19,18 +19,22 @@
 // finalize:   reads guides/<slug>/selections.json  { stop: [[ref, role], …] }
 //             ref is "<source>:<id>" (e.g. "unsplash:abc123"), the candidate number
 //             NN (resolved via work/index.json), or a legacy bare "File:Title.jpg".
-//             Fetches full-res, WebP-encodes (~640px), captures artist/license,
-//             writes guides/<slug>/manifest.json (base64, committed — no network
-//             needed to rebuild).
+//             Fetches each pick, sharp-encodes a bounded-source (~1600px) WebP to
+//             public/guides/<slug>/<stop>-<role>.webp, captures artist/license from
+//             the adapter (never guessed), and upserts those image entries into
+//             content/<slug>.yml — touching only `images:` arrays, never prose
+//             (handoff-spec §7). No base64; @nuxt/image renders the real files.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ADAPTERS, ORDER, refOf, parseRef } from './lib/sources.mjs';
 import { sleep } from './lib/wikimedia.mjs';
-import { toWebp } from './lib/images.mjs';
+import { toBoundedWebp } from './lib/images.mjs';
+import { imageFile, toImageEntry, upsertImages } from './lib/yml-images.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const GUIDES = path.resolve(__dirname, '..', 'guides');
+const ROOT = path.resolve(__dirname, '..');
+const GUIDES = path.join(ROOT, 'guides');
 const THROTTLE = 1400; // ms between downloads — be a polite API citizen
 const CAP = 36;        // candidates per stop across all sources
 
@@ -120,23 +124,43 @@ async function finalize() {
   const sel = readJson('selections.json');
   let index = {};
   try { index = JSON.parse(fs.readFileSync(path.join(dir, 'work', 'index.json'), 'utf8')); } catch { /* refs only */ }
-  const manifest = {};
+
+  const contentFile = path.join(ROOT, 'content', `${slug}.yml`);
+  if (!fs.existsSync(contentFile)) throw new Error(`no content file to upsert into: ${path.relative(ROOT, contentFile)}`);
+  const publicDir = path.join(ROOT, 'public', 'guides', slug);
+  fs.mkdirSync(publicDir, { recursive: true });
+
+  // Build the { stop: [image entry, …] } map finalize will upsert, and drop the
+  // bounded-source WebP files alongside it. The filename IS the upsert key, so a
+  // rare second image of one role gets a -2 suffix (imageFile).
+  const imagesByStop = {};
+  let count = 0;
+  let totalKb = 0;
   for (const [stop, items] of Object.entries(sel)) {
-    manifest[stop] = [];
+    imagesByStop[stop] = [];
+    const roleSeen = {};
     for (const [key, role] of items) {
       const { source, id } = parseRef(resolveKey(stop, key, index));
       const adapter = ADAPTERS[source];
-      const info = await adapter.imageInfo(id);
-      const enc = await toWebp(await adapter.bytes(info.thumburl));
-      manifest[stop].push({ role, source, title: info.title, artist: info.artist, license: info.license,
-        licenseurl: info.licenseurl, descurl: info.descurl, w: enc.w, h: enc.h, kb: enc.kb, b64: enc.b64 });
+      const info = await adapter.imageInfo(id, { thumb: 1600 });
+      const file = imageFile(stop, role, roleSeen[role] ?? 0);
+      roleSeen[role] = (roleSeen[role] ?? 0) + 1;
+      const enc = await toBoundedWebp(await adapter.bytes(info.thumburl));
+      fs.writeFileSync(path.join(publicDir, file), enc.data);
+      imagesByStop[stop].push(toImageEntry({ file, role, source, info }));
+      count++;
+      totalKb += enc.kb;
       console.log(`${stop.padEnd(12)} ${role.padEnd(7)} ${source.padEnd(9)} ${enc.w}x${enc.h} ${String(enc.kb).padStart(6)}KB  ${info.artist.slice(0, 24).padEnd(24)} ${info.license}`);
       await sleep(THROTTLE);
     }
   }
-  fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest));
-  const total = Object.values(manifest).flat().reduce((s, i) => s + i.kb, 0);
-  console.log(`\nmanifest.json: ${(total / 1024).toFixed(2)} MB across ${Object.values(manifest).flat().length} images`);
+
+  // Surgically upsert the attribution into content/<slug>.yml (prose untouched).
+  const updated = upsertImages(fs.readFileSync(contentFile, 'utf8'), imagesByStop);
+  fs.writeFileSync(contentFile, updated);
+
+  console.log(`\n${path.relative(ROOT, publicDir)}/: ${count} images, ${(totalKb / 1024).toFixed(2)} MB source`);
+  console.log(`→ upserted images into ${path.relative(ROOT, contentFile)}`);
 }
 
 await (cmd === 'candidates' ? candidates() : finalize());

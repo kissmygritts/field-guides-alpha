@@ -8,6 +8,29 @@ import sharp from 'sharp';
 export const MAXW = 640;
 export const MAXH = 720;
 
+// Bounded-source pre-pass for the Nuxt/@nuxt/image pipeline (handoff-spec §7).
+// A different role from toWebp: this *tames the source* (bounds it to ~1600px so
+// git never holds a multi-MB original) rather than *producing the shipped byte*
+// — IPX bakes the 640/q80 (+retina) delivery variants at build time. No hard KB
+// cap here; withoutEnlargement keeps small sources at native size.
+export const SOURCE_MAXDIM = 1600;
+
+// Buffer -> { data, w, h, kb } as a bounded WebP (the file written to
+// public/guides/<slug>/<stop>-<role>.webp). `data` is the raw WebP bytes.
+export async function toBoundedWebp(buf, { maxDim = SOURCE_MAXDIM, quality = 80 } = {}) {
+  const out = await sharp(buf)
+    .rotate()
+    .resize({ width: maxDim, height: maxDim, fit: 'inside', withoutEnlargement: true })
+    .webp({ quality, effort: 6 })
+    .toBuffer({ resolveWithObject: true });
+  return {
+    data: out.data,
+    w: out.info.width,
+    h: out.info.height,
+    kb: Math.round((out.data.length / 1024) * 10) / 10,
+  };
+}
+
 // Buffer -> { b64, w, h, kb } as WebP, capped and quality-managed.
 export async function toWebp(buf, { maxW = MAXW, maxH = MAXH, quality = 80, capKb = 120, minQuality = 68 } = {}) {
   const base = sharp(buf).rotate().resize({ width: maxW, height: maxH, fit: 'inside', withoutEnlargement: true });

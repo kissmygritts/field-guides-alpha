@@ -12,6 +12,8 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
-    include: ['test/**/*.test.ts'],
+    // .ts covers the app/data layer; .mjs covers the plain-JS build/ toolchain
+    // (finalize's yml + image helpers) with the same alias + yaml plugin.
+    include: ['test/**/*.test.ts', 'test/**/*.test.mjs'],
   },
 })
