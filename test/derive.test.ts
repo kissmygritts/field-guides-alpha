@@ -35,7 +35,7 @@ describe('deriveGuideView', () => {
         },
       ],
     })
-    return deriveGuideView(guideSchema.parse(input))
+    return deriveGuideView(guideSchema.parse(input), 'sample')
   }
 
   it('passes masthead text through unchanged (raw thin-prose, rendered downstream)', () => {
@@ -76,5 +76,28 @@ describe('deriveGuideView', () => {
     expect(brief.map((b) => b.label)).toEqual(['Fuel', 'Signal'])
     expect(brief[1]!.warn).toBe(true)
     expect(brief[0]!.icon).toBe('⛽')
+  })
+
+  it('derives each stop image into a gallery view (absolute src + role label)', () => {
+    const v = view()
+    const img = v.days[0]!.stops[0]!.images[0]!
+    // Absolute-path src joined from the slug + bare filename (§7).
+    expect(img.src).toBe('/guides/sample/trailhead-wide.webp')
+    // Role label is the rendering constant, not authored data (§5).
+    expect(img.roleLabel).toBe('the place')
+    expect(img.role).toBe('wide')
+    // Attribution carried through for per-image credits.
+    expect(img.artist).toBe('A. Photographer')
+    expect(img.source).toBe('wikimedia')
+    expect(img.license).toBe('CC BY-SA 4.0')
+    expect(img.sourceUrl).toBe(
+      'https://commons.wikimedia.org/wiki/File:Sample.jpg',
+    )
+  })
+
+  it('gives a stop with no images an empty gallery', () => {
+    const v = view()
+    // The second day's single stop (factory push) has no images.
+    expect(v.days[1]!.stops[0]!.images).toEqual([])
   })
 })

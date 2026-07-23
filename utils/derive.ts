@@ -1,5 +1,46 @@
 import type { FieldItem, Gps, Guide, Image } from '~/schema/guide'
 
+// Image role label (handoff-spec §5): a RENDERING CONSTANT mapping the `image.role`
+// enum to its caption. Never per-guide data — the yml carries only the role enum.
+export const ROLE_LABELS: Record<Image['role'], string> = {
+  wide: 'the place',
+  shot: "toward 'the shot'",
+  detail: 'detail',
+  mood: 'mood · light',
+}
+
+/** Presentational props for one `Gallery` image (handoff-spec §6.3). */
+export interface GalleryImage {
+  /** Absolute `/guides/<slug>/<file>` path — IPX-optimizable (§7). */
+  src: string
+  role: Image['role']
+  roleLabel: string
+  artist: string
+  source: Image['source']
+  license: string
+  licenseUrl?: string
+  /** Source/description page — the attribution link. */
+  sourceUrl: string
+}
+
+/**
+ * Derive one {@link GalleryImage} from an authored {@link Image}: join the bare
+ * `file` to the absolute `/guides/<slug>/` path (§7) and attach the role label
+ * rendering constant (§5). Attribution fields pass through for per-image credits.
+ */
+export function galleryImage(slug: string, img: Image): GalleryImage {
+  return {
+    src: `/guides/${slug}/${img.file}`,
+    role: img.role,
+    roleLabel: ROLE_LABELS[img.role],
+    artist: img.artist,
+    source: img.source,
+    license: img.license,
+    licenseUrl: img.licenseUrl,
+    sourceUrl: img.sourceUrl,
+  }
+}
+
 // Derived data (handoff-spec §5): everything below is COMPUTED from the authored
 // schema — the yml never carries `Day N · Weekday`, dotted stop numbers, or the
 // day-accent index. The page (the one smart component, §6.2) calls
@@ -32,7 +73,7 @@ export interface StopView {
   gps: Gps
   directions: FieldItem[]
   theShot?: string
-  images: Image[]
+  images: GalleryImage[]
 }
 
 /** Plain props for a `DaySection` — derived, presentational-ready. */
@@ -60,10 +101,12 @@ export interface GuideView {
 
 /**
  * Turn a validated {@link Guide} into a flat, presentational view model: derive
- * per-day labels and per-stop numbers, the accent index, and normalize optional
- * flags. No image/moon/jump-nav data yet (later tickets) — text structure only.
+ * per-day labels and per-stop numbers, the accent index, normalize optional
+ * flags, and derive each stop's gallery images (absolute src + role label). The
+ * `slug` joins bare image filenames to their `/guides/<slug>/` path (§7). No
+ * moon/jump-nav data yet (later tickets).
  */
-export function deriveGuideView(guide: Guide): GuideView {
+export function deriveGuideView(guide: Guide, slug: string): GuideView {
   return {
     masthead: {
       eyebrow: guide.masthead.eyebrow,
@@ -91,7 +134,7 @@ export function deriveGuideView(guide: Guide): GuideView {
         gps: stop.gps,
         directions: stop.directions,
         theShot: stop.theShot,
-        images: stop.images,
+        images: stop.images.map((img) => galleryImage(slug, img)),
       })),
     })),
   }

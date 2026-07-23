@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { FieldItem, Gps, Image } from '~/schema/guide'
+import type { FieldItem, Gps } from '~/schema/guide'
+import type { GalleryImage } from '~/utils/derive'
 
 // StopCard (handoff-spec §6.3): kicker (num / optional / when), title (+ badge and
-// locale), description, geo line, directions via FieldList, and the "shot" callout.
-// Images/Gallery arrive in a later ticket — the `images` prop is accepted now but
-// not yet rendered. Presentational — props in, markup out; `--accent` is inherited
+// locale), description, geo line, directions via FieldList, the "shot" callout, and
+// the photo Gallery. Presentational — props in, markup out; `--accent` is inherited
 // from the enclosing DaySection.
 defineProps<{
   num: string
@@ -18,7 +18,7 @@ defineProps<{
   gps: Gps
   directions: FieldItem[]
   theShot?: string
-  images: Image[]
+  images: GalleryImage[]
 }>()
 </script>
 
@@ -51,6 +51,8 @@ defineProps<{
         <span class="theshot-tag">The shot</span>
         <span v-html="renderInline(theShot)" />
       </div>
+
+      <Gallery v-if="images.length" :images="images" />
     </div>
   </article>
 </template>

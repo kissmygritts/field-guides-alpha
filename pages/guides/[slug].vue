@@ -15,8 +15,9 @@ if (!guide) {
   })
 }
 
-// Derived, never authored: Day N · Weekday, dotted stop numbers, accent index.
-const view = deriveGuideView(guide)
+// Derived, never authored: Day N · Weekday, dotted stop numbers, accent index,
+// and each stop's gallery images (absolute /guides/<slug>/ src + role label).
+const view = deriveGuideView(guide, slug.value)
 
 useHead({ title: guide.masthead.eyebrow })
 </script>
