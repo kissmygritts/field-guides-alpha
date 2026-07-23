@@ -1,4 +1,5 @@
 import type { FieldItem, Gps, Guide, Image } from '~/schema/guide'
+import { moonPhaseLabel, moonWindowLabel } from '~/utils/moon'
 
 // Image role label (handoff-spec §5): a RENDERING CONSTANT mapping the `image.role`
 // enum to its caption. Never per-guide data — the yml carries only the role enum.
@@ -88,6 +89,15 @@ export interface DayView {
   stops: StopView[]
 }
 
+/** Plain props for the dumb `MoonPanel` — derived moon data (handoff-spec §6.3). */
+export interface MoonView {
+  windowLabel: string
+  phaseLabel: string
+  start: Date
+  end: Date
+  darkSites: string
+}
+
 /** The full view model the guide page binds to the component tree. */
 export interface GuideView {
   masthead: {
@@ -97,6 +107,7 @@ export interface GuideView {
     meta: string[]
   }
   days: DayView[]
+  moon: MoonView
 }
 
 /**
@@ -137,5 +148,14 @@ export function deriveGuideView(guide: Guide, slug: string): GuideView {
         images: stop.images.map((img) => galleryImage(slug, img)),
       })),
     })),
+    // Window + phase labels are computed from the trip dates at build time and
+    // baked into props — the yml never authors them (§5, §6.5).
+    moon: {
+      windowLabel: moonWindowLabel(guide.moon.start, guide.moon.end),
+      phaseLabel: moonPhaseLabel(guide.moon.start, guide.moon.end),
+      start: guide.moon.start,
+      end: guide.moon.end,
+      darkSites: guide.darkSites,
+    },
   }
 }

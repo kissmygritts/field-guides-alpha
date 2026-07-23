@@ -100,4 +100,19 @@ describe('deriveGuideView', () => {
     // The second day's single stop (factory push) has no images.
     expect(v.days[1]!.stops[0]!.images).toEqual([])
   })
+
+  it('derives the moon window + phase from the trip dates, never authored', () => {
+    const v = view()
+    // Factory window is 2026-09-17..2026-09-18 (both mid-month).
+    expect(v.moon.windowLabel).toBe('mid September')
+    expect(v.moon.phaseLabel).toBeTypeOf('string')
+    expect(v.moon.phaseLabel.length).toBeGreaterThan(0)
+  })
+
+  it('passes moon dates + dark-sites note straight through to the panel props', () => {
+    const v = view()
+    expect(v.moon.start).toEqual(new Date('2026-09-17'))
+    expect(v.moon.end).toEqual(new Date('2026-09-18'))
+    expect(v.moon.darkSites).toBe('Great Basin skies.')
+  })
 })
