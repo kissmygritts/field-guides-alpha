@@ -1,0 +1,719 @@
+# 2026-vegas-sandiego — migrated from guides/2026-vegas-sandiego/config.json
+# (structure) + hand-ported prose.
+#
+# STRUCTURE (moon, darkSites, gps, day/stop membership, elev→number, alt promotion)
+# was generated from guides/2026-vegas-sandiego/config.json with:
+#     node build/config-to-yml.mjs 2026-vegas-sandiego
+# Two alts are promoted to sibling optional stops: Cima Dome summit (cima-alt) and
+# Jumbo Rocks · Skull Rock (joshuatree-alt). This guide has no `feed` key.
+# PROSE (masthead, descriptions, directions, theShot, day themes/briefs/legs,
+# fieldNotes, colophon) is hand-ported from guides/2026-vegas-sandiego/content.html
+# — the copy IS the product (non-negotiable #4). The SVG stop-visual placeholders
+# are dropped; galleries come from finalize (public/guides/<slug>/ + images: below).
+masthead:
+  eyebrow: Shooting Script · Overland · Mid-October
+  title: Las Vegas to San Diego, the *back way*
+  dek: >-
+    Two days southwest that barely touch a freeway. Skip I-15 entirely: drop down US-95 into the volcanic heart of the Mojave National Preserve, run a forgotten stretch of Route 66, cross the badlands of Anza-Borrego, then climb the pine crest above San Diego and coast down after dark. Built around the ends of the day, with dark desert nights between.
+  meta:
+    - ~600 mi total
+    - 2 nights · Preserve + 29 Palms
+    - Depart Fri PM
+    - Route no I-15
+    - Waxing-crescent moon · dark late
+  # Saturday is the first full shooting day (Fri-evening departure) — drives the
+  # derived "Day N · Weekday" labels (Sat, Sun).
+  startDate: 2026-10-17
+
+moon:
+  start: 2026-10-16
+  end: 2026-10-18
+
+darkSites: Mojave Preserve (Kelso, Hole-in-the-Wall), Amboy on Route 66, and Anza-Borrego
+
+days:
+  - theme: Preserve & Route 66
+    route: Vegas → Amboy → Twentynine Palms
+    summary: >-
+      Slip out of Vegas Friday night, camp in the Mojave Preserve, and spend Saturday working its volcanic middle — a granite dome, a red-rock slot, a mission depot, booming dunes — then drop onto Route 66 for a cinder cone and the loneliest neon in California. ~230 mi.
+    legs:
+      - at: Fri PM
+        text: depart Vegas · US-95 S
+      - at: dawn
+        text: Cima Dome
+      - at: AM
+        text: Hole-in-the-Wall
+      - at: midday
+        text: Kelso Depot + Dunes
+      - at: pm
+        text: Amboy Crater
+      - at: dusk
+        text: Roy's → 29 Palms
+    brief:
+      - label: Fuel
+        icon: "⛽"
+        value: Fill up in Las Vegas — the Preserve has no gas at all. Next reliable pumps are Baker or Ludlow, then Twentynine Palms.
+      - label: Signal
+        icon: "📵"
+        value: Dead across the entire Preserve and Route 66. Download maps + this guide before you leave Vegas.
+      - label: Water
+        icon: "💧"
+        value: Carry 6+ L each — no potable water at any Preserve stop, and October still hits ~90°F midday on the low flats.
+      - label: Drive
+        icon: "🚗"
+        value: ~230 mi · much of it graded dirt · 5–6 hr moving + stops
+      - label: Camp
+        icon: "▲"
+        value: >-
+          Overnight **Twentynine Palms** (motels + the Joshua Tree gateway), or dispersed on Amboy Road / back in the Preserve if you'd rather stay under stars. Fuel up and eat before you turn in — Sunday is the long day. The crescent moon sets early, so if it's clear, walk out from Roy's sign for stars before you go.
+    stops:
+      - id: cima
+        name: Cima Dome & Teutonia Peak
+        badge: Mojave Preserve
+        optional: true
+        when: Dawn · first frame
+        gps:
+          lat: 35.2717
+          lng: -115.5407
+          label: Teutonia Peak TH, Cima Rd
+          elev: 5220
+        description: >-
+          A near-perfect granite dome — 75 square miles of it, rising so symmetrically it reads as almost engineered — with the boulder-stacked Teutonia Peak trail picking through what was the world's densest **Joshua-tree forest**. Honest note: the 2020 **Dome Fire** burned much of that forest, so today you're shooting survivors and silvered snags among the monzogranite, not the endless green army it was. Still a quiet, strange place to open the trip. Low sun rakes the boulders and backlights the Joshuas that made it.
+        directions:
+          - label: Light
+            value: First light · low sun backlighting the Joshuas
+          - label: Glass
+            value: 24–70 · wide to set the dome's curve
+          - label: Access
+            value: Paved Cima Rd + short trail · fire-scarred
+        theShot: >-
+          A lone surviving Joshua tree rim-lit at sunrise, stacked granite boulders behind it, the dome's clean arc on the horizon. Then a stark minimal — a single burned snag against boulder and sky.
+        images:
+          - file: cima-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Cima_Dome_sunset_1.jpg
+          - file: cima-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Cima_Dome_landscape_1.jpg
+          - file: cima-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Yucca_brevifolia_5.jpg
+          - file: cima-mood.webp
+            role: mood
+            source: wikimedia
+            artist: NPS
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Burned_landscape_of_Cima_Dome_(6c192ddd-aa1b-4d0e-8296-dd5496a11591).JPG
+
+      - id: cima-alt
+        name: Cima Dome summit
+        optional: true
+        when: Extra · boulder scramble
+        gps:
+          lat: 35.3003
+          lng: -115.525
+          label: high point above the Teutonia Peak trail
+          elev: 5745
+        description: >-
+          The high point above the Teutonia Peak trail — a short boulder scramble up onto the crown of the dome for the widest read of its arc and the burned Joshua forest below. A worthwhile add-on if the dawn light holds.
+
+      - id: holeinthewall
+        name: Hole-in-the-Wall
+        when: Morning
+        gps:
+          lat: 35.0458
+          lng: -115.3931
+          label: Hole-in-the-Wall, Black Canyon Rd
+          elev: 4270
+        description: >-
+          Rust-red volcanic rock pocked with hundreds of wind-and-gas hollows — debris from a violent eruption 18 million years ago. The **Rings Trail** drops you down through a slot in the rhyolite on iron rings bolted to the stone, walls closing overhead into **Banshee Canyon**. The oxidized tuff glows when low sun hits it. One of the Preserve's most graphic, texture-dense stops — Swiss-cheese walls from every angle.
+        directions:
+          - label: Light
+            value: Low sun ignites the red rock · flat is fine for the pockets
+          - label: Glass
+            value: 16–35 in the slot · 70–200 for wall texture
+          - label: Access
+            value: Graded dirt (Black Canyon Rd) + ring scramble
+        theShot: >-
+          Down inside Banshee Canyon: pocked red walls curving around you, the iron rings or a figure for scale. Then tight abstracts of the tafoni — pockets within pockets, warm on cool.
+        images:
+          - file: holeinthewall-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Mojave_Preserve_Wildhorse_Canyon_2.jpg
+          - file: holeinthewall-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Wilson44691
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:HoleInTheWallTuff.JPG
+          - file: holeinthewall-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Table_Mountain_from_Hole-in-the-Wall_1.jpg
+
+      - id: kelsodepot
+        name: Kelso Depot
+        badge: 1924 · restored
+        when: Midday · roadside
+        gps:
+          lat: 35.0114
+          lng: -115.6534
+          label: Kelso Depot, Kelbaker Rd
+          elev: 2126
+        description: >-
+          A gleaming white **Spanish-mission railroad depot** marooned in the middle of the desert — red-tile roof, arcaded veranda, built 1924 for the Union Pacific and now the Preserve's visitor center. Palms, a long empty platform, freight trains still grinding past on the mainline. Pure Americana: architectural symmetry against raw desert, the Providence Mountains behind. Works even under flat midday light — you're shooting the building, not the sky.
+        directions:
+          - label: Light
+            value: Front light on the white facade AM · warm side-light PM
+          - label: Glass
+            value: 24–70 · symmetry, arches, receding veranda
+          - label: Access
+            value: Paved (Kelbaker Rd) — any car
+        theShot: >-
+          The depot dead-on and symmetrical, palms framing, red tile against blue. Then the arcade receding down the veranda in hard shadow — and hold for a freight stack blurring past behind it.
+        images:
+          - file: kelsodepot-wide.webp
+            role: wide
+            source: wikimedia
+            artist: w:User:Pretzelpaws
+            license: CC BY-SA 3.0
+            licenseUrl: http://creativecommons.org/licenses/by-sa/3.0/
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Kelso_railroad_depot.jpg
+          - file: kelsodepot-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Joshua Tree National Park
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Kelso_Depot_Visitor_Center_in_Mojave_National_Preserve_(51175194861).jpg
+          - file: kelsodepot-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Stan Shebs
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Kelso_Depot_4.jpg
+          - file: kelsodepot-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Joshua Tree National Park
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Kelso_Depot_Mojave_Preserve_(49030556192).jpg
+
+      - id: kelsodunes
+        name: Kelso Dunes
+        when: Afternoon → golden hour
+        gps:
+          lat: 34.8925
+          lng: -115.7108
+          label: Kelso Dunes TH, off Kelbaker Rd
+          elev: 2650
+        description: >-
+          Six hundred feet of rose-gold sand piled into one of the tallest dune fields in the Mojave — and when you slide down the steep lee faces they **boom**, a low aircraft-engine drone from the shearing sand. A short walk off the trailhead puts you onto clean, unfootprinted ridgelines. This is your pure-form chapter: line, shadow, ripple, nothing else. Save it for the last hour, when raking light cuts the crests into knife-edges.
+        directions:
+          - label: Light
+            value: Last hour — raking light for ridgelines & ripples
+          - label: Glass
+            value: 70–200 to compress crests · wide for the sweep
+          - label: Access
+            value: Graded dirt to TH + ~1.5 mi soft-sand walk
+            warn: true
+        theShot: >-
+          A single sinuous crest dividing light from shadow, wind ripples leading in, not a footprint in frame. Go long to stack ridge on ridge; wait out the last low sun for the deepest shadow.
+        images:
+          - file: kelsodunes-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Joshua Tree National Park
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Kelso_Dunes_in_the_Mojave_Preserve_(49532336737).jpg
+          - file: kelsodunes-wide.webp
+            role: wide
+            source: wikimedia
+            artist: John Fowler from Placitas, NM, USA
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Kelso_Dunes_(47054805321).jpg
+          - file: kelsodunes-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Murray Foubister
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:In_the_Mojave_desert,_near_Kelso,_California_-_a_visit_to_the_Kelso_dunes_-_sand_ripples_(13843366605).jpg
+          - file: kelsodunes-mood.webp
+            role: mood
+            source: wikimedia
+            artist: John Fowler from Placitas, NM, USA
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Kelso_Dunes_Panorama_(47350732631).jpg
+
+      - id: amboycrater
+        name: Amboy Crater
+        badge: Route 66
+        when: Late afternoon
+        gps:
+          lat: 34.5486
+          lng: -115.7864
+          label: Amboy Crater, Route 66
+          elev: 980
+        description: >-
+          A textbook **250-ft cinder cone** sitting alone on a black lava field beside Route 66, last erupted maybe 10,000 years ago. A trail crosses the basalt to a breach in the west wall and climbs to the rim; all around, the flow is a dead-flat sea of black rock. Shoot it late — low sun models the cone's symmetry and throws the lava field into long shadow. Midday here is brutal and flat, so don't waste that light on it.
+        directions:
+          - label: Light
+            value: Late afternoon models the cone · skip midday
+          - label: Glass
+            value: 24–70 · wide for the lava sea, tele to isolate the cone
+          - label: Access
+            value: Paved lot off Route 66 + exposed lava trail
+            warn: true
+        theShot: >-
+          The symmetrical cone across the black flow, warm rim-light, a thread of trail leading in for scale. Then get low and shoot the cracked basalt into the sun for texture and a sun-star.
+        images:
+          - file: amboycrater-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Daniel Mayer (mav)
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Amboy_Crater_closeup.JPG
+          - file: amboycrater-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Photographersnature
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Amboy_Crater_at_Dusk.jpg
+          - file: amboycrater-detail.webp
+            role: detail
+            source: wikimedia
+            artist: blmcalifornia
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Amboy_Crater_(26354967583).jpg
+          - file: amboycrater-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Bob Wick, Bureau of Land Management
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Amboy_Crater_Area_of_Critical_Environmental_Concern,_California_(15039266973).jpg
+
+      - id: roys
+        name: Roy's Motel & Café
+        badge: the sign
+        when: Dusk · blue hour
+        gps:
+          lat: 34.5583
+          lng: -115.7442
+          label: Roy's, Amboy · Route 66
+          elev: 640
+        description: >-
+          The great googie boomerang sign of **Roy's** — Amboy's 1950s Route 66 outpost, population near zero, the most photographed neon in the Mojave. The soaring pylon, the shuttered café, a rusted gas pump, and the dead-straight Mother Road running off to a vanishing point. They relight the neon on occasion; even dark, the sign against a blue-hour or star-filled sky is the frame. This is your last stop before the run down Amboy Road to Twentynine Palms.
+        directions:
+          - label: Light
+            value: Blue hour into full dark · neon or stars behind the pylon
+          - label: Glass
+            value: 24–70 + wide · tripod for the dark frames
+          - label: Access
+            value: Paved, right on Route 66
+        theShot: >-
+          The boomerang pylon dead-center against a deep post-sunset blue, Route 66 leading straight to it. Later, if it's dark and clear, the sign silhouetted under stars. A rusted pump detail for the diptych.
+        images:
+          - file: roys-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Dietmar Rabich
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Amboy_(California,_USA)_--_2012_--_4.jpg
+          - file: roys-shot.webp
+            role: shot
+            source: wikimedia
+            artist: John Margolies
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Roy%27s_Motel_sign,_Route_66,_Amboy,_California_LCCN2017703549.tif
+          - file: roys-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Domenico Convertini from Zurich, Schweiz
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Route_66_to_Amargosa_Valley,_California,_USA_(52667372913).jpg
+          - file: roys-mood.webp
+            role: mood
+            source: wikimedia
+            artist: inkknife_2000 (7.5 million views +)
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Along_Old_Rt._66,_Amboy,_CA,_Roy%27s_Cafe_2005_(6595774387).jpg
+
+  - theme: Badlands to the Pines
+    route: 29 Palms → Anza-Borrego → San Diego
+    summary: >-
+      The long day. Traverse Joshua Tree at dawn, take the one unavoidable freeway hop, then drop into the Anza-Borrego badlands — a Grand-Canyon overlook and a slot canyon — before climbing the switchbacks to apple-pie Julian and running the pine crest down into San Diego after dark. ~250 mi.
+    legs:
+      - at: dawn
+        text: Joshua Tree traverse
+      - at: "—"
+        text: brief I-10 hop
+      - at: midday
+        text: The Slot
+      - at: pm
+        text: Font's Point
+      - at: golden
+        text: Montezuma Grade
+      - at: dusk
+        text: Julian
+      - at: dark
+        text: Sunrise Hwy → San Diego
+    brief:
+      - label: Fuel
+        icon: "⛽"
+        value: Fill in Twentynine Palms before the park; then Chiriaco Summit / Indio on I-10. Borrego Springs and Julian both have gas.
+      - label: Signal
+        icon: "📵"
+        value: Dead in Joshua Tree and across Anza-Borrego; returns on I-10 and in Julian.
+      - label: Heat → Cold
+        icon: "🏜"
+        value: Anza-Borrego's floor bakes past 90°F midday; Julian and Mt. Laguna sit at 4,000–6,000 ft and turn cold after dark — pack a real layer.
+      - label: Drive
+        icon: "🚗"
+        value: ~250 mi · one ~35-mi stint on I-10 is the only freeway · plan the whole day
+      - label: Finish
+        icon: "◆"
+        value: >-
+          S-1 down off the mountains to I-8, then west into **San Diego** for Sunday night — arriving well after dark, salt air finally replacing desert dust. Roughly 600 miles and two golden days out of Las Vegas, and you barely touched a freeway the whole way.
+    stops:
+      - id: joshuatree
+        name: Joshua Tree
+        badge: north → south traverse
+        optional: true
+        when: Dawn · traverse
+        gps:
+          lat: 33.7442
+          lng: -115.9267
+          label: Cholla Garden, Pinto Basin Rd
+          elev: 2250
+        description: >-
+          Enter at Twentynine Palms and drive the park's spine south to Cottonwood — the fastest low-road link toward the coast, and a worthy first frame either way. Up high: the namesake trees and monzogranite jumbles around **Jumbo Rocks** and Skull Rock. Dropping into the Pinto Basin, the **Cholla Cactus Garden** lights up like fur when low sun backlights ten thousand spines. Shoot the cholla at first light, grab the rocks on the way through, then keep moving — the day is long.
+        directions:
+          - label: Light
+            value: First light backlighting the cholla · long shadows in the rocks
+          - label: Glass
+            value: 24–70 · macro / tele for cholla halos
+          - label: Access
+            value: Paved park road end-to-end · entrance fee
+        theShot: >-
+          The Cholla Garden backlit at sunrise, every spine a halo, one plant isolated against shadowed hills. Up in the rocks: a Joshua tree against a granite pile, hard dawn shadow raking across.
+        images:
+          - file: joshuatree-shot.webp
+            role: shot
+            source: wikimedia
+            artist: MistyEyedKid
+            license: CC BY 4.0
+            licenseUrl: https://creativecommons.org/licenses/by/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:A_field_of_Cholla_reach_for_the_western_skies_of_California.jpg
+          - file: joshuatree-wide.webp
+            role: wide
+            source: wikimedia
+            artist: David Balmer
+            license: CC BY 3.0
+            licenseUrl: https://creativecommons.org/licenses/by/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Cholla_Cactus_Garden_1_-_panoramio.jpg
+          - file: joshuatree-detail.webp
+            role: detail
+            source: wikimedia
+            artist: NPS Photo
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Be_careful_when_walking_around_in_the_park,_especially_at_the_Cholla_Cactus_Garden._Cholla_often_drop_very_sharp_balls_that_can_(80cd7f32-4c27-4b35-89fa-bbbad2b8f4c7).jpg
+          - file: joshuatree-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Martin Haeusler
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Cholla_Cactus_Garden_(12.2010)_-_panoramio.jpg
+
+      - id: joshuatree-alt
+        name: Jumbo Rocks · Skull Rock
+        optional: true
+        when: On the traverse · quick stop
+        gps:
+          lat: 33.9944
+          lng: -116.0636
+          label: Jumbo Rocks, upper park road
+          elev: 4400
+        description: >-
+          The monzogranite heart of the park's high country — piled boulder domes around **Jumbo Rocks** and the eroded hollows of **Skull Rock**, right off the road on the way south. Hard dawn shadow rakes across the granite; grab it in passing before you drop to the cholla.
+
+      - id: theslot
+        name: The Slot
+        badge: Anza-Borrego
+        when: Midday · flat-light friendly
+        gps:
+          lat: 33.2189
+          lng: -116.147
+          label: The Slot, Borrego Mtn
+          elev: 780
+        description: >-
+          A narrow sandstone slot you walk down into — walls pinching to shoulder-width overhead, a natural **rock bridge** spanning the gap, soft light bouncing down sculpted mudstone. Unlike the badland overlooks, a slot shoots **best under flat midday sun**, when top light filters down without blowing the rim — so this is the stop to drop into when you roll in around noon. Short, easy, out of the wind, and completely unlike anything else on the drive.
+        directions:
+          - label: Light
+            value: Midday soft top-light is ideal · avoid hard low sun
+          - label: Glass
+            value: 16–35, vertical · the walls do the composing
+          - label: Access
+            value: Sandy access road + short walk · never in flash-flood weather
+            warn: true
+        theShot: >-
+          Vertical, looking up the pinched walls to a ribbon of sky, the rock bridge crossing overhead. Then a tight study of the wind-carved flutes where the bounced light goes warm.
+        images:
+          - file: theslot-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Chris Hunkeler from Carlsbad, California, USA
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Slot_Middle_(33433272594).jpg
+          - file: theslot-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Chris Hunkeler from Carlsbad, California, USA
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Slot_Top_(33433279884).jpg
+
+      - id: fontspoint
+        name: Font's Point
+        badge: Anza-Borrego
+        when: Late afternoon · raking light
+        gps:
+          lat: 33.2766
+          lng: -116.2803
+          label: Font's Point, wash off S-22
+          elev: 1290
+        description: >-
+          "California's Grand Canyon" — an abrupt cliff-edge over the Borrego Badlands, a chaos of eroded mudstone ridges and washes falling away toward the Salton basin. Raw and enormous. Low, raking light carves the badland fins into three dimensions; harsh overhead sun flattens them to mush — so if you got here midday, do The Slot first and circle back for the **late side-light**. The four miles in are a soft-sand wash: air down, 4WD advised, and don't attempt it if rain threatens.
+        directions:
+          - label: Light
+            value: Sunset (or sunrise) rakes the ridges · midday kills it
+          - label: Glass
+            value: 24–70 wide at the rim · tele to isolate the fins
+          - label: Access
+            value: 4 mi soft-sand wash · high-clearance 4WD, air down
+            warn: true
+        theShot: >-
+          Standing at the rim, wide, the whole badland maze raking away in low side-light. Then go long and pull single eroded fins out of the chaos, layer stacked on layer.
+        images:
+          - file: fontspoint-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Rozlynn Worrall
+            license: CC BY 4.0
+            licenseUrl: https://creativecommons.org/licenses/by/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Sunset_over_the_Desert_Bad_Lands.jpg
+          - file: fontspoint-wide.webp
+            role: wide
+            source: wikimedia
+            artist: No machine-readable author provided. Miskatonic assumed (based on copyright claims).
+            license: CC BY 2.5
+            licenseUrl: https://creativecommons.org/licenses/by/2.5
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Fontspoint02262006.JPG
+          - file: fontspoint-detail.webp
+            role: detail
+            source: wikimedia
+            artist: ALAN SCHMIERER
+            license: CC0
+            licenseUrl: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+            sourceUrl: https://commons.wikimedia.org/wiki/File:CARRIZO_BADLANDS_OVERLOOK_CAMPSITE_(1-8-2017)_anza-borrego_state_park,_san_diego_co,_ca_-8_(31483226374).jpg
+          - file: fontspoint-mood.webp
+            role: mood
+            source: wikimedia
+            artist: ALAN SCHMIERER
+            license: CC0
+            licenseUrl: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+            sourceUrl: https://commons.wikimedia.org/wiki/File:CARRIZO_BADLANDS_OVERLOOK_CAMPSITE_(1-8-2017)_anza-borrego_state_park,_san_diego_co,_ca_-7_(32286325116).jpg
+
+      - id: montezuma
+        name: Montezuma Grade
+        badge: S-22 climb
+        optional: true
+        when: Golden hour · on the climb
+        gps:
+          lat: 33.2447
+          lng: -116.4033
+          label: Crawford Overlook, S-22
+          elev: 3000
+        description: >-
+          The road out of the basin. County **S-22** claws 3,000 feet up from the Borrego floor to Ranchita in a run of switchbacks, and the pullouts near the top — the **Crawford Overlook** especially — open onto the whole Borrego Valley, its badlands, and the Salton Sea beyond. It's at its best when the setting sun sidelights the ridges and the valley floods with blue shadow. Time your climb for golden hour and stop at the rail.
+        directions:
+          - label: Light
+            value: Sunset — valley in warm side-light, shadows pooling
+          - label: Glass
+            value: 24–70 · tele to compress the ridgelines into layers
+          - label: Access
+            value: Paved (S-22) · paved pullouts — any car
+        theShot: >-
+          From the overlook, the switchback road threading down into the vast valley, low sun raking the floor, the distant Salton Sea catching the last light. Or a tele compression of ridgelines going blue with haze.
+        images:
+          - file: montezuma-wide.webp
+            role: wide
+            source: wikimedia
+            artist: No machine-readable author provided. Mollinger~commonswiki assumed (based on copyright claims).
+            license: CC BY-SA 3.0
+            licenseUrl: http://creativecommons.org/licenses/by-sa/3.0/
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Borregosprings.jpg
+          - file: montezuma-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Z3lvs
+            license: CC0
+            licenseUrl: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Near_Highway_S22.jpg
+          - file: montezuma-detail.webp
+            role: detail
+            source: wikimedia
+            artist: RuggyBearLA
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Anza-Borrego_Desert_State_Park_(2025)_12.jpg
+
+      - id: julian
+        name: Julian
+        badge: mountain town
+        when: Dusk · blue hour
+        gps:
+          lat: 33.0786
+          lng: -116.6019
+          label: Main St, Julian
+          elev: 4235
+        description: >-
+          A gold-rush mountain town gone to apples and pie, at **4,235 ft** in the Cuyamacas — false-front main street, wood boardwalks, cider mills, pine air. Mid-October is peak apple season, so it'll be busy and golden: warm-lit windows, string lights, woodsmoke at dusk. A complete change of key from the desert two hours behind you. Shoot the main street at blue hour, when the storefronts glow against the deepening sky.
+        directions:
+          - label: Light
+            value: Blue hour — lit storefronts against deep sky
+          - label: Glass
+            value: 35 / 50 · signage, warm windows, boardwalk detail
+          - label: Access
+            value: Paved (CA-78/79) — any car · busy in fall
+        theShot: >-
+          Main Street at blue hour: warm false-front stores, a hand-painted or neon sign, string lights overhead. Put a slice of pie in the frame if you want the cliché — at this point you've earned it.
+        images:
+          - file: julian-wide.webp
+            role: wide
+            source: wikimedia
+            artist: TimShell
+            license: CC BY-SA 3.0
+            licenseUrl: http://creativecommons.org/licenses/by-sa/3.0/
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Julian_California01.jpg
+          - file: julian-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Seauton
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Julian_11_mining_co.jpg
+          - file: julian-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Seauton
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Julian_7_sign_post.jpg
+          - file: julian-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Rob Hooft
+            license: CC BY-SA 3.0
+            licenseUrl: http://creativecommons.org/licenses/by-sa/3.0/
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Julian1995.jpg
+
+      - id: sunrise
+        name: Sunrise Highway
+        badge: Mt. Laguna
+        when: After dark · the descent
+        gps:
+          lat: 32.8785
+          lng: -116.4247
+          label: Sunrise Hwy (S-1), Mt. Laguna
+          elev: 5980
+        description: >-
+          The last act. County **S-1** runs the crest of the Laguna Mountains at 5,000–6,000 ft through Jeffrey pine and black oak, the east side dropping in sheer overlooks straight down to the Anza-Borrego desert you just crossed. In daylight the Desert View and Stephenson Peak pullouts are staggering; by the time you reach them it may be full dark — so make it your dark-sky window. The crescent moon has set, and the desert glitters far below before the long coast down into San Diego and the city lights.
+        directions:
+          - label: Light
+            value: Overlooks at last light · then stars over the desert rim
+          - label: Glass
+            value: 24–70 · tripod for the dark descent + any night frame
+          - label: Access
+            value: Paved (S-1) · genuinely cold at 6,000 ft after dark
+            warn: true
+        theShot: >-
+          If you catch last light: the pine ridge dropping thousands of feet to the desert floor, backlit. After dark: a long exposure of stars and distant desert lights from a pullout, pines framing — then the switchbacks down to the coast.
+        images:
+          - file: sunrise-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Rob.Bertholf
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Mount_Laguna_Overlook_-_33772641551.jpg
+          - file: sunrise-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Rob.Bertholf
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Mount_Laguna_Overlook_-_33901960195.jpg
+          - file: sunrise-mood.webp
+            role: mood
+            source: wikimedia
+            artist: BOB PERRY
+            license: CC BY 3.0
+            licenseUrl: https://creativecommons.org/licenses/by/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:LITTLE_LAGUNA_LAKE_AND_MEADOW,_MT._LAGUNA,_CA_-_MAY_2011_-_panoramio.jpg
+
+fieldNotes:
+  - heading: Skipping I-15 by design
+    body: >-
+      The direct Vegas–San Diego shot is I-15, four dull hours of freeway. This route trades that for **US-95 → Mojave Preserve → Route 66 → Amboy Rd → Joshua Tree → Anza-Borrego → Julian → Sunrise Hwy**, with a single unavoidable ~35-mi stint on I-10. Longer and slower on purpose — the point is what's between the dots.
+  - heading: Fuel & signal
+    body: >-
+      Long dead legs. The **Mojave Preserve has no fuel and no signal at all** — fill in Vegas, download everything first. Top off again at Twentynine Palms, on I-10, and in Borrego Springs. Julian is your last mountain gas before the coast.
+  - heading: Dirt & 4WD
+    body: >-
+      Your rig earns its keep here. **Font's Point** is 4 miles of soft-sand wash — air down, 4WD, and **never in the rain**. Kelso Dunes and Hole-in-the-Wall are graded dirt; the Preserve backroads are washboard but fine dry. Check for flash-flood weather before any wash or slot.
+  - heading: Heat, then real cold
+    body: >-
+      Mid-October is kind but split: desert floors (Amboy, Anza-Borrego) still **push past 90°F midday** — shoot them at the ends of the day, carry more water than you think. Then Julian and Mt. Laguna sit at **4,000–6,000 ft and go cold after dark**. Pack for both in the same day.
+  - heading: Dark skies, quiet moon
+    body: >-
+      Oct 16–18 is a **waxing crescent** (~28–49% lit) that sets not long after sunset — so the late nights go properly black in the Preserve and in **Anza-Borrego** (an International Dark-Sky park). The catch: by mid-October the Milky-Way **core sets soon after dusk**, so it's more a stars-and-foreground night than a core session.
+  - heading: The long Sunday
+    body: >-
+      Day 2 is the big one — a dawn start in Joshua Tree and a headlamp arrival in San Diego. Don't over-stack it: The Slot and Font's Point are the anchors, Montezuma and the Sunrise Hwy overlooks are drive-through wins. If you're running late, cut Font's and keep the golden-hour climb.
+
+colophon:
+  artDirection: >-
+    Each stop leads with reference photographs of the actual place — tap any to view it full-screen. The light, glass and 'the shot' notes are the art direction: the look to chase at each stop, not a promise of the conditions you'll get.
+  photographers: >-
+    Nick Carver (large-format Americana — Kelso Depot, Roy's, Julian) · Michael Shainblum (desert, dunes & night skies) · Thomas Heaton (patient minimal landscape — Kelso Dunes, Amboy) · Nick Page (bold light, graphic form — Hole-in-the-Wall, the cholla).
+  route: >-
+    Las Vegas → US-95 → Mojave National Preserve → Route 66 → Amboy Rd → Joshua Tree → (brief I-10) → Anza-Borrego → Julian → Sunrise Hwy (S-1) → San Diego. Timings assume a Friday-evening departure and nights in the Preserve and Twentynine Palms. Verify fuel hours, park fees, and any dirt-road, wash, or fire closures close to your dates.

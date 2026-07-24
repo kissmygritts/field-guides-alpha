@@ -36,14 +36,15 @@ function toGps({ lat, lng, label, elev }) {
 
 // A promoted `alt` sub-location → a first-class `optional` stop. Alts carried
 // only name + coords in the old model, so prose/directions come out empty for
-// hand-porting; the alt has no `label`, so gps.label seeds empty too. `n` is the
-// 0-based alt index within the parent, so a parent with several alts stays unique
-// (`<parent>-alt`, `<parent>-alt2`, …).
-function promoteAlt(parentId, alt, n) {
-  const id = n === 0 ? `${parentId}-alt` : `${parentId}-alt${n + 1}`
+// hand-porting; the alt has no `label`, so gps.label seeds empty too. `id` is the
+// promoted stop's key — either the generic `<parent>-alt(N)` or, when the parent
+// feeds a merged gallery (see `configToGuide`), the fed sub-stop's real manifest
+// id so `finalize`'s stop-keyed image upsert lands on it. `disp` supplies a
+// display name for that fed id when one exists, falling back to the alt's name.
+function promoteAlt(id, alt, disp = {}) {
   return {
     id,
-    name: alt.name,
+    name: disp[id] ?? alt.name,
     optional: true,
     description: '',
     gps: toGps({ lat: alt.lat, lng: alt.lng, label: alt.label ?? '', elev: alt.elev }),
@@ -61,6 +62,7 @@ function promoteAlt(parentId, alt, n) {
 export function configToGuide(config) {
   const gps = config.gps ?? {}
   const disp = config.disp ?? {}
+  const feed = config.feed ?? {}
 
   const days = (config.days ?? []).map((day) => {
     const stops = []
@@ -78,7 +80,18 @@ export function configToGuide(config) {
         theShot: '',
       })
       // Promote this stop's alts to sibling optional stops, right after it.
-      ;(g.alt ?? []).forEach((alt, n) => stops.push(promoteAlt(id, alt, n)))
+      // The old `feed` key merged extra manifest galleries into a parent's
+      // gallery (e.g. owens showed owens + cerrogordo); the spec retires it by
+      // splitting each fed sub-stop into its OWN stop. Those fed sub-stops are the
+      // same real places the parent carries as `alt`s, so we promote the alts but
+      // name the i-th one with the i-th fed sub-id — giving the split stop the
+      // manifest id `finalize` keys images by, instead of a generic `<parent>-alt`.
+      const fedIds = (feed[id] ?? []).filter((f) => f !== id)
+      ;(g.alt ?? []).forEach((alt, n) => {
+        const altId =
+          fedIds[n] ?? (n === 0 ? `${id}-alt` : `${id}-alt${n + 1}`)
+        stops.push(promoteAlt(altId, alt, disp))
+      })
     }
     return {
       theme: '',

@@ -24,6 +24,15 @@ const config = JSON.parse(
   ),
 )
 
+// 2026-395 is the only guide carrying the old merged-gallery `feed` key, so it
+// exercises the feed-split branch of the converter.
+const config395 = JSON.parse(
+  readFileSync(
+    fileURLToPath(new URL('../guides/2026-395/config.json', import.meta.url)),
+    'utf8',
+  ),
+)
+
 describe('elevToFeet', () => {
   it('parses a "4,255 ft" display string to the number 4255', () => {
     expect(elevToFeet('4,255 ft')).toBe(4255)
@@ -116,11 +125,44 @@ describe('configToGuide — alt promotion (handoff-spec §3, migration-spec §2)
   })
 })
 
+describe('configToGuide — feed split (handoff-spec §8, ticket #18)', () => {
+  const guide = configToGuide(config395)
+  const day1 = guide.days[0].stops
+
+  it('splits the fed sub-stop into its own promoted stop keyed by its manifest id', () => {
+    // config.feed = { owens: [owens, cerrogordo] }; owens.alt is Cerro Gordo.
+    const owensIdx = day1.findIndex((s) => s.id === 'owens')
+    const promoted = day1[owensIdx + 1]
+    // The promoted stop takes the fed manifest id `cerrogordo`, NOT `owens-alt`,
+    // so finalize's stop-keyed image upsert lands on it.
+    expect(promoted.id).toBe('cerrogordo')
+    expect(promoted.optional).toBe(true)
+    // Display name comes from config.disp[cerrogordo]; geo from owens.alt[0].
+    expect(promoted.name).toBe('Cerro Gordo')
+    expect(promoted.gps.lat).toBe(36.5383)
+    expect(promoted.gps.elev).toBe(8200)
+  })
+
+  it('leaves no generic owens-alt stop behind (the fed id replaces it)', () => {
+    const ids = guide.days.flatMap((d) => d.stops).map((s) => s.id)
+    expect(ids).not.toContain('owens-alt')
+    expect(ids).toContain('cerrogordo')
+  })
+
+  it('does not carry the `feed` key onto the emitted guide', () => {
+    expect(guide).not.toHaveProperty('feed')
+  })
+})
+
 describe('configToGuide — schema compatibility', () => {
   it('the skeleton validates against guideSchema once round-tripped through yaml', () => {
     // Prose placeholders are empty strings (valid mdInline); the skeleton is a
     // complete, parseable guide even before hand-porting.
     const guide = configToGuide(config)
     expect(() => guideSchema.parse(guide)).not.toThrow()
+  })
+
+  it('the feed-carrying 2026-395 skeleton also validates', () => {
+    expect(() => guideSchema.parse(configToGuide(config395))).not.toThrow()
   })
 })
