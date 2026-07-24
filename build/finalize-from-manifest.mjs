@@ -20,48 +20,77 @@ import { imageFile, toImageEntry, upsertImages } from './lib/yml-images.mjs';
 
 const ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 
-const slug = process.argv[2];
-if (!slug) {
-  console.error('usage: node build/finalize-from-manifest.mjs <slug>');
-  process.exit(1);
-}
-
-const manifestFile = path.join(ROOT, 'guides', slug, 'manifest.json');
-const contentFile = path.join(ROOT, 'content', `${slug}.yml`);
-if (!fs.existsSync(manifestFile)) throw new Error(`no manifest: ${path.relative(ROOT, manifestFile)}`);
-if (!fs.existsSync(contentFile)) throw new Error(`no content yml to upsert into: ${path.relative(ROOT, contentFile)}`);
-
-const manifest = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
-const publicDir = path.join(ROOT, 'public', 'guides', slug);
-fs.mkdirSync(publicDir, { recursive: true });
-
-const imagesByStop = {};
-let count = 0;
-let totalKb = 0;
-for (const [stop, imgs] of Object.entries(manifest)) {
-  imagesByStop[stop] = [];
-  const roleSeen = {};
-  for (const img of imgs) {
-    const { role, source, b64 } = img;
-    const file = imageFile(stop, role, roleSeen[role] ?? 0);
-    roleSeen[role] = (roleSeen[role] ?? 0) + 1;
-
-    const bytes = Buffer.from(b64, 'base64');
-    if (bytes.subarray(0, 4).toString('latin1') !== 'RIFF' || bytes.subarray(8, 12).toString('latin1') !== 'WEBP') {
-      throw new Error(`${stop}/${role}: manifest payload is not WebP`);
-    }
-    fs.writeFileSync(path.join(publicDir, file), bytes);
-
-    // Manifest fields map to an adapter imageInfo shape (licenseurl/descurl), so
-    // toImageEntry produces the identical schema entry the network finalize would.
-    imagesByStop[stop].push(toImageEntry({ file, role, source, info: img }));
-    count++;
-    totalKb += Math.round(bytes.length / 1024);
+// Some early manifests (e.g. 2026-395) predate the `source` field. It is a schema
+// enum required in the yml, so recover it from the description-page host, which is
+// unambiguous: Commons/Wikipedia → wikimedia, Unsplash → unsplash, Flickr →
+// flickr. A manifest that already carries `source` is used verbatim.
+export function resolveSource(img) {
+  if (img.source) return img.source;
+  let host = '';
+  try {
+    host = new URL(img.descurl).host;
+  } catch {
+    host = '';
   }
+  if (/(^|\.)wikimedia\.org$|(^|\.)wikipedia\.org$/.test(host)) return 'wikimedia';
+  if (/(^|\.)unsplash\.com$/.test(host)) return 'unsplash';
+  if (/(^|\.)flickr\.com$|(^|\.)staticflickr\.com$/.test(host)) return 'flickr';
+  throw new Error(`cannot resolve image source (no source field, unknown host "${host}"): ${img.descurl}`);
 }
 
-const updated = upsertImages(fs.readFileSync(contentFile, 'utf8'), imagesByStop);
-fs.writeFileSync(contentFile, updated);
+// Finalize one guide's manifest into public webp files + upserted yml images.
+// Split from the CLI entry so the pure `resolveSource` helper can be imported and
+// unit-tested without the module executing (and exiting) on import.
+function finalize(slug) {
+  const manifestFile = path.join(ROOT, 'guides', slug, 'manifest.json');
+  const contentFile = path.join(ROOT, 'content', `${slug}.yml`);
+  if (!fs.existsSync(manifestFile)) throw new Error(`no manifest: ${path.relative(ROOT, manifestFile)}`);
+  if (!fs.existsSync(contentFile)) throw new Error(`no content yml to upsert into: ${path.relative(ROOT, contentFile)}`);
 
-console.log(`${path.relative(ROOT, publicDir)}/: ${count} images, ${(totalKb / 1024).toFixed(2)} MB`);
-console.log(`→ upserted images into ${path.relative(ROOT, contentFile)}`);
+  const manifest = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+  const publicDir = path.join(ROOT, 'public', 'guides', slug);
+  fs.mkdirSync(publicDir, { recursive: true });
+
+  const imagesByStop = {};
+  let count = 0;
+  let totalKb = 0;
+  for (const [stop, imgs] of Object.entries(manifest)) {
+    imagesByStop[stop] = [];
+    const roleSeen = {};
+    for (const img of imgs) {
+      const { role, b64 } = img;
+      const source = resolveSource(img);
+      const file = imageFile(stop, role, roleSeen[role] ?? 0);
+      roleSeen[role] = (roleSeen[role] ?? 0) + 1;
+
+      const bytes = Buffer.from(b64, 'base64');
+      if (bytes.subarray(0, 4).toString('latin1') !== 'RIFF' || bytes.subarray(8, 12).toString('latin1') !== 'WEBP') {
+        throw new Error(`${stop}/${role}: manifest payload is not WebP`);
+      }
+      fs.writeFileSync(path.join(publicDir, file), bytes);
+
+      // Manifest fields map to an adapter imageInfo shape (licenseurl/descurl), so
+      // toImageEntry produces the identical schema entry the network finalize would.
+      imagesByStop[stop].push(toImageEntry({ file, role, source, info: img }));
+      count++;
+      totalKb += Math.round(bytes.length / 1024);
+    }
+  }
+
+  const updated = upsertImages(fs.readFileSync(contentFile, 'utf8'), imagesByStop);
+  fs.writeFileSync(contentFile, updated);
+
+  console.log(`${path.relative(ROOT, publicDir)}/: ${count} images, ${(totalKb / 1024).toFixed(2)} MB`);
+  console.log(`→ upserted images into ${path.relative(ROOT, contentFile)}`);
+}
+
+// Run as a CLI only when invoked directly (`node build/finalize-from-manifest.mjs
+// <slug>`), never on import.
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const slug = process.argv[2];
+  if (!slug) {
+    console.error('usage: node build/finalize-from-manifest.mjs <slug>');
+    process.exit(1);
+  }
+  finalize(slug);
+}

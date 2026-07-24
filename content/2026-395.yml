@@ -1,0 +1,771 @@
+# 2026-395 — migrated from guides/2026-395/config.json (structure) + hand-ported prose.
+#
+# STRUCTURE (moon, darkSites, gps, day/stop membership, elev→number, alt promotion,
+# and the `feed` split) was generated from guides/2026-395/config.json with:
+#     node build/config-to-yml.mjs 2026-395
+# The old `feed: { owens: [owens, cerrogordo] }` merged-gallery key is retired: its
+# fed sub-stop Cerro Gordo is now its own promoted `optional` stop (id `cerrogordo`),
+# carrying the images the manifest keys under `cerrogordo` — no gallery merging.
+# PROSE (masthead, descriptions, directions, theShot, day themes/briefs/legs,
+# fieldNotes, colophon) is hand-ported from guides/2026-395/content.html — the copy
+# IS the product (non-negotiable #4). The SVG stop-visual placeholders are dropped;
+# galleries come from finalize (public/guides/<slug>/ + images: below).
+masthead:
+  eyebrow: Shooting Script · Solo · Late Aug – Early Sep
+  title: San Diego to Reno, the *long way* up 395
+  dek: >-
+    Three days east of the Sierra crest — desert tufa, living ghost towns, granite arches and dawn-lit alkali flats. Built to shoot the ends of the day and drive through the heat. No portraits, no LA, no Death Valley in September.
+  meta:
+    - ~530 mi total
+    - 3 nights camping
+    - Depart Fri 4:00 AM
+    - Route I-15 → CA-395
+    - Golden hours are the whole point
+  # Friday departure — drives the derived "Day N · Weekday" labels (Fri, Sat, Sun).
+  startDate: 2026-08-21
+
+moon:
+  start: 2026-08-18
+  end: 2026-09-08
+
+darkSites: Trona, Alabama Hills, the bristlecones, Mono
+
+days:
+  - theme: The Desert Day
+    route: San Diego → Lone Pine
+    summary: >-
+      Chase the desert while it's cool. Shoot two big subjects before noon, drive the heat, land at the Alabama Hills for golden hour. ~330 mi.
+    legs:
+      - at: 4:00a
+        text: depart · I-15 N
+      - at: ~8:30a
+        text: Trona
+      - at: ~11a
+        text: Randsburg
+      - at: lunch
+        text: Ridgecrest
+      - at: pm
+        text: Fossil Falls
+      - at: golden
+        text: Alabama Hills
+    brief:
+      - label: Fuel
+        icon: "⛽"
+        value: Ridgecrest — last real gas before Lone Pine. Top off.
+      - label: Signal
+        icon: "📵"
+        value: Dead from Trona through Owens Valley. Download everything first.
+      - label: Water
+        icon: "💧"
+        value: Carry 4+ L — none at Trona, Fossil Falls or Owens.
+      - label: Drive
+        icon: "🚗"
+        value: ~330 mi · 6–7 hr moving
+      - label: Camp
+        icon: "▲"
+        value: >-
+          **Alabama Hills** (free BLM dispersed, Movie Road) or **Tuttle Creek CG** nearby for a table + vault toilet. Arrive before dark to claim a spot and scout — desert nights here are mild but the wind kicks up. Midday is drive time: fuel and lunch in **Ridgecrest**, the last real town before Lone Pine, then push north as the Sierra crest opens on your left into Owens Valley.
+    stops:
+      - id: trona
+        name: Trona Pinnacles
+        when: First light · ~8:30–9:30 AM
+        gps:
+          lat: 35.6142
+          lng: -117.3664
+          label: BLM tufa area, off CA-178
+          elev: 1690
+        description: >-
+          Your marquee desert subject — **500+ tufa spires on a dry lakebed**, straight out of a Shainblum frame. Access is ~5 mi of graded, washboarded dirt off CA-178; fine for a normal car if you crawl it. Beat the heat and the crowds: you want the low raking sun that separates each spire from its shadow. By 10:30 it flattens and bakes.
+        directions:
+          - label: Light
+            value: Low side-light, E/SE
+          - label: Glass
+            value: 24–70 + a longer lens to stack spires
+          - label: Access
+            value: 5 mi washboard dirt — crawl it
+            warn: true
+        theShot: >-
+          Get low. Use a foreground spire as anchor, compress a cluster behind it with the longer lens so they overlap into a ridge of teeth. Shadows pointing at camera-left.
+        images:
+          - file: trona-wide.webp
+            role: wide
+            source: wikimedia
+            artist: John R Savageau
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Trona_Pinnacles_at_Sunrise_Late_Winter.jpg
+          - file: trona-shot.webp
+            role: shot
+            source: wikimedia
+            artist: John R Savageau
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Trona_Pinnacles_Close_Up_at_Sunrise.jpg
+          - file: trona-mood.webp
+            role: mood
+            source: wikimedia
+            artist: John R Savageau
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Trona_Pinnacles_with_Sunrise_Peeking_Above_Mountains.jpg
+
+      - id: randsburg
+        name: Randsburg
+        when: Late morning · ~11 AM
+        gps:
+          lat: 35.3686
+          lng: -117.6558
+          label: Butte Ave, main street
+          elev: 3523
+        description: >-
+          A **living ghost town** — wooden sidewalks, gold-rush facades, mining bones in the hills, ~100 residents still hanging on. This is your Nick Carver Americana chapter: hand-painted signage, sun-bleached siding, rust and patina. Detail and texture work, so midday flat light is fine here — you're not shooting sky.
+        directions:
+          - label: Light
+            value: Flat is fine · shade for detail
+          - label: Glass
+            value: 35 / 50 · get tight on texture
+          - label: Also
+            value: Red Mtn & Jo'burg on the way
+        theShot: >-
+          One clean facade dead-on, symmetrical, filling the frame — then break it with a tight detail: a cracked sign, a padlock, boots of peeling paint. Shoot for a diptych.
+        images:
+          - file: randsburg-wide.webp
+            role: wide
+            source: wikimedia
+            artist: inkknife_2000 (7.5 million views +)
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Randsburg_Ghost_Town,_CA_1987_(6384941443).jpg
+          - file: randsburg-detail.webp
+            role: detail
+            source: wikimedia
+            artist: inkknife_2000 (7.5 million views +)
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Randsburg_Ghost_Town,_CA_1987_(6384943047).jpg
+
+      - id: fossilfalls
+        name: Fossil Falls
+        when: Late morning · quick stop
+        gps:
+          lat: 35.97
+          lng: -117.9126
+          label: trailhead off US-395
+          elev: 3200
+        description: >-
+          A dry waterfall of **water-polished black basalt** — the ancient Owens River carved obsidian-smooth flutes, potholes and voids into a volcanic flow, with **Red Hill cinder cone** rising behind. A five-minute walk from the lot off US-395; almost nobody stops. Low raking light sculpts the rock best, but even midday hard shadow reads the strange scooped texture.
+        directions:
+          - label: Light
+            value: Low & hard — rakes the flutes
+          - label: Glass
+            value: 24–70 + something close for texture
+          - label: Access
+            value: Short graded dirt off US-395 — any car
+        theShot: >-
+          Get down into the rock: frame a smooth black void or pothole against the pale desert beyond, Red Hill cone as a distant anchor. Watch your footing — the drops are real.
+        images:
+          - file: fossilfalls-shot.webp
+            role: shot
+            source: wikimedia
+            artist: blmcalifornia
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Fossil_Falls_Campground_(49916156643).jpg
+          - file: fossilfalls-wide.webp
+            role: wide
+            source: wikimedia
+            artist: blmcalifornia
+            license: Public domain
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Fossil_Falls_Campground_(49916960592).jpg
+          - file: fossilfalls-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Powerhouse55
+            license: CC BY 3.0
+            licenseUrl: https://creativecommons.org/licenses/by/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Volcanic_cinder_cone_fossil_falls.JPG
+
+      - id: owens
+        name: Owens (dry) Lake
+        badge: roadside
+        optional: true
+        when: Afternoon pass-through
+        gps:
+          lat: 36.4231
+          lng: -117.9339
+          label: Owens dry lakebed
+          elev: 3600
+        description: >-
+          A stark alkali plain with the Sierra rising straight off it — Heaton-style minimalism, all negative space and horizon. A quick roadside frame if the light's doing anything.
+        directions:
+          - label: Light
+            value: Any · shoot the flatness
+          - label: Glass
+            value: Wide, or long to compress crest
+          - label: Skip if
+            value: You want the Hills before dark
+        images:
+          - file: owens-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Jengod
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Owens_Lake_2023_June_01.jpg
+          - file: owens-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Eeekster (Richard Ellis)
+            license: CC BY 3.0
+            licenseUrl: https://creativecommons.org/licenses/by/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Blowing-alkali-dust-Owens-Lake.jpg
+
+      - id: cerrogordo
+        name: Cerro Gordo
+        optional: true
+        when: Only with time to spare · rough climb
+        gps:
+          lat: 36.5383
+          lng: -117.8056
+          label: ghost town, 7.7 mi up off CA-136
+          elev: 8200
+        description: >-
+          If you're ahead of schedule and hungry for a real ghost town, **Cerro Gordo** sits 7.7 mi up a rough road off CA-136 above Owens Lake — a gated silver-mining town with few visitors and big views back down over the alkali flat. Only worth it if you've got the time and the stomach for the climb before sunset.
+        directions:
+          - label: Access
+            value: 7.7 mi rough dirt off CA-136 · gated
+            warn: true
+          - label: Skip if
+            value: You're tight on daylight for the Hills
+        images:
+          - file: cerrogordo-wide.webp
+            role: wide
+            source: wikimedia
+            artist: QKC
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Main_street_of_the_silver-mining_ghost_town_of_Cerro_Gordo,_Looking_E_to_mine_dumps_and_Cerro_Gordo_Peak,_Inyo_County,_CA,_USA_-_panoramio.jpg
+          - file: cerrogordo-detail.webp
+            role: detail
+            source: wikimedia
+            artist: David Lofink from Orange, United States
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Cerro_Gordo_ghost_town,_Keeler,_California,_US_(5412117469).jpg
+
+      - id: alabama
+        name: Alabama Hills
+        when: Golden hour → camp
+        gps:
+          lat: 36.6046
+          lng: -118.1206
+          label: Mobius Arch, off Movie Rd
+          elev: 4800
+        description: >-
+          The payoff. Rounded granite boulders and natural arches with **Mt. Whitney and the Sierra crest** behind — one of the most-shot spots on the whole route, and it earns it. **Mobius Arch** is the classic (short walk from the Movie Rd trailhead) — it frames Whitney through the opening. Scout compositions in the good light, sleep here, shoot it again at dawn.
+        directions:
+          - label: Light
+            value: Sunset warms boulders; dawn = alpenglow on crest
+          - label: Glass
+            value: 16–35 for arch foreground · tele for crest
+          - label: Camp
+            value: Free dispersed on Movie Rd
+        theShot: >-
+          Mobius Arch low and close, wide lens, Whitney centered in the opening. Sunset for warm granite; set an alarm and come back for pink alpenglow at first light.
+        images:
+          - file: alabama-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Clyde Charles Brown
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Mobius_Arch_in_Alabama_Hills,_California,_US.jpg
+          - file: alabama-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Jeffrey Pang from Berkeley, CA, USA
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Reverse_Mobius_Arch_(3874921460).jpg
+
+  - theme: Climbing the East Side
+    route: Lone Pine → June Lake
+    summary: >-
+      Dawn on the crest, then work north through Bishop into alpine country. Cooler air, bigger water, your reservation night. ~120 mi + detours.
+    legs:
+      - at: dawn
+        text: Alabama Hills
+      - at: early
+        text: Manzanar
+      - at: AM
+        text: Bishop · Rowell gallery
+      - at: opt
+        text: Bristlecones
+      - at: PM
+        text: Convict · Hot Creek
+      - at: golden
+        text: June Lake
+    brief:
+      - label: Fuel
+        icon: "⛽"
+        value: Bishop (cheapest on the route) and Mammoth.
+      - label: Signal
+        icon: "📵"
+        value: Solid in Bishop/Mammoth; dead on the Bristlecone & Crowley dirt.
+      - label: Altitude
+        icon: "🏔"
+        value: Up to 10,000 ft at the bristlecones — pace yourself, layer up.
+      - label: Drive
+        icon: "🚗"
+        value: ~120 mi + detours
+      - label: Camp
+        icon: "▲"
+        value: >-
+          **June Lake Loop** (Oh! Ridge, June Lake, Silver, Gull) or Mammoth-area FS campgrounds. This is your **one competitive night** — a summer Saturday, these fill. Reserve early or have a dispersed national-forest backup pinned before you arrive.
+    stops:
+      - id: manzanar
+        name: Manzanar
+        badge: historic site
+        when: Early morning · reflective stop
+        gps:
+          lat: 36.7283
+          lng: -118.1547
+          label: auto-tour entrance
+          elev: 3900
+        description: >-
+          The WWII camp where the U.S. incarcerated over 10,000 Japanese-Americans — a **National Historic Site** right on US-395 between Lone Pine and Independence. Not a "shot" so much as a place you stop: the stone sentry posts and entrance sign, a reconstructed guard tower and barracks, the white cemetery monument standing against the Sierra wall. Drive the 3.2-mi auto tour; the museum in the old auditorium is worth an hour. **Free.**
+        directions:
+          - label: Light
+            value: Flat AM is fine — it's about content
+          - label: Glass
+            value: 35 / 50 · documentary, restrained
+          - label: Time
+            value: 45–90 min incl. museum
+        theShot: >-
+          The guard tower against the crest, or a stone sentry post framing the empty valley. Let it be quiet — restraint over drama does this place justice.
+        images:
+          - file: manzanar-wide.webp
+            role: wide
+            source: wikimedia
+            artist: GFred1
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Entrance_gate_-_Manzanar_National_Historic_site.jpg
+          - file: manzanar-shot.webp
+            role: shot
+            source: wikimedia
+            artist: GFred1
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Guard_tower_-_Manzanar_National_Historic_Site.jpg
+          - file: manzanar-mood.webp
+            role: mood
+            source: wikimedia
+            artist: claralieu
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Manzanar_001.jpg
+
+      - id: bristlecone
+        name: Ancient Bristlecone Pines
+        badge: +2–3 hrs
+        optional: true
+        when: Morning · big detour
+        gps:
+          lat: 37.3847
+          lng: -118.1717
+          label: Schulman Grove visitor ctr
+          elev: 10000
+        description: >-
+          East of Bishop, a long climb to ~10,000 ft and the **oldest trees on earth** — twisted, sculptural, silver-and-amber against high desert. A Heaton patient-landscape subject, and cool even in summer thanks to the elevation. It's a committed out-and-back; make it a pace call. Before you leave Bishop, duck into the **Mountain Light Gallery** — Galen Rowell's life work of this exact landscape, and the best possible tuning-fork for your eye.
+        directions:
+          - label: Light
+            value: Low sun rakes the grain; storms are a gift
+          - label: Glass
+            value: 35–85 · isolate one tree's form
+          - label: Cost
+            value: Half a day round-trip
+            warn: true
+        theShot: >-
+          One tree, backlit, against clean sky or a dark distant range. Let the dead silver wood and living needles fight in the same frame. Sidelight for the grain.
+        images:
+          - file: bristlecone-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Dcrjsr
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Big_bristlecone_pine_Pinus_longaeva.jpg
+          - file: bristlecone-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Z3lvs
+            license: CC0
+            licenseUrl: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Ancient_Bristlecone_Pine_Forest_04_30_2022_30.jpg
+
+      - id: crowley
+        name: Crowley Lake Columns
+        badge: conditions
+        optional: true
+        when: Midday bonus
+        gps:
+          lat: 37.5686
+          lng: -118.7258
+          label: columns, SE shore
+          elev: 6780
+        description: >-
+          Strange eroded stone columns along the shoreline — a lesser-known, very graphic subject. Access can involve a dirt road and it depends on **lake level**, so treat it as a bonus if conditions cooperate. Rewards a longer lens and repetition.
+        directions:
+          - label: Light
+            value: Raking sun into the arches
+          - label: Glass
+            value: 50–135 · pattern & repetition
+          - label: Depends
+            value: Lake level + dirt access
+            warn: true
+        images:
+          - file: crowley-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Andrew Kearns
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Columns_at_Crowley_Lake_California.jpg
+          - file: crowley-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Zpxc002
+            license: CC0
+            licenseUrl: http://creativecommons.org/publicdomain/zero/1.0/deed.en
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Crowley_Lake_Columns-partially_exposed.jpg
+
+      - id: convict
+        name: Convict Lake
+        when: Late afternoon
+        gps:
+          lat: 37.5906
+          lng: -118.8564
+          label: north-shore day use
+          elev: 7850
+        description: >-
+          Big dramatic peaks dropping straight into water, a short easy drive off 395 — **huge payoff for almost no effort**. Classically a sunrise lake, but golden hour puts warm light on the peaks with the reflection still holding. Walk the north shore for the cleanest mirror.
+        directions:
+          - label: Light
+            value: PM warms peaks · calm = mirror
+          - label: Glass
+            value: 24–70 · centered symmetry
+          - label: Effort
+            value: Minimal — roadside + short walk
+        theShot: >-
+          Dead-center symmetry, waterline on the horizontal third, let the reflection do half the work. Shoot before evening wind ruffles the surface.
+        images:
+          - file: convict-wide.webp
+            role: wide
+            source: wikimedia
+            artist: MARKroberts
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Convict_Lake_CA.jpg
+          - file: convict-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Jeffrey Pang from Madison, NJ, USA
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Convict_Lake_Rocks.jpg
+
+      - id: hotcreek
+        name: Hot Creek
+        badge: geologic site
+        when: Midday · geothermal detour
+        gps:
+          lat: 37.6614
+          lng: -118.828
+          label: geologic site lot
+          elev: 7200
+        description: >-
+          A geothermal gorge where **cobalt and turquoise hot springs** boil up through a cold trout stream, banked in bleached mineral white and rust. Short paved road off US-395 just south of Mammoth, with an easy overlook and a trail down to the water. The colors punch hardest under **high midday sun** — a rare stop that rewards the flat light you're dodging everywhere else. No swimming: scalding and unpredictable.
+        directions:
+          - label: Light
+            value: High noon makes the blues glow
+          - label: Glass
+            value: 24–70 + polarizer to cut glare
+          - label: Access
+            value: Paved to lot — stay out of the water
+            warn: true
+        theShot: >-
+          Shoot down the gorge, turquoise pools leading into the green creek with white mineral banks framing. Polarize to kill surface glare and saturate the blue.
+        images:
+          - file: hotcreek-shot.webp
+            role: shot
+            source: wikimedia
+            artist: James St. John
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Hot_Creek_(Long_Valley_Caldera,_California,_USA)_20.jpg
+          - file: hotcreek-wide.webp
+            role: wide
+            source: wikimedia
+            artist: James St. John
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Hot_Creek_(Long_Valley_Caldera,_California,_USA)_9.jpg
+          - file: hotcreek-detail.webp
+            role: detail
+            source: wikimedia
+            artist: James St. John
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Hot_Creek_(Long_Valley_Caldera,_California,_USA)_12.jpg
+
+      - id: june
+        name: June Lake Loop
+        when: Golden hour → camp
+        gps:
+          lat: 37.7778
+          lng: -119.1289
+          label: Silver Lake, June Lake Loop
+          elev: 7215
+        description: >-
+          The "Switzerland of California" — alpine lakes ringed by granite, on a scenic loop off 395. Aspens won't have turned yet this early, but the water, peaks and evening light carry it. Drive the loop, pick a west-facing shoreline, and shoot the last warm light on the crest reflecting off calm water.
+        directions:
+          - label: Light
+            value: Sunset on the crest + reflection
+          - label: Glass
+            value: 24–70 · foreground rocks help
+          - label: Camp
+            value: Book ahead — Sat night
+            warn: true
+        images:
+          - file: june-shot.webp
+            role: shot
+            source: wikimedia
+            artist: King of Hearts
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Silver_Lake_Mammoth_September_2016_003.jpg
+          - file: june-wide.webp
+            role: wide
+            source: wikimedia
+            artist: oliver.dodd
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Carson_Peak,_Silver_Lake.jpg
+
+  - theme: Out Through the Basin
+    route: Mono Lake → Reno
+    summary: >-
+      Build the morning around the tufa at dawn, then wander north through high country into Nevada ranch land. Arrive Reno evening. ~140 mi + detours.
+    legs:
+      - at: sunrise
+        text: Mono South Tufa
+      - at: opt
+        text: Tioga Pass
+      - at: midday
+        text: Conway Summit
+      - at: pm
+        text: Bodie
+      - at: late
+        text: Travertine · Bridgeport
+      - at: eve
+        text: Reno
+    brief:
+      - label: Fuel
+        icon: "⛽"
+        value: Lee Vining & Bridgeport — pricey, top off anyway before Bodie/Tioga.
+      - label: Signal
+        icon: "📵"
+        value: Dead at Bodie and up Tioga; returns near Bridgeport.
+      - label: Drive
+        icon: "🚗"
+        value: ~140 mi to Reno + Bodie detour (adds ~1 hr)
+      - label: Finish
+        icon: "◆"
+        value: >-
+          395 N through Gardnerville and Carson City into **Reno** for Sunday evening. If you're chasing one last frame, the high-desert ranch light north of Bridgeport is the sleeper of the whole drive.
+    stops:
+      - id: mono
+        name: Mono Lake — South Tufa
+        when: Sunrise · the shot of the trip
+        gps:
+          lat: 37.9382
+          lng: -119.0272
+          label: South Tufa parking
+          elev: 6380
+        description: >-
+          The signature Eastern Sierra frame: **tufa spires rising straight out of a still, alien lake** with the desert ranges behind. Build the whole morning around dawn here — colour behind the towers, glassy surface before the wind, the place nearly empty. South Tufa reserve, small fee. Get in position in the dark.
+        directions:
+          - label: Light
+            value: Pre-dawn glow behind towers, E
+          - label: Glass
+            value: 16–35 for scale · tele to isolate
+          - label: Timing
+            value: Arrive before first light
+            warn: true
+        theShot: >-
+          Low, one hero tufa anchoring the foreground, cluster behind it, colour band on the horizon reflected in dead-still water. Go before any wind touches the surface.
+        images:
+          - file: mono-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Sheila Sund from Salem, United States
+            license: CC BY 2.0
+            licenseUrl: https://creativecommons.org/licenses/by/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Mono_Lake_sunrise_(25512846443).jpg
+          - file: mono-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Annitta Keck
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Sunrise_on_Mono_Lake.jpg
+          - file: mono-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Dukesnyder1027
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Dramatic_winter_sunrise_over_Mono_Lake_California.jpg
+
+      - id: tioga
+        name: Tioga Pass spur
+        badge: out-and-back
+        optional: true
+        when: Morning detour · open in summer
+        gps:
+          lat: 37.9357
+          lng: -119.234
+          label: Ellery Lake, Tioga Rd
+          elev: 9500
+        description: >-
+          From Lee Vining, Tioga Rd climbs to California's highest highway pass past **Ellery and Tioga Lakes** — crazy granite, deep teal alpine water. You don't need to enter Yosemite; just drive up to the lakes and back for a stunning hour. It eats into your Reno arrival, so gauge it against how the morning ran.
+        directions:
+          - label: Light
+            value: Mid-morning is fine up high
+          - label: Glass
+            value: 24–70 · roadside pullouts
+          - label: Cost
+            value: 1–2 hrs round trip
+        images:
+          - file: tioga-wide.webp
+            role: wide
+            source: wikimedia
+            artist: JERRYE AND ROY KLOTZ MD
+            license: CC BY-SA 3.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:ELLERY_LAKE_-_NEAR_YOSEMITE_NATIONAL_PARK.jpg
+
+      - id: bodie
+        name: Bodie
+        badge: +2–3 hrs
+        when: Midday · big detour
+        gps:
+          lat: 38.2124
+          lng: -119.0137
+          label: townsite, via Hwy 270
+          elev: 8375
+        description: >-
+          The **best-preserved ghost town in the West** — 100+ weathered buildings held in official "arrested decay," a gold-rush town frozen mid-collapse at 8,375 ft. Turn east off US-395 onto Hwy 270; the **last 3 mi are rough dirt** (fine dry, any vehicle). Rusted autos in the sage, the leaning Methodist church, the Standard Mill, interiors left exactly as abandoned. Flat light is no enemy here — it's texture and story, not golden hour. Small day-use fee, cash.
+        directions:
+          - label: Light
+            value: Flat OK · hard sun for wood grain
+          - label: Glass
+            value: 24–70 + longer to compress; shoot interiors through glass
+          - label: Access
+            value: 3 mi dirt · fee · 2–3 hr round trip
+            warn: true
+        theShot: >-
+          A rusted Model-A in tall grass with the town behind, or the leaning church against bare hills. Then go close on silvered wood grain and the peeling wallpaper behind wavy window glass.
+        images:
+          - file: bodie-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Roland Arhelger
+            license: CC BY-SA 4.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Autowrack_in_Bodie_(CA,_USA).jpg
+          - file: bodie-shot.webp
+            role: shot
+            source: wikimedia
+            artist: Anna Irene from Frankfurt, Deutschland
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Bodie_Ghost_Town_(35428773441).jpg
+          - file: bodie-detail.webp
+            role: detail
+            source: wikimedia
+            artist: Anna Irene from Frankfurt, Deutschland
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Bodie_Ghost_Town_(35558843215).jpg
+          - file: bodie-mood.webp
+            role: mood
+            source: wikimedia
+            artist: Anna Irene from Frankfurt, Deutschland
+            license: CC BY-SA 2.0
+            licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Bodie_Ghost_Town_(35520087816).jpg
+
+      - id: travertine
+        name: Travertine Hot Springs
+        badge: Bridgeport
+        when: Afternoon · last frame
+        gps:
+          lat: 38.2489
+          lng: -119.2047
+          label: BLM pools, S of Bridgeport
+          elev: 6500
+        description: >-
+          Just outside Bridgeport — a BLM site of terraced mineral pools, turquoise water banked in warm orange travertine with the **Sierra as backdrop**. Good closing landscape (and a soak if you want one). North of here 395 opens into Nevada ranch country — Bridgeport valley and the Walker River canyon give you big Carver-style open compositions if the light holds.
+        directions:
+          - label: Light
+            value: Afternoon warms the terraces
+          - label: Glass
+            value: 24–70 · pools as lead-in lines
+          - label: Also
+            value: Conway Summit vista en route
+        theShot: >-
+          Use a turquoise pool as foreground, its edge as a leading line pointing back at the snow-flecked crest. Late light makes the mineral terraces glow.
+        images:
+          - file: travertine-shot.webp
+            role: shot
+            source: wikimedia
+            artist: noelwaters
+            license: CC BY-SA 3.0
+            licenseUrl: http://creativecommons.org/licenses/by-sa/3.0/
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Travertine-mound_Bridgeport_CA.jpg
+          - file: travertine-wide.webp
+            role: wide
+            source: wikimedia
+            artist: Daniel Mayer
+            license: CC BY-SA 3.0
+            licenseUrl: http://creativecommons.org/licenses/by-sa/3.0/
+            sourceUrl: https://commons.wikimedia.org/wiki/File:Travertine_Hot_Springs-1200px.jpg
+
+fieldNotes:
+  - heading: Heat is the spine of the plan
+    body: >-
+      Shoot the desert in Friday's cool early hours, drive the midday heat while gaining elevation, and by Saturday night you're camped at 7,000+ ft. **Bring a real warm layer** — the east side drops fast after dark even in summer.
+  - heading: Water & fuel
+    body: >-
+      Long gaps between services on 395. Top off at **Ridgecrest, Bishop, Lee Vining**. Carry more water than you think for the desert day — there's none at Trona.
+  - heading: The one reservation
+    body: >-
+      Sat night around **June Lake / Mammoth** is competitive in summer. Book ahead or pin a dispersed FS backup. Days 1 & 3 camping is open and easy.
+  - heading: Why not Death Valley
+    body: >-
+      Early September routinely runs 110°F+ — miserable and unsafe to camp. **Trona gives you the same tufa/dry-lakebed look** without the oven. Good call skipping it.
+  - heading: Dirt-road stops
+    body: >-
+      Trona (5 mi), Crowley Columns, Cerro Gordo — all graded/rough dirt. Crawl the washboard, watch clearance, and don't attempt anything soft after rain.
+  - heading: Rhythm
+    body: >-
+      Two golden hours a day is the target: dawn + dusk. Midday is for driving and the flat-light detail work (Randsburg, bristlecone grain). Don't burn energy shooting harsh noon landscapes.
+
+colophon:
+  artDirection: >-
+    Each stop leads with reference photographs of the actual place — tap any to view it full-screen. The light, glass and 'the shot' notes are the art direction: the look to chase at each stop, not a guarantee of the conditions you'll get.
+  photographers: >-
+    Nick Carver (large-format Americana, facades, weathered signage) · Michael Shainblum (desert & tufa, dramatic light) · Thomas Heaton (patient minimal landscape, single strong subject) · Nick Page (bold light, graphic compositions).
+  route: >-
+    San Diego → I-15 N → CA-395 N → Reno. Timings assume a 4:00 AM Friday departure. Verify campground reservations, Tioga Pass status, and any dirt-road / fire closures close to your dates.
